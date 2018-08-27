@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row header">
+                <h1>Nutrition Value App</h1>
+                <p>Nutrition value per 100g (100ml) for various food items.</p>
+        </div>
+        <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title text-center">
+                        <h2>Food Items</h2>
+                        <span></span>
+                        <p>Click to check the details of each food item.</p>
+                    </div>
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-primary">
+                        <!-- <div class="panel-heading"> -->
+                        <div class="panel-heading"">
+                            <h4 class="panel-title accordion-toggle" data-target="#panel1" data-toggle="collapse" data-parent="#accordion">Semi Skimmed Milk - Tesco - Milk
+                                <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                            </h4>
+                        </div>
+
+                      <!-- ,,,,,,,4,,,,0.9ug,124.mg,Milk,Tesco, -->
+
+
+                        <div id="panel1" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <!-- <table>
+                                    <tr><th>Energy</th> <td>209.kJ</td> <th>Energy</th> <td> 50.kcal</td></tr>
+                                    <tr><th>Fat</th> <td>1.8g</td> <th>Saturated</th> <td>1.1g</td></tr>
+                                    <tr><th>Carbohydrates</th> <td>4.8g</td> <th>Sugar</th> <td><4.8g/td></tr>
+                                    <tr><th>Fibre</th> <td>0.0g</td> <th>Protein</th> <td>3.6g</td></tr>
+                                    <tr><th>Salt</th> <td>0.1g</td> <th></th> <td></td></tr>
+                                </table> -->
+                                    <!-- Energy (kJ),Energy (kcal),<,Fat,<,Sat Fat,<,Carbohydrates,Sugars,<,Fibre,Protein,Salt,B12,Calcium,Classification,Shop,Notes -->
+                            <!-- </div> -->
+
+
+                            <!-- <div class="col-lg-6"> -->
+                                <!-- anthonybonello.co.uk -->
+                                <div class="flip3D">
+                                      <div class="card back slow" id="box1_back">
+                                        <!--<h3>Independent Music Professional</h3>
+                                        <p>This webpage is my own site related to my music-related activities. It has brief information about the different activities I do. It also has a few examples of my compositions. It makes use of parallax effect background.</p>
+                                        <p><strong>Technologies used</strong></p>
+                                        <ul>
+                                            <li>HTML</li>
+                                            <li>CSS</li>
+                                            <li>jQuery</li>
+                                            <li>Bootstrap</li>
+                                        </ul>
+                                        <a href="https://github.com/abonello/project-1" target="_blank">Github Repository</a>
+                                        <br>
+                                        <a href="http://www.anthonybonello.co.uk" target="_blank">Deployment</a> -->
+                                        Extra information HERE.
+                                        <div class="card-button">
+                                            <div class="btnGroup1">
+                                                <div class="btnEdit"><button onclick=""><strong>Edit</strong></button></div>
+                                                <div class="btnDelete"><button onclick=""><strong>Delete</strong></button></div>
+                                            </div>
+                                            <!-- <div class="clearfix"></div> -->
+                                            <div class="btnGroup2">
+                                                <div class="btnBack"><button onclick="flipBox('box1_front', 'box1_back')"><strong>Back to Front</strong></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card front slow" id="box1_front">
+                                        <!-- <h3>Independent Music Professional</h3>
+                                        <p>This is my website related to my music activities.</p>
+                                        <img src="images/Screenshot 2018-08-15 14.11.33.anthonybonello.png" alt="anthonybonello.co.uk">
+                                        <p>Flip the card for more detail.</p> -->
+                                        
+
+                                        <table>
+                                            <tr><th>Energy</th> <td>209.kJ</td> <th>Energy</th> <td> 50.kcal</td></tr>
+                                            <tr><th>Fat</th> <td>1.8g</td> <th>Saturated</th> <td>1.1g</td></tr>
+                                            <tr><th>Carbohydrates</th> <td>4.8g</td> <th>Sugar</th> <td><4.8g/td></tr>
+                                            <tr><th>Fibre</th> <td>0.0g</td> <th>Protein</th> <td>3.6g</td></tr>
+                                            <tr><th>Salt</th> <td>0.1g</td> <th></th> <td></td></tr>
+                                        </table>
+
+                                        <div class="card-button">
+                                            <button onclick="flipBox('box1_front', 'box1_back')"><strong>More info and Controls</strong></button>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                            <div class="panel-heading">
+                                    <h4 class="panel-title accordion-toggle" data-target="#panel2" data-toggle="collapse" data-parent="#accordion">Title - Brand - Category
+                                            <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                    </h4>
+                            </div>
+                            <div id="panel2" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                        <tr><th>Energy</th> <td>209.kJ</td> <th>Energy</th> <td></td></tr>
+                                        <tr><th>Fat</th> <td></td> <th>Saturated</th> <td></td></tr>
+                                        <tr><th>Carbohydrates</th> <td></td> <th>Sugar</th> <td></td></tr>
+                                        <tr><th>Fibre</th> <td></td> <th>Protein</th> <td></td></tr>
+                                        <tr><th>Salt</th> <td></td> <th></th> <td></td></tr>
+                                </div>
+                            </div>
+                        </div>
+                </div><!-- End accordion panel-group -->
+            </div><!-- End column -->
+        </div><!-- End row -->
+        
+        
+  
+        
+
+
+    </div>
+
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script>
+        function flipBox(el_f, el_b){
+            var elem_f = document.getElementById(el_f);
+            var elem_b = document.getElementById(el_b);
+
+            var angle_elem_f = rotate_degree(elem_f);
+            console.log(angle_elem_f);
+            var angle_elem_b = rotate_degree(elem_b);
+            console.log(angle_elem_b);
+
+            if (angle_elem_f == 0) {
+                elem_f.style.transform = "perspective(1000px) rotateY(-180deg)";
+                elem_b.style.transform = "perspective(1000px) rotateY(0deg)";
+            } else if (angle_elem_f == 180) {
+                elem_f.style.transform = "perspective(1000px) rotateY(0deg)";
+                elem_b.style.transform = "perspective(1000px) rotateY(180deg)";
+            }
+            // elem_f.style.transform = "perspective(1000px) rotateY(-180deg)";
+            // elem_b.style.transform = "perspective(1000px) rotateY(0deg)";
+        }
+
+        function rotate_degree(obj) {
+            var st = window.getComputedStyle(obj, null);
+            var matrix = st.getPropertyValue("transform");
+            // console.log(matrix);
+            if(matrix !== 'none') {
+                var values = matrix.split('(')[1].split(')')[0].split(',');
+                var a = values[0];
+                var b = values[1];
+                var angle = Math.round(Math.atan2(b, a) * (180/Math.PI));
+            } else { var angle = 0; }
+            return (angle < 0) ? angle +=360 : angle;
+        }
+    </script>
+    <script>
+        function toggleChevron(e) {
+            $(e.target)
+                .prev('.panel-heading')
+                .find("i.indicator")
+                .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+        }
+        $('#accordion2').on('hidden.bs.collapse', toggleChevron);
+        $('#accordion2').on('shown.bs.collapse', toggleChevron);
+
+
+        /*
+        Author       : Theme_ocean.
+        Template Name: Fury - Product Landing Page
+        Version      : 1.0
+        */
+        /*(function($) {
+            'use strict';
+            
+            jQuery(document).on('ready', function(){
+            
+                    $('a.page-scroll').on('click', function(e){
+                        var anchor = $(this);
+                        $('html, body').stop().animate({
+                            scrollTop: $(anchor.attr('href')).offset().top - 50
+                        }, 1500);
+                        e.preventDefault();
+                    });		
+
+            }); 	
+
+                        
+        })(jQuery);*/
+
+    </script>
+    
+</body>
+</html>
+
+

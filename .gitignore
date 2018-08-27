@@ -1,2 +1,4 @@
 /venv
 /.vscode
+/static/css/style_experiment.css
+index_experiment.html

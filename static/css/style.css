@@ -1,0 +1,133 @@
+/* Cards Set Up */
+.flip3D {
+    width: 500px;
+    height: 400px;
+    margin: 10px;
+    float: left;  /* can use flex or bootstrap */
+    /* z-index: -1; */
+}
+
+.card {
+    position: absolute; /* We need to stack the divs [back and front (on top)] */
+    width: 500px;
+    height: 400px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    backface-visibility: hidden; /* Do not show the content from the back */
+    /* z-index: -1; */
+}
+
+.card h3 {
+    text-align: center;
+}
+
+.card img {
+    margin: 0 auto;
+    display: inherit;
+}
+
+.card p {
+    margin: 2px 0 2px 0;
+}
+
+/* .card-content {
+    border: 1px solid black;
+} */
+
+.card-button {
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    /* align-items: center; */
+}
+.btnGroup1 {
+    display: flex;
+    justify-content: space-around;
+    /* flex-direction: row; */
+    
+}
+.btnGroup2 {
+    display: flex;
+    justify-content: center;
+    /* flex-direction: row; */
+}
+
+.btnEdit {
+    /* flex: 1; */
+    flex-basis: 30%;
+}
+.btnDelete {
+    /* flex: 1; */
+    /* background-color: red; */
+    flex-basis: 30%;
+}
+.btnBack {
+    flex: 1;
+    flex-basis: 50%;
+}
+
+
+
+.flip3D > .front {
+    background-color: burlywood;
+    -webkit-transform: perspective(1000px) rotateY(0deg);       /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
+        -ms-transform: perspective(1000px) rotateY(0deg);       /* IE 9 */
+            transform: /* Start State for front */              /* IE 10, Fx 16+, Op 12.1+ */
+                perspective(1000px) /* perspective need to be high so that it is not warped */
+                rotateY(0deg); /* card face forward by default */
+}
+
+.flip3D > .back {
+    background-color: #898;
+    border: 5px solid burlywood;
+    -webkit-transform: perspective(1000px) rotateY(180deg);     /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
+        -ms-transform: perspective(1000px) rotateY(180deg);     /* IE 9 */
+            transform: /* Start State for back */               /* IE 10, Fx 16+, Op 12.1+ */
+                perspective(1000px) /* perspective need to be high so that it is not warped */
+                rotateY(180deg); /* card face forward by default */
+}
+
+.flip3D > .transparentFront {
+    -webkit-transform: perspective(1000px) rotateY(0deg);       /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
+        -ms-transform: perspective(1000px) rotateY(0deg);       /* IE 9 */
+            transform: /* Start State for transparent front */  /* IE 10, Fx 16+, Op 12.1+ */
+                perspective(1000px) /* perspective need to be high so that it is not warped */
+                rotateY(0deg); /* card face forward by default */
+}
+
+.flip3D > .transparentBack {
+    -webkit-transform: perspective(1000px) rotateY(180deg);     /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
+        -ms-transform: perspective(1000px) rotateY(180deg);     /* IE 9 */
+            transform: /* Start State for transparent back */   /* IE 10, Fx 16+, Op 12.1+ */
+                perspective(1000px) /* perspective need to be high so that it is not warped */
+                rotateY(180deg); /* card face forward by default */
+}
+/* End Set Up */
+
+/* Animation duration */
+.slow {
+    transition: -webkit-transform 0.3s linear 0s;   /* controls animation */
+    transition: -ms-transform 0.3s linear 0s;       /* controls animation */
+    transition: transform 0.3s linear 0s;           /* controls animation */
+}
+/* End Animation duration */
+
+/* Animation */
+/* Slow - just 180deg flip */
+Cancelled.flip3D:hover > .front.slow {
+    -webkit-transform: perspective(1000px) rotateY(-180deg);    /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
+        -ms-transform: perspective(1000px) rotateY(-180deg);    /* IE 9 */
+            transform: /* End State for front */                /* IE 10, Fx 16+, Op 12.1+ */
+                perspective(1000px) /* perspective need to be high so that it is not warped */
+                rotateY(-180deg); /* card face forward by default */
+}
+
+Cancelled.flip3D:hover > .back.slow {
+    -webkit-transform: perspective(1000px) rotateY(0deg);       /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
+        -ms-transform: perspective(1000px) rotateY(0deg);       /* IE 9 */
+            transform: /* End State for back */                 /* IE 10, Fx 16+, Op 12.1+ */
+                perspective(1000px) /* perspective need to be high so that it is not warped */
+                rotateY(0deg); /* card face forward by default */
+}
+/* End Animation */
