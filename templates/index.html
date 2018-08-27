@@ -183,13 +183,91 @@
                         </div>
                     </div>
                     
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class="panel-title accordion-toggle" data-target="#panel3" data-toggle="collapse" data-parent="#accordion">{{ food.name }}
+                                    - {{ food.brand }} - {{ food.classification }}
+                                <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                            </h4>
+                        </div>
+    
+    
+    
+                        <div id="panel3" class="panel-collapse collapse">
+                            <div class="panel-body panel-size">
+                                <div class="flip3D">
+                                    <div class="card back slow" id="box3_back">
+                                        <h4>More information</h4>
+                                        <p>{{ food.notes }}</p>
+                                        <p>This item was bought from {{ food.shop }}.</p>
+                                        <div class="card-button">
+                                            <div class="btnGroup1">
+                                                <button class="btnEdit onclick=""><strong>Edit</strong></button>
+                                                <button class="btnDelete" onclick=""><strong>Delete</strong></button>
+                                            </div>
+                                            <div class="btnGroup2">
+                                                <button class="btnFlip" onclick="flipBox('box3_front', 'box3_back')"><strong>Back to Front</strong></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card front slow" id="box3_front">
+                                        <div class="cardContent">
+                                            <div class="cardItem">
+                                                <h4>Energy:</h4>
+                                                <p>{{ food.energy1 }} / {{ food.energy2 }}</p>
+                                            </div>
+                                            <div class="cardItem">
+                                                <h4>Fats:</h4>
+                                                <p>{{ food.fat }}</p>
+                                            </div>
+                                            <div class="cardItem">
+                                                <h4>Saturate:</h4>
+                                                <p>{{ food.saturated }}</p>
+                                            </div>
+                                            <div class="cardItem">
+                                                <h4>Carbohydrates:</h4>
+                                                <p>{{ food.carbohydrates }}</p>
+                                            </div>
+                                            <div class="cardItem">
+                                                <h4>Sugar:</h4>
+                                                <p>{{ food.sugar }}</p>
+                                            </div>
+                                            <div class="cardItem">
+                                                <h4>Fibre:</h4>
+                                                <p>{{ food.fibre }}</p>
+                                            </div>
+                                            <div class="cardItem">
+                                                <h4>Protein:</h4>
+                                                <p>{{ food.protein }}</p>
+                                            </div>
+                                            <div class="cardItem">
+                                                <h4>Salt:</h4>
+                                                <p>{{ food.salt }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-button">
+                                            <div class="btnGroup2">
+                                                <button class="btnFlip" onclick="flipBox('box3_front', 'box3_back')"><strong>More info and Controls at the Back</strong></button>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                                <h4 class="panel-title accordion-toggle" data-target="#panel3" data-toggle="collapse" data-parent="#accordion">Title - Brand - Category
+                                <h4 class="panel-title accordion-toggle" data-target="#panel4" data-toggle="collapse" data-parent="#accordion">Title - Brand - Category
                                         <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
                                 </h4>
                         </div>
-                        <div id="panel3" class="panel-collapse collapse">
+                        <div id="panel4" class="panel-collapse collapse">
                             <div class="panel-body">
                                     <tr><th>Energy</th> <td>209.kJ</td> <th>Energy</th> <td></td></tr>
                                     <tr><th>Fat</th> <td></td> <th>Saturated</th> <td></td></tr>
@@ -227,9 +305,9 @@
             var back = document.getElementById(back);
 
             var angle_front = rotate_degree(front);
-            // console.log(angle_front);
+            // 
             var angle_back = rotate_degree(back);
-            // console.log(angle_back);
+            // 
 
             if (angle_front == 0) {
                 front.style.transform = "perspective(1000px) rotateY(-180deg)";
@@ -244,7 +322,7 @@
         function rotate_degree(obj) {
             var st = window.getComputedStyle(obj, null);
             var matrix = st.getPropertyValue("transform");
-            // console.log(matrix);
+            // 
             if(matrix !== 'none') {
                 var values = matrix.split('(')[1].split(')')[0].split(',');
                 var a = values[0];
