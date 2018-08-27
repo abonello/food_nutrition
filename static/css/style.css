@@ -1,133 +1,117 @@
-/* Cards Set Up */
+.panel-body {
+    padding: 15px;
+    width: 100%;
+    position: relative;
+}
+
+/* Cards Set Up - START */
 .flip3D {
-    width: 500px;
-    height: 400px;
-    margin: 10px;
-    float: left;  /* can use flex or bootstrap */
-    /* z-index: -1; */
+    width: 100%;
+    height: 200px;
 }
 
 .card {
     position: absolute; /* We need to stack the divs [back and front (on top)] */
-    width: 500px;
-    height: 400px;
+    width: calc(100% - 30px);
+    height: 200px;
     padding: 10px;
     box-sizing: border-box;
     border-radius: 5px;
     backface-visibility: hidden; /* Do not show the content from the back */
-    /* z-index: -1; */
+    overflow: scroll;
+}
+.cardContent {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
-.card h3 {
-    text-align: center;
+.cardItem {
+    flex: 1;
+    min-width: 150px;
 }
-
-.card img {
-    margin: 0 auto;
-    display: inherit;
-}
-
-.card p {
-    margin: 2px 0 2px 0;
-}
-
-/* .card-content {
-    border: 1px solid black;
-} */
 
 .card-button {
     display: flex;
-    /* justify-content: center; */
     flex-direction: column;
-    /* align-items: center; */
 }
+
 .btnGroup1 {
+    padding: 5px;
     display: flex;
     justify-content: space-around;
-    /* flex-direction: row; */
-    
 }
+
 .btnGroup2 {
+    padding: 5px;
     display: flex;
     justify-content: center;
-    /* flex-direction: row; */
 }
 
 .btnEdit {
-    /* flex: 1; */
-    flex-basis: 30%;
+    color: #212529;
+    background-color: #7cc;
+    border-color: #5bc2c2;
+    border-radius: 18px;
+    padding: 3px 20px;
 }
+
 .btnDelete {
-    /* flex: 1; */
-    /* background-color: red; */
-    flex-basis: 30%;
-}
-.btnBack {
-    flex: 1;
-    flex-basis: 50%;
+    color: #3bff56;
+    background-color: #F44336;
+    border-color: #de362a;
+    border-radius: 18px;
+    padding: 3px 20px;
 }
 
-
+.btnFlip {
+    color: #212529;
+    background-color: #fdd22d;
+    border-color: #ceac2a;
+    border-radius: 18px;
+    padding: 5px 20px;
+}
 
 .flip3D > .front {
-    background-color: burlywood;
+    background-color: #c0de87;
     -webkit-transform: perspective(1000px) rotateY(0deg);       /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
         -ms-transform: perspective(1000px) rotateY(0deg);       /* IE 9 */
             transform: /* Start State for front */              /* IE 10, Fx 16+, Op 12.1+ */
-                perspective(1000px) /* perspective need to be high so that it is not warped */
-                rotateY(0deg); /* card face forward by default */
+                       perspective(1000px) /* perspective need to be high so that it is not warped */
+                       rotateY(0deg); /* card face forward by default */
 }
 
 .flip3D > .back {
-    background-color: #898;
-    border: 5px solid burlywood;
+    background-color: #d9f3a8;
+    border: 5px solid #c0de87;
     -webkit-transform: perspective(1000px) rotateY(180deg);     /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
         -ms-transform: perspective(1000px) rotateY(180deg);     /* IE 9 */
             transform: /* Start State for back */               /* IE 10, Fx 16+, Op 12.1+ */
-                perspective(1000px) /* perspective need to be high so that it is not warped */
-                rotateY(180deg); /* card face forward by default */
+                       perspective(1000px) /* perspective need to be high so that it is not warped */
+                       rotateY(180deg); /* card face forward by default */
 }
 
 .flip3D > .transparentFront {
     -webkit-transform: perspective(1000px) rotateY(0deg);       /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
         -ms-transform: perspective(1000px) rotateY(0deg);       /* IE 9 */
             transform: /* Start State for transparent front */  /* IE 10, Fx 16+, Op 12.1+ */
-                perspective(1000px) /* perspective need to be high so that it is not warped */
-                rotateY(0deg); /* card face forward by default */
+                       perspective(1000px) /* perspective need to be high so that it is not warped */
+                       rotateY(0deg); /* card face forward by default */
 }
 
 .flip3D > .transparentBack {
     -webkit-transform: perspective(1000px) rotateY(180deg);     /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
         -ms-transform: perspective(1000px) rotateY(180deg);     /* IE 9 */
             transform: /* Start State for transparent back */   /* IE 10, Fx 16+, Op 12.1+ */
-                perspective(1000px) /* perspective need to be high so that it is not warped */
-                rotateY(180deg); /* card face forward by default */
+                       perspective(1000px) /* perspective need to be high so that it is not warped */
+                       rotateY(180deg); /* card face forward by default */
 }
-/* End Set Up */
+/* Cards Set Up - END */
 
-/* Animation duration */
+/* Cards Animation duration - START */
 .slow {
     transition: -webkit-transform 0.3s linear 0s;   /* controls animation */
     transition: -ms-transform 0.3s linear 0s;       /* controls animation */
     transition: transform 0.3s linear 0s;           /* controls animation */
 }
-/* End Animation duration */
-
-/* Animation */
-/* Slow - just 180deg flip */
-Cancelled.flip3D:hover > .front.slow {
-    -webkit-transform: perspective(1000px) rotateY(-180deg);    /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
-        -ms-transform: perspective(1000px) rotateY(-180deg);    /* IE 9 */
-            transform: /* End State for front */                /* IE 10, Fx 16+, Op 12.1+ */
-                perspective(1000px) /* perspective need to be high so that it is not warped */
-                rotateY(-180deg); /* card face forward by default */
-}
-
-Cancelled.flip3D:hover > .back.slow {
-    -webkit-transform: perspective(1000px) rotateY(0deg);       /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
-        -ms-transform: perspective(1000px) rotateY(0deg);       /* IE 9 */
-            transform: /* End State for back */                 /* IE 10, Fx 16+, Op 12.1+ */
-                perspective(1000px) /* perspective need to be high so that it is not warped */
-                rotateY(0deg); /* card face forward by default */
-}
-/* End Animation */
+/* Cards Animation duration - END */
