@@ -32,97 +32,16 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel-group" id="accordion">
-                    <!-- <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4 class="panel-title accordion-toggle" data-target="#panel1" data-toggle="collapse" data-parent="#accordion">Semi Skimmed Milk - Tesco - Milk
-                                <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                            </h4>
-                        </div>
-
-                        <div id="panel1" class="panel-collapse collapse">
-                            <div class="panel-body panel-size">
-                                <div class="flip3D">
-                                    <div class="card back slow" id="box1_back">
-                                        <h4>More information</h4>
-                                        <p>This milk was baought from Tesco. There are other brands from different shops.</p>
-                                        <div class="card-button">
-                                            <div class="btnGroup1">
-                                                <button class="btnEdit onclick=""><strong>Edit</strong></button>
-                                                <button class="btnDelete" onclick=""><strong>Delete</strong></button>
-                                            </div>
-                                            <div class="btnGroup2">
-                                                <button class="btnFlip" onclick="flipBox('box1_front', 'box1_back')"><strong>Back to Front</strong></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card front slow" id="box1_front">
-                                        <div class="cardContent">
-                                            <div class="cardItem">
-                                                <h4>Energy:</h4>
-                                                <p>209.kJ / 50.kcal</p>
-                                            </div>
-                                            <div class="cardItem">
-                                                <h4>Fats:</h4>
-                                                <p>1.8g</p>
-                                            </div>
-                                            <div class="cardItem">
-                                                <h4>Saturate:</h4>
-                                                <p>1.1g</p>
-                                            </div>
-                                            <div class="cardItem">
-                                                <h4>Carbohydrates:</h4>
-                                                <p>4.8g</p>
-                                            </div>
-                                            <div class="cardItem">
-                                                <h4>Sugar:</h4>
-                                                <p>4.8g</p>
-                                            </div>
-                                            <div class="cardItem">
-                                                <h4>Fibre:</h4>
-                                                <p>0.0g</p>
-                                            </div>
-                                            <div class="cardItem">
-                                                <h4>Protein:</h4>
-                                                <p>3.6g</p>
-                                            </div>
-                                            <div class="cardItem">
-                                                <h4>Salt:</h4>
-                                                <p>0.1g</p>
-                                            </div>
-                                        </div>
-                                        <div class="card-button">
-                                            <div class="btnGroup2">
-                                                <button class="btnFlip" onclick="flipBox('box1_front', 'box1_back')"><strong>More info and Controls at the Back</strong></button>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-
-
-
-
- <!-- JINJA TEMPLATING START -->
- <!-- {#% set foodItem1 = {"name": "Tomato Puree", "brand": "Cucina", "energy1": "335.kJ", "energy2": "79.kcal", "fat": "0.5g","saturated": "0.1g", "carbohydrates": "14.0g", "sugar": "14.0g", "fibre": "1.8g", "protein": "4.3g", "salt": "1.6g","classification": "Tomato Puree", "shop": "Aldi", "notes": "Double Concentrate / 20g = 1/5-a-day"} %#} -->
-
-                    
+                <!-- JINJA TEMPLATING START -->
                 <!-- JINJA FOR loop to build accordion -->
                 {% for foodItem in food %}
-                <!-- <p>{#{ loop.index }#} - {#{ foodItem.name }#}</p> -->
-                
-                <div class="panel panel-primary">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h4 class="panel-title accordion-toggle" data-target="#panel{{ loop.index }}" data-toggle="collapse" data-parent="#accordion">{{ foodItem.name }}
                                     - {{ foodItem.brand }} - {{ foodItem.classification }}
                                 <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
                             </h4>
                         </div>
-                    
-                    
-                    
                         <div id="panel{{ loop.index }}" class="panel-collapse collapse">
                             <div class="panel-body panel-size">
                                 <div class="flip3D">
@@ -180,53 +99,15 @@
                                                 <button class="btnFlip" onclick="flipBox('box{{ loop.index }}_front', 'box{{ loop.index }}_back')"><strong>More info and Controls at the Back</strong></button>
                                             </div>
                                         </div>
-                                        
                                     </div>
                                 </div>
                             </div>
-                    
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-
                 {% endfor %}
-
-                    
-
-
-
-                    <!-- <div class="panel panel-default">
-                        <div class="panel-heading">
-                                <h4 class="panel-title accordion-toggle" data-target="#panel4" data-toggle="collapse" data-parent="#accordion">Title - Brand - Category
-                                        <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                                </h4>
-                        </div>
-                        <div id="panel4" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                    <tr><th>Energy</th> <td>209.kJ</td> <th>Energy</th> <td></td></tr>
-                                    <tr><th>Fat</th> <td></td> <th>Saturated</th> <td></td></tr>
-                                    <tr><th>Carbohydrates</th> <td></td> <th>Sugar</th> <td></td></tr>
-                                    <tr><th>Fibre</th> <td></td> <th>Protein</th> <td></td></tr>
-                                    <tr><th>Salt</th> <td></td> <th></th> <td></td></tr>
-                            </div>
-                        </div>
-                    </div> -->
                 </div><!-- End accordion panel-group -->
             </div><!-- End column -->
         </div><!-- End row -->
-        
-        
-  
-        
-
-
     </div>
 
     <script
@@ -257,8 +138,6 @@
                 front.style.transform = "perspective(1000px) rotateY(0deg)";
                 back.style.transform = "perspective(1000px) rotateY(180deg)";
             }
-            // elem_f.style.transform = "perspective(1000px) rotateY(-180deg)";
-            // elem_b.style.transform = "perspective(1000px) rotateY(0deg)";
         }
         function rotate_degree(obj) {
             var st = window.getComputedStyle(obj, null);
@@ -280,8 +159,8 @@
         //         .find("i.indicator")
         //         .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
         // }
-        // $('#accordion2').on('hidden.bs.collapse', toggleChevron);
-        // $('#accordion2').on('shown.bs.collapse', toggleChevron); */
+        // $('#accordion').on('hidden.bs.collapse', toggleChevron);
+        // $('#accordion').on('shown.bs.collapse', toggleChevron); */
 
     </script>
     
