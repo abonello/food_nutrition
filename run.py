@@ -85,13 +85,14 @@ def index():
     # ]
     
 
-
 # Sundried Tomatoes,Tesco,674.kJ,163.kcal,,11.9g,,1.4g,,7.0g,6.4g,,7.9g,3.0g,2.8g,NA,NA,Dried Tomatoes,Tesco,Marinated with garlic in sunflower oil and virgin olive oil / drained
 
     # return render_template("index.html", food=foodItems)
     return render_template("index.html", food=mongo.db.nutrition100.find())
 
-
+@app.route("/add_food_item")
+def add_food_item():
+    return render_template("addfooditem.html")
 
 if __name__ == '__main__':
     # app.run(host=os.getenv('IP'), port=int(os.getenv('PORT', 8080)), debug=True)
