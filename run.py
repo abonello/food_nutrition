@@ -1,5 +1,5 @@
 import os
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template, request, url_for
 from flask_pymongo import PyMongo
 from connection import getDbName, getURI
 
@@ -30,9 +30,9 @@ FIELDS = {
 mongo = PyMongo(app)
 
 
-
 @app.route("/")
-def index():
+@app.route("/get_food_items")
+def get_food_items():
     # foodItems = [
     #     {
     #          "name": "Tomato Puree",
@@ -93,6 +93,23 @@ def index():
 @app.route("/add_food_item")
 def add_food_item():
     return render_template("addfooditem.html")
+
+@app.route("/insert_food_item", methods=["POST"])
+def insert_food_item():
+    foods = mongo.db.nutrition100
+    data = request.form.to_dict()
+    data["energy1"] = data["energy1"] + "kJ"
+    data["energy2"] = data["energy2"] + "kcal"
+    data["fat"] = data["fat"] + "g"
+    data["saturated"] = data["saturated"] + "g"
+    data["carbohydrates"] = data["carbohydrates"] + "g"
+    data["sugar"] = data["sugar"] + "g"
+    data["fibre"] = data["fibre"] + "g"
+    data["protein"] = data["protein"] + "g"
+    data["salt"] = data["salt"] + "g"
+    del data["action"]
+    foods.insert_one(data)
+    return redirect(url_for("get_food_items"))
 
 if __name__ == '__main__':
     # app.run(host=os.getenv('IP'), port=int(os.getenv('PORT', 8080)), debug=True)
