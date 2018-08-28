@@ -1,180 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
-            rel="stylesheet" 
-            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
-            crossorigin="anonymous" />
-    <link rel="stylesheet" href="./static/css/style.css" />
-</head>
-<body>
-    
-    <div class="container">
-        <div class="row header">
-                <h1>Nutrition Value App</h1>
-                <p>Nutrition value per 100g (100ml) for various food items.</p>
-        </div>
-        <div class="row"> <!-- Heading for Accordion -->
-            <div class="col-md-12">
-                <div class="section-title text-center">
-                    <h2>Food Items</h2>
-                    <span></span>
-                    <p>Click to check the details of each food item.</p>
-                </div>
+{% extends "base.html" %}
+{% block content %}
+
+
+
+
+    <div class="row"> <!-- Heading for Accordion -->
+        <div class="col-md-12">
+            <div class="section-title text-center">
+                <h2>Food Items</h2>
+                <span></span>
+                <p>Click to check the details of each food item.</p>
             </div>
         </div>
-        <div class="row">  <!-- Holds Accordion Panels -->
-            <div class="col-sm-12">
-                <div class="panel-group" id="accordion">
-                <!-- JINJA TEMPLATING START -->
-                <!-- JINJA FOR loop to build accordion -->
-                {% for foodItem in food %}
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4 class="panel-title accordion-toggle" data-target="#panel{{ loop.index }}" data-toggle="collapse" data-parent="#accordion">{{ foodItem.name }}
-                                    - {{ foodItem.brand }} - {{ foodItem.classification }}
-                                <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                            </h4>
-                        </div>
-                        <div id="panel{{ loop.index }}" class="panel-collapse collapse">
-                            <div class="panel-body panel-size">
-                                <div class="flip3D">
-                                    <div class="card back slow" id="box{{ loop.index }}_back">
-                                        <h4>More information</h4>
-                                        <p>{{ foodItem.notes }}</p>
-                                        <p>This item was bought from {{ foodItem.shop }}.</p>
-                                        <div class="card-button">
-                                            <div class="btnGroup1">
-                                                <button class="btnEdit onclick=""><strong>Edit</strong></button>
-                                                <button class="btnDelete" onclick=""><strong>Delete</strong></button>
-                                            </div>
-                                            <div class="btnGroup2">
-                                                <button class="btnFlip" onclick="flipBox('box{{ loop.index }}_front', 'box{{ loop.index }}_back')"><strong>Back to Front</strong></button>
-                                            </div>
+    </div>
+
+    <div class="row">  <!-- Holds Accordion Panels -->
+        <div class="col-sm-12">
+            <div class="panel-group" id="accordion">
+            <!-- JINJA TEMPLATING START -->
+            <!-- JINJA FOR loop to build accordion -->
+            {% for foodItem in food %}
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title accordion-toggle" data-target="#panel{{ loop.index }}" data-toggle="collapse" data-parent="#accordion">{{ foodItem.name }}
+                                - {{ foodItem.brand }} - {{ foodItem.classification }}
+                            <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                        </h4>
+                    </div>
+                    <div id="panel{{ loop.index }}" class="panel-collapse collapse">
+                        <div class="panel-body panel-size">
+                            <div class="flip3D">
+                                <div class="card back slow" id="box{{ loop.index }}_back">
+                                    <h4>More information</h4>
+                                    <p>{{ foodItem.notes }}</p>
+                                    <p>This item was bought from {{ foodItem.shop }}.</p>
+                                    <div class="card-button">
+                                        <div class="btnGroup1">
+                                            <button class="btnEdit onclick=""><strong>Edit</strong></button>
+                                            <button class="btnDelete" onclick=""><strong>Delete</strong></button>
+                                        </div>
+                                        <div class="btnGroup2">
+                                            <button class="btnFlip" onclick="flipBox('box{{ loop.index }}_front', 'box{{ loop.index }}_back')"><strong>Back to Front</strong></button>
                                         </div>
                                     </div>
-                                    <div class="card front slow" id="box{{ loop.index }}_front">
-                                        <div class="cardContent">
-                                            <div class="cardItem">
-                                                <h4>Energy:</h4>
-                                                <p>{{ foodItem.energy1 }} / {{ foodItem.energy2 }}</p>
-                                            </div>
-                                            <div class="cardItem">
-                                                <h4>Fats:</h4>
-                                                <p>{{ foodItem.fat }}</p>
-                                            </div>
-                                            <div class="cardItem">
-                                                <h4>Saturate:</h4>
-                                                <p>{{ foodItem.saturated }}</p>
-                                            </div>
-                                            <div class="cardItem">
-                                                <h4>Carbohydrates:</h4>
-                                                <p>{{ foodItem.carbohydrates }}</p>
-                                            </div>
-                                            <div class="cardItem">
-                                                <h4>Sugar:</h4>
-                                                <p>{{ foodItem.sugar }}</p>
-                                            </div>
-                                            <div class="cardItem">
-                                                <h4>Fibre:</h4>
-                                                <p>{{ foodItem.fibre }}</p>
-                                            </div>
-                                            <div class="cardItem">
-                                                <h4>Protein:</h4>
-                                                <p>{{ foodItem.protein }}</p>
-                                            </div>
-                                            <div class="cardItem">
-                                                <h4>Salt:</h4>
-                                                <p>{{ foodItem.salt }}</p>
-                                            </div>
+                                </div>
+                                <div class="card front slow" id="box{{ loop.index }}_front">
+                                    <div class="cardContent">
+                                        <div class="cardItem">
+                                            <h4>Energy:</h4>
+                                            <p>{{ foodItem.energy1 }} / {{ foodItem.energy2 }}</p>
                                         </div>
-                                        <div class="card-button">
-                                            <div class="btnGroup2">
-                                                <button class="btnFlip" onclick="flipBox('box{{ loop.index }}_front', 'box{{ loop.index }}_back')"><strong>More info and Controls at the Back</strong></button>
-                                            </div>
+                                        <div class="cardItem">
+                                            <h4>Fats:</h4>
+                                            <p>{{ foodItem.fat }}</p>
+                                        </div>
+                                        <div class="cardItem">
+                                            <h4>Saturate:</h4>
+                                            <p>{{ foodItem.saturated }}</p>
+                                        </div>
+                                        <div class="cardItem">
+                                            <h4>Carbohydrates:</h4>
+                                            <p>{{ foodItem.carbohydrates }}</p>
+                                        </div>
+                                        <div class="cardItem">
+                                            <h4>Sugar:</h4>
+                                            <p>{{ foodItem.sugar }}</p>
+                                        </div>
+                                        <div class="cardItem">
+                                            <h4>Fibre:</h4>
+                                            <p>{{ foodItem.fibre }}</p>
+                                        </div>
+                                        <div class="cardItem">
+                                            <h4>Protein:</h4>
+                                            <p>{{ foodItem.protein }}</p>
+                                        </div>
+                                        <div class="cardItem">
+                                            <h4>Salt:</h4>
+                                            <p>{{ foodItem.salt }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-button">
+                                        <div class="btnGroup2">
+                                            <button class="btnFlip" onclick="flipBox('box{{ loop.index }}_front', 'box{{ loop.index }}_back')"><strong>More info and Controls at the Back</strong></button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
-                </div><!-- End accordion panel-group -->
-            </div><!-- End column -->
-        </div><!-- End row -->
-    </div>
+                </div>
+            {% endfor %}
+            </div><!-- End accordion panel-group -->
+        </div><!-- End column -->
+    </div><!-- End row -->
 
-    <script
-        src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous">
-    </script>
-    <script 
-        src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous">
-    </script>
-
-    <script>
-        
-        function flipBox(front, back){
-            var front = document.getElementById(front);
-            var back = document.getElementById(back);
-
-            var angle_front = rotate_degree(front);
-            // 
-            var angle_back = rotate_degree(back);
-            // 
-
-            if (angle_front == 0) {
-                front.style.transform = "perspective(1000px) rotateY(-180deg)";
-                back.style.transform = "perspective(1000px) rotateY(0deg)";
-            } else if (angle_front == 180) {
-                front.style.transform = "perspective(1000px) rotateY(0deg)";
-                back.style.transform = "perspective(1000px) rotateY(180deg)";
-            }
-        }
-        function rotate_degree(obj) {
-            var st = window.getComputedStyle(obj, null);
-            var matrix = st.getPropertyValue("transform");
-            // 
-            if(matrix !== 'none') {
-                var values = matrix.split('(')[1].split(')')[0].split(',');
-                var a = values[0];
-                var b = values[1];
-                var angle = Math.round(Math.atan2(b, a) * (180/Math.PI));
-            } else { var angle = 0; }
-            return (angle < 0) ? angle +=360 : angle;
-        } 
-    </script>
-    <script>
-        function toggleChevron(e) {
-            $(e.target)
-                .prev('.panel-heading')
-                .find("i.indicator")
-                .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
-        }
-        $('#accordion').on('hidden.bs.collapse', toggleChevron);
-        $('#accordion').on('shown.bs.collapse', toggleChevron);
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('.panel-collapse').on('show.bs.collapse', function () {
-                $(this).siblings('.panel-heading').addClass('active');
-            });
-            $('.panel-collapse').on('hide.bs.collapse', function () {
-                $(this).siblings('.panel-heading').removeClass('active');
-            });
-        });
-    </script>
-  
-    
-</body>
-</html>
-
-
+{% endblock %}
