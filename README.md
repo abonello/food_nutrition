@@ -35,8 +35,70 @@ I want to allow for data which in Not Available (**NA**) and values which are ma
 5. I will have an edit page [**U**]. It will be structured like the add page but will be prepopulated with the data for the particular item to be edited. There will be a button to save the changes or leave without saving changes.
 6. There will be a **Dashboard** with DC.js graphs with filters and the possibility to select an item and go to the item's detail page. (Or the accordion fold of that particular item.)
 
+-----------
 
 ## Deploy to Heroku
 
 Name of app: **food-nutrition**  
 URI: [https://food-nutrition.herokuapp.com/]()
+
+I am using ***gunicorn*** server. I found that I will have to set less settings myself.  
+The differences include:
+1. I do NOT need to run ```heroku ps:scale web=1```
+2. I do NOT need to manually set the IP and PORT variables in *settings > Reveal Config Vars*.
+3. I do NOT need to *Restart all Dynos* from *More*.
+
+In all, using gunicorn makes deploying to Heroku much easier.
+
+The commands needed are: (using this app as example)
+1. Install gunicorn
+~~~~
+pip3 install gunicorn
+~~~~
+
+2. Create Procfile
+~~~~
+echo web: gunicorn run:app > Procfile
+~~~~
+
+3. Create/Update requirements.txt
+~~~~
+sudo pip3 freeze --local > requirements.txt
+~~~~
+
+4. Create the Heroku on the website (allows me to set Region to EU)
+
+5. Log in to heroku (locally, need email and password) and check the apps
+~~~~
+heroku login
+heroku apps
+~~~~
+
+6. Initialise git, if not already done and set a remote for heroku
+~~~~
+git init
+heroku git:remote -a food-nutrition
+~~~~
+
+7. Push to Heroku
+~~~~
+git push heroku master
+~~~~
+
+DONE. -- Open the app at [https://food-nutrition.herokuapp.com/]()
+
+
+### Addition
+
+To access the files on Heroku, 
+1. go to **More > Run console**.
+2. run the command 
+~~~~
+heroku run bash
+~~~~
+3. Use normal bash commands.
+
+.
+
+------------
+
