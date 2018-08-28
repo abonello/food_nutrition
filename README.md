@@ -36,4 +36,7 @@ I want to allow for data which in Not Available (**NA**) and values which are ma
 6. There will be a **Dashboard** with DC.js graphs with filters and the possibility to select an item and go to the item's detail page. (Or the accordion fold of that particular item.)
 
 
+## Deploy to Heroku
 
+Name of app: **food-nutrition**  
+URI: [https://food-nutrition.herokuapp.com/]()
