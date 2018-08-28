@@ -123,3 +123,23 @@ The port argument complained about the int() method, so now it is:
 ~~~~
 app.run(host=os.getenv('IP'), port=os.getenv('PORT'), debug=True)
 ~~~~
+
+### Add Food Item
+
+Implemented **add food item**.
+
+Now updating Heroku.  
+The following code:
+~~~~
+from connection import getDbName, getURI
+.
+.
+.
+.
+app.config["MONGO_DBNAME"] = getDbName()
+app.config["MONGO_URI"] = getURI()
+~~~~
+
+does not work in Heroku.
+
+Instead, in Heroku set environment variables for **MONGO_DBNAME** and **MONGO_URI** with the correct information.

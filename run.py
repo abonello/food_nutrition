@@ -1,12 +1,17 @@
 import os
 from flask import Flask, redirect, render_template, request, url_for
 from flask_pymongo import PyMongo
-from connection import getDbName, getURI
+# from connection import getDbName, getURI
 
 
 app = Flask(__name__)
-app.config["MONGO_DBNAME"] = getDbName()
-app.config["MONGO_URI"] = getURI()
+# Use the following to run locally will need the import
+# app.config["MONGO_DBNAME"] = getDbName()
+# app.config["MONGO_URI"] = getURI()
+
+# Use the following to run from heroku - remove the import
+app.config["MONGO_DBNAME"] = os.getenv('MONGO_DBNAME')
+app.config["MONGO_URI"] = os.getenv('MONGO_URI')
 # collection = getCollection()
 FIELDS = {
             'name': True, 
