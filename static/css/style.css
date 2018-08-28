@@ -1,8 +1,56 @@
+
 .panel-body {
     padding: 15px;
     width: 100%;
     position: relative;
 }
+
+.panel {
+    border: 0;
+    box-shadow: none;
+}
+
+.panel-group {
+    background: #fff none repeat scroll 0 0;
+    border-radius: 3px;
+    box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.04);
+    margin-bottom: 0;
+    padding: 2px;
+
+}
+
+@media screen and (min-width: 600px) {
+    .panel-group {
+        padding: 10px;
+    }
+}
+
+@media screen and (min-width: 725px) {
+    .panel-group {
+        padding: 30px;
+    }
+}
+
+.panel-primary>.panel-heading+.panel-collapse>.panel-body {
+    border: 0;
+    background-color: red;
+    border-radius: 20px;
+    background-color: #6abfa829;
+}
+
+
+#accordion .panel-heading {
+    border-radius: 30px;
+}
+
+
+.panel-heading.active {
+    border: 1px solid #337ab7;
+    background-color: #5da7e6;
+    box-shadow: 0 3px 5px #5da7e6;
+    color: #ffe064;
+}
+
 
 /* Cards Set Up - START */
 .flip3D {
@@ -50,6 +98,7 @@
 
 .btnEdit {
     color: #212529;
+    font-size: 1.2em;
     background-color: #7cc;
     border-color: #5bc2c2;
     border-radius: 18px;
@@ -58,6 +107,7 @@
 
 .btnDelete {
     color: #3bff56;
+    font-size: 1.2em;
     background-color: #F44336;
     border-color: #de362a;
     border-radius: 18px;
@@ -79,6 +129,20 @@
             transform: /* Start State for front */              /* IE 10, Fx 16+, Op 12.1+ */
                        perspective(1000px) /* perspective need to be high so that it is not warped */
                        rotateY(0deg); /* card face forward by default */
+}
+
+.flip3D::after {
+    font-family: fontawesome;
+    font-size: 30px;
+    content: "\f064";
+    color: #ceaf31;
+    height: 0px;
+    /* width: 25px; */
+    width: 0px;
+    position: absolute;
+    top: 0px;
+    right: 15px;
+    transform: rotate(50deg);
 }
 
 .flip3D > .back {
@@ -110,8 +174,8 @@
 
 /* Cards Animation duration - START */
 .slow {
-    transition: -webkit-transform 0.3s linear 0s;   /* controls animation */
-    transition: -ms-transform 0.3s linear 0s;       /* controls animation */
-    transition: transform 0.3s linear 0s;           /* controls animation */
+    transition: -webkit-transform 0.5s linear 0s;   /* controls animation */
+    transition: -ms-transform 0.5s linear 0s;       /* controls animation */
+    transition: transform 0.5s linear 0s;           /* controls animation */
 }
 /* Cards Animation duration - END */
