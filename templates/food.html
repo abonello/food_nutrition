@@ -1,0 +1,11 @@
+{% for each in food %}
+    <p>{{ each }}</p>
+    <h1>{{ each.name }}</h1>
+    <h2>{{ each.brand }}</h2>
+    <p><strong>Fat: </strong>{{ each.fat }}<br>
+    <strong>Saturated: </strong>{{ each.saturated }}</p>
+    <br>
+    <hr>
+    <br>
+
+{% endfor %}

@@ -3,3 +3,6 @@
 /static/css/style_experiment.css
 index_experiment.html
 temporary_code.html
+temp_pycode.py
+connection.py
+__pycache__

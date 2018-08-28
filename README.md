@@ -102,3 +102,24 @@ heroku run bash
 
 ------------
 
+## Database
+
+Create a MongoDB database on mLab.  
+Database name: **food**  
+MONGODB VERSION: **3.6.6 (MMAPv1)**
+
+* add user
+* add collection: **nutrition100**
+* created 3 documents with some data.
+
+
+I had to do some changes in the code I used in previous projects.  
+MONGO_DBNAME and MONGO_URI had to be used as app.config:
+~~~~
+app.config["MONGO_DBNAME"] = getDbName()
+app.config["MONGO_URI"] = getURI()
+~~~~
+The port argument complained about the int() method, so now it is:
+~~~~
+app.run(host=os.getenv('IP'), port=os.getenv('PORT'), debug=True)
+~~~~
