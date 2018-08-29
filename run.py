@@ -122,7 +122,10 @@ def insert_food_item():
     foods.insert_one(data)
     return redirect(url_for("get_food_items"))
 
-
+@app.route("/delete_food_item/<food_item_id>")
+def delete_food_item(food_item_id):
+    mongo.db.nutrition100.remove({"_id": ObjectId(food_item_id)})
+    return redirect(url_for('get_food_items'))
 
 
 
