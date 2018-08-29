@@ -54,6 +54,22 @@ def delete_food_item(food_item_id):
     return redirect(url_for('get_food_items'))
 
 
+@app.route("/edit_food_item/<food_item_id>")
+def edit_food_item(food_item_id):
+    food_item = mongo.db.nutrition100.find_one({"_id": ObjectId(food_item_id)})
+    return render_template("editfooditem.html", foodItem=food_item, classification=mongo.db.classification.find())
+    
+    
+@app.route("/update_food_item/<food_item_id>", methods=["POST"])
+def update_food_item(food_item_id):
+    nutrition100 = mongo.db.nutrition100
+    data = request.form.to_dict()
+    del data["action"]
+    nutrition100.update({"_id": ObjectId(food_item_id)}, data)
+    return redirect(url_for('get_food_items'))
+
+
+
 
 #-------------FOOD CLASSES-----------------------------
 @app.route("/get_classification")
