@@ -3,17 +3,17 @@ from flask import Flask, redirect, render_template, request, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
-# from connection import getDbName, getURI  # Needed to run locally - Comment out for heroku
+from connection import getDbName, getURI  # Needed to run locally - Comment out for heroku
 
 
 app = Flask(__name__)
 # Use the following to run LOCALLY will need the import
-# app.config["MONGO_DBNAME"] = getDbName()
-# app.config["MONGO_URI"] = getURI()
+app.config["MONGO_DBNAME"] = getDbName()
+app.config["MONGO_URI"] = getURI()
 
 # Use the following to run from HEROKU - remove the import
-app.config["MONGO_DBNAME"] = os.getenv('MONGO_DBNAME')
-app.config["MONGO_URI"] = os.getenv('MONGO_URI')
+# app.config["MONGO_DBNAME"] = os.getenv('MONGO_DBNAME')
+# app.config["MONGO_URI"] = os.getenv('MONGO_URI')
 
 
 mongo = PyMongo(app)
@@ -79,12 +79,14 @@ def insert_class():
     data = request.form.to_dict()
     del data["action"]
     for food_class in classification.find():
+        print(food_class['class'])
         if data['class'].lower() == food_class['class'].lower():
+            print("There is a match")
             return render_template("addclass.html", classification=mongo.db.classification.find(), entry=data['class'])
-        else:
-            data['class'] = data['class'].capitalize()
-            classification.insert_one(data)
-            return redirect(url_for("get_classification"))
+
+    data['class'] = data['class'].capitalize()
+    classification.insert_one(data)
+    return redirect(url_for("get_classification"))
 
 
 if __name__ == '__main__':
