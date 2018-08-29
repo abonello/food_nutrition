@@ -1,4 +1,60 @@
 
+/* @import url('https://fonts.googleapis.com/css?family=Montserrat:500');
+@import url('https://fonts.googleapis.com/css?family=Merienda'); */
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Merienda');
+
+
+.body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+}
+
+a.brand-logo {
+    font-family: 'Merienda', cursive;
+    font-size: 35px;
+    margin-left: 30px;
+    color: #fec;
+}
+
+a.brand-logo:hover {
+    text-decoration: none;
+    color: #ff568a;
+    font-weight: 900;
+    text-shadow: 0px 2px 5px #0b136f;
+}
+
+nav {
+    background-color: #2869a0;
+}
+
+nav a {
+    color: #fec;
+}
+
+ul#wide-menu li a {
+    color: #fec;
+    font-size: 1.2em;
+    text-decoration: none;
+}
+
+ul#wide-menu li a:hover {
+    color: #ff568a;
+    font-size: 1.2em;
+    text-decoration: none;
+    text-shadow: 0px 2px 5px #0b136f;
+}
+
+.side-nav li a {
+    color: #ff568a;
+    font-size: 1.5em;
+    text-decoration: none;
+}
+
+a.button-collapse i:hover {
+    color: #ff568a;
+    text-shadow: 0px 2px 5px #0b136f;
+}
+
 .panel-body {
     padding: 15px;
     width: 100%;

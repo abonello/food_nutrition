@@ -20,28 +20,28 @@
     
     <div class="container">
         <header class="row header">
-            <h1>Nutrition Value App</h1>
-            <p>Nutrition value per 100g (100ml) for various food items.</p>
-            <hr>
             <nav>
                 <div class="nav-wrapper">
-                    <a href="{{ url_for('get_food_items') }}" class="brand-logo">Task Manager</a>
+                    <a href="{{ url_for('get_food_items') }}" class="brand-logo">NUTRITION</a>
                     <!--<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>-->
-                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <ul id="wide-menu" class="right hide-on-med-and-down">
                         <li><a href="{{ url_for('get_food_items') }}">Home</a></li>
-                        <li><a href="{{ url_for('add_food_item') }}">New Task</a></li>
+                        <li><a href="{{ url_for('add_food_item') }}">New Item</a></li>
                         <!-- <li><a href="{#{ url_for('get_categories') }#}">Categories</a></li>
                         <li><a href="{#{ url_for('add_category') }#}">Add Category</a></li> -->
                     </ul>
-                    <ul class="side-nav" id="mobile-demo">
+                    <ul class="side-nav" id="mobile-menu">
                         <li><a href="{{ url_for('get_food_items') }}">Home</a></li>
-                        <li><a href="{{ url_for('add_food_item') }}">New Task</a></li>
+                        <li><a href="{{ url_for('add_food_item') }}">New Item</a></li>
                         <!-- <li><a href="{#{ url_for('get_categories') }#}">Categories</a></li>
                         <li><a href="{#{ url_for('add_category') }#}">Add Category</a></li> -->
                     </ul>
                 </div>
             </nav>
+            <hr>
+            
+            <p><Strong>Nutrition Value App</Strong> - value per 100g (100ml) for various food items.</p>
             <hr>
         </header>
         
