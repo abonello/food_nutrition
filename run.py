@@ -97,12 +97,9 @@ def edit_class(class_id):
 @app.route('/update_class/<class_id>', methods=['POST'])
 def update_class(class_id):
     classification = mongo.db.classification
-    classification.update({"_id": ObjectId(class_id)}, 
-        # {"categroy_name": request.form.get['category_name']})
-    request.form.to_dict())
-    # mongo.db.categories.update(
-    #     {"_id": ObjectId(category_id)},
-    #     {"category_name": request.form.get['category_name']})
+    data = request.form.to_dict()
+    del data["action"]
+    classification.update({"_id": ObjectId(class_id)}, data)
     return redirect(url_for('get_classification'))
 
 
