@@ -61,6 +61,8 @@
                         {{ url_for('add_food_item') }}
                     {% elif cameFrom == 'get_classification' %}
                         {{ url_for('get_classification') }}
+                    {% else %}
+                        {{ url_for('get_classification') }}
                     {% endif %}
                 " class="btn waves-effect waves-light grey">
                     <i class="material-icons right">cancel</i>Cancel
