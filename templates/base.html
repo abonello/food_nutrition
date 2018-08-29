@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Food Nutrition Value</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
@@ -28,14 +28,14 @@
                     <ul id="wide-menu" class="right hide-on-med-and-down">
                         <li><a href="{{ url_for('get_food_items') }}">Home</a></li>
                         <li><a href="{{ url_for('add_food_item') }}">New Item</a></li>
-                        <!-- <li><a href="{#{ url_for('get_categories') }#}">Categories</a></li>
-                        <li><a href="{#{ url_for('add_category') }#}">Add Category</a></li> -->
+                        <li><a href="{{ url_for('get_classification') }}">Food Classes</a></li>
+                        <!-- <li><a href="{#{ url_for('add_category') }#}">Add Category</a></li> -->
                     </ul>
                     <ul class="side-nav" id="mobile-menu">
                         <li><a href="{{ url_for('get_food_items') }}">Home</a></li>
                         <li><a href="{{ url_for('add_food_item') }}">New Item</a></li>
-                        <!-- <li><a href="{#{ url_for('get_categories') }#}">Categories</a></li>
-                        <li><a href="{#{ url_for('add_category') }#}">Add Category</a></li> -->
+                        <li><a href="{{ url_for('get_classification') }}">Food Classes</a></li>
+                        <!-- <li><a href="{#{ url_for('add_category') }#}">Add Category</a></li> -->
                     </ul>
                 </div>
             </nav>

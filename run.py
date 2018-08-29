@@ -120,6 +120,16 @@ def insert_food_item():
     foods.insert_one(data)
     return redirect(url_for("get_food_items"))
 
+
+
+
+
+#-------------FOOD CLASSES-----------------------------
+@app.route("/get_classification")
+def get_classification():
+    return render_template("classification.html", classification=mongo.db.classification.find())
+
+
 if __name__ == '__main__':
     # app.run(host=os.getenv('IP'), port=int(os.getenv('PORT', 8080)), debug=True)
     app.run(host=os.getenv('IP'), port=os.getenv('PORT'), debug=True) # Is it because of the different server?
