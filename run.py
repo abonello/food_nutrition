@@ -1,37 +1,39 @@
 import os
 from flask import Flask, redirect, render_template, request, url_for
 from flask_pymongo import PyMongo
-# from connection import getDbName, getURI  # Needed to run locally - Comment out for heroku
+from bson.objectid import ObjectId
+
+from connection import getDbName, getURI  # Needed to run locally - Comment out for heroku
 
 
 app = Flask(__name__)
 # Use the following to run LOCALLY will need the import
-# app.config["MONGO_DBNAME"] = getDbName()
-# app.config["MONGO_URI"] = getURI()
+app.config["MONGO_DBNAME"] = getDbName()
+app.config["MONGO_URI"] = getURI()
 
 # Use the following to run from HEROKU - remove the import
-app.config["MONGO_DBNAME"] = os.getenv('MONGO_DBNAME')
-app.config["MONGO_URI"] = os.getenv('MONGO_URI')
+# app.config["MONGO_DBNAME"] = os.getenv('MONGO_DBNAME')
+# app.config["MONGO_URI"] = os.getenv('MONGO_URI')
 
 
 # collection = getCollection()
-FIELDS = {
-            'name': True, 
-            'brand': True, 
-            'energy1': True, 
-            'energy2': True, 
-            'fat': True, 
-            'saturated': True, 
-            'carbohydrates': True,
-            'sugar': True, 
-            'fibre': True, 
-            'protein': True, 
-            'salt': True,
-            'classification': True, 
-            'shop': True, 
-            'notes': True, 
-            '_id': False
-        }
+# FIELDS = {
+#             'name': True, 
+#             'brand': True, 
+#             'energy1': True, 
+#             'energy2': True, 
+#             'fat': True, 
+#             'saturated': True, 
+#             'carbohydrates': True,
+#             'sugar': True, 
+#             'fibre': True, 
+#             'protein': True, 
+#             'salt': True,
+#             'classification': True, 
+#             'shop': True, 
+#             'notes': True, 
+#             '_id': False
+#         }
 
 
 mongo = PyMongo(app)
@@ -128,6 +130,11 @@ def insert_food_item():
 @app.route("/get_classification")
 def get_classification():
     return render_template("classification.html", classification=mongo.db.classification.find())
+
+@app.route("/delete_class/<class_id>")
+def delete_class(class_id):
+    mongo.db.classification.remove({"_id": ObjectId(class_id)})
+    return redirect(url_for('get_classification'))
 
 
 if __name__ == '__main__':
