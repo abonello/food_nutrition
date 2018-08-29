@@ -143,3 +143,9 @@ app.config["MONGO_URI"] = getURI()
 does not work in Heroku.
 
 Instead, in Heroku set environment variables for **MONGO_DBNAME** and **MONGO_URI** with the correct information.
+
+## Classification
+
+I created another collection in the database that will hold the different classifications of food. This will help to give unity to the data.  
+
+I implemented the code to populate the classification input field with classes to select from in the add food item page.

@@ -12,20 +12,19 @@
 
     <div class="row">
             <form action="{{ url_for('insert_food_item') }}" method="POST" class="col s12">
-                <!-- <div class="row">
+                <div class="row">
+                    <span id="linkToClassCreate">If class does not exist create one <a href="{{ url_for('get_food_items') }}">here</a>.</span>
                     <div class="input-field col s12">
                         <i class="material-icons prefix">poll</i>
-                        <select id="category" name="category_name">
-                            <option value="" disabled selected>Choose a category</option>
-                            {#% for cat in categories %#}
-                                <option value="{#{ cat.category_name }#}">{#{ cat.category_name }#}</option>
-                            {#% endfor %#}
-                            <!--<option value="2">Option 2</option>-->
-                            <!--<option value="3">Option 3</option>-->
-                        <!-- </select>
-                        <label>Task Category</label>
+                        <select id="classification" name="classification">
+                            <option value="" disabled selected>Choose a classification</option>
+                            {% for class in classification %}
+                                <option value="{{ class.class }}">{{ class.class }}</option>
+                            {% endfor %}
+                        </select>
+                        <label>Classification </label>
                     </div>
-                </div> -->
+                </div>
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">assignment</i>
@@ -103,13 +102,14 @@
                         <label for="food_salt">Salt (g)</label>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">assignment</i>
                         <input id="classification" name="classification" type="text" class="validate">
                         <label for="classification">Classification</label>
                     </div>
-                </div>
+                </div> -->
+                
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">assignment</i>

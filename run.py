@@ -97,9 +97,11 @@ def get_food_items():
     # return render_template("index.html", food=foodItems)
     return render_template("index.html", food=mongo.db.nutrition100.find())
 
+
 @app.route("/add_food_item")
 def add_food_item():
-    return render_template("addfooditem.html")
+    return render_template("addfooditem.html", classification=mongo.db.classification.find())
+
 
 @app.route("/insert_food_item", methods=["POST"])
 def insert_food_item():

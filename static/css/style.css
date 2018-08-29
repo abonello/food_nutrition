@@ -235,3 +235,30 @@ a.button-collapse i:hover {
     transition: transform 0.5s linear 0s;           /* controls animation */
 }
 /* Cards Animation duration - END */
+
+.input-field label {
+    color: #ff568a;
+    font-size: 1em;
+}
+
+#linkToClassCreate {
+    margin-left: 39px;
+    color: #ff568a;
+}
+
+#linkToClassCreate a {
+    font-size: 1.1em;
+}
+
+#linkToClassCreate a:hover {
+    text-decoration: none;
+    color: #ff568a;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    /* text-shadow: 0px 0px 10px #0b136f; */
+    border: 1px solid #e4d4b0;
+    border-radius: 15px;
+    padding: 3px 10px;
+    background-color: #fec;
+}
