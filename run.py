@@ -103,6 +103,7 @@ def get_food_items():
 @app.route("/add_food_item")
 def add_food_item():
     return render_template("addfooditem.html", classification=mongo.db.classification.find())
+    # return render_template("addfooditem.html", classification=mongo.db.classification.find(), cameFrom="add_food_item")
 
 
 @app.route("/insert_food_item", methods=["POST"])
@@ -133,11 +134,34 @@ def delete_food_item(food_item_id):
 @app.route("/get_classification")
 def get_classification():
     return render_template("classification.html", classification=mongo.db.classification.find())
+    # return render_template("classification.html", classification=mongo.db.classification.find(), cameFrom="get_classification")
 
 @app.route("/delete_class/<class_id>")
 def delete_class(class_id):
     mongo.db.classification.remove({"_id": ObjectId(class_id)})
     return redirect(url_for('get_classification'))
+
+@app.route("/add_class/<cameFrom>")
+@app.route("/add_class")
+def add_class(cameFrom=""): # I want to check that class does not exist
+    return render_template("addclass.html", classification=mongo.db.classification.find(), cameFrom=cameFrom)
+    # return render_template("addcategory.html")
+
+
+@app.route("/insert_class", methods=['POST'])
+def insert_class():
+    classification = mongo.db.classification
+    data = request.form.to_dict()
+    del data["action"]
+    # classification.find().forEach(function(e) { print(e)})
+    for food_class in classification.find():
+        # print(food_class['class'])
+        if data['class'].lower() == food_class['class'].lower():
+            return render_template("addclass.html", classification=mongo.db.classification.find(), entry=data['class'])
+        else:
+            data['class'] = data['class'].capitalize()
+            classification.insert_one(data)
+            return redirect(url_for("get_classification"))
 
 
 if __name__ == '__main__':

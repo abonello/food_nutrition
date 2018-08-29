@@ -308,3 +308,24 @@ a.button-collapse i:hover {
         font-size: 1em;
     }
 }
+
+.framed {
+    border: 1px solid red;
+    border-radius: 7px;
+    padding: 20px;
+}
+
+.framed .row {
+    margin: 30px 20px 20px 20px;
+}
+
+.row .warning {
+    color: red;
+    text-align: center;
+    font-size: 2em;
+    /* padding: 30px 10px; */
+    margin: 30px 10px;
+    margin-top: 50px;
+    display: inline-block;
+    border: 1px solid black;
+}

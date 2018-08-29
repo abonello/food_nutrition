@@ -13,7 +13,9 @@
     <div class="row">
             <form action="{{ url_for('insert_food_item') }}" method="POST" class="col s12">
                 <div class="row">
-                    <span id="linkToClassCreate">If class does not exist create one <a href="{{ url_for('get_food_items') }}">here</a>.</span>
+                    
+                    <span id="linkToClassCreate">If class does not exist create one <a href="{{ url_for('add_class', cameFrom='add_food_item') }}">here</a>.</span>
+                    
                     <div class="input-field col s12">
                         <i class="material-icons prefix">poll</i>
                         <select id="classification" name="classification">
