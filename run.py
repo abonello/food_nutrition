@@ -3,17 +3,17 @@ from flask import Flask, redirect, render_template, request, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
-#from connection import getDbName, getURI  # Needed to run locally - Comment out for heroku
+from connection import getDbName, getURI  # Needed to run locally - Comment out for heroku
 
 
 app = Flask(__name__)
 # Use the following to run LOCALLY will need the import
-# app.config["MONGO_DBNAME"] = getDbName()
-# app.config["MONGO_URI"] = getURI()
+app.config["MONGO_DBNAME"] = getDbName()
+app.config["MONGO_URI"] = getURI()
 
 # Use the following to run from HEROKU - remove the import
-app.config["MONGO_DBNAME"] = os.getenv('MONGO_DBNAME')
-app.config["MONGO_URI"] = os.getenv('MONGO_URI')
+# app.config["MONGO_DBNAME"] = os.getenv('MONGO_DBNAME')
+# app.config["MONGO_URI"] = os.getenv('MONGO_URI')
 
 
 mongo = PyMongo(app)
@@ -87,6 +87,23 @@ def insert_class():
     data['class'] = data['class'].capitalize()
     classification.insert_one(data)
     return redirect(url_for("get_classification"))
+
+
+@app.route('/edit_class/<class_id>')
+def edit_class(class_id):
+    return render_template('editclass.html', foodClass=mongo.db.classification.find_one({'_id': ObjectId(class_id)}))
+    
+
+@app.route('/update_class/<class_id>', methods=['POST'])
+def update_class(class_id):
+    classification = mongo.db.classification
+    classification.update({"_id": ObjectId(class_id)}, 
+        # {"categroy_name": request.form.get['category_name']})
+    request.form.to_dict())
+    # mongo.db.categories.update(
+    #     {"_id": ObjectId(category_id)},
+    #     {"category_name": request.form.get['category_name']})
+    return redirect(url_for('get_classification'))
 
 
 if __name__ == '__main__':

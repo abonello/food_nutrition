@@ -21,7 +21,7 @@
                         {% for class in classification %}
                                 <li><i class="material-icons prefix classList">send</i>{{ class.class }}
                                     <span class="delClass">
-                                        <a href="#">
+                                        <a href="{{ url_for('edit_class', class_id=class._id) }}">
                                         <i class="material-icons prefix classList">create</i>Edit </a> | 
                                         <a href="#">
                                         <i class="material-icons prefix classList">clear</i>

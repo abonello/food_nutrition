@@ -151,3 +151,5 @@ I created another collection in the database that will hold the different classi
 I implemented the code to populate the classification input field with classes to select from in the add food item page.
 
 I implemented adding new classes. I also added the functionality of returning to the calling page if the process is cancelled.
+
+Implemented editing a class.
