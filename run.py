@@ -1,7 +1,8 @@
 import os
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, redirect, render_template, request, url_for #, json
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from bson.json_util import dumps
 
 from connection import getDbName, getURI  # Needed to run locally - Comment out for heroku
 
@@ -117,6 +118,33 @@ def update_class(class_id):
     del data["action"]
     classification.update({"_id": ObjectId(class_id)}, data)
     return redirect(url_for('get_classification'))
+
+
+#-------------DATA BACKUP-----------------------------
+@app.route("/get_data_backup")
+def get_data_backup():
+    food=mongo.db.nutrition100.find()
+    classes = mongo.db.classification.find()
+    nutrition100 = dumps(food)
+    classification = dumps(classes)
+    print("\n\nFOOD ITEMS\n==========\n")
+    print(food)
+    print(nutrition100)
+    print("\n\nFOOD CLASSIFICATION\n===================\n")
+    print(classes)
+    print(classification)
+    # file = "data_backup/" + file_name
+    with open("data_backup/nutrition100.json", 'w') as file:
+        file.write(nutrition100)
+    with open("data_backup/classification.json", 'w') as file:
+        file.write(classification)
+
+    return redirect(url_for('get_food_items'))
+
+@app.route("/replace_data_from_backup")
+def replace_data_from_backup():
+
+    return redirect(url_for('get_food_items'))
 
 
 if __name__ == '__main__':
