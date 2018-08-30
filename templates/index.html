@@ -47,35 +47,36 @@
                                     <div class="cardContent">
                                         <div class="cardItem">
                                             <h4>Energy:</h4>
-                                            <p>{{ foodItem.energy1 }}kJ / {{ foodItem.energy2 }}kcal</p>
+                                            <p>{{ foodItem.energy1 }}{% if foodItem.energy1 != "NA" %}kJ{% endif %}  / 
+                                                {{ foodItem.energy2 }}{% if foodItem.energy2 != "NA" %}kcal{% endif %}</p>
                                         </div>
                                         <div class="cardItem">
                                             <h4>Fats:</h4>
-                                            <p>{{ foodItem.fat }}g</p>
+                                            <p>{{ foodItem.fat }}{% if foodItem.fat != "NA" %}g{% endif %}</p>
                                         </div>
                                         <div class="cardItem">
                                             <h4>Saturate:</h4>
-                                            <p>{{ foodItem.saturated }}g</p>
+                                            <p>{{ foodItem.saturated }}{% if foodItem.saturated != "NA" %}g{% endif %}</p>
                                         </div>
                                         <div class="cardItem">
                                             <h4>Carbohydrates:</h4>
-                                            <p>{{ foodItem.carbohydrates }}g</p>
+                                            <p>{{ foodItem.carbohydrates }}{% if foodItem.carbohydrates != "NA" %}g{% endif %}</p>
                                         </div>
                                         <div class="cardItem">
                                             <h4>Sugar:</h4>
-                                            <p>{{ foodItem.sugar }}g</p>
+                                            <p>{{ foodItem.sugar }}{% if foodItem.sugar != "NA" %}g{% endif %}</p>
                                         </div>
                                         <div class="cardItem">
                                             <h4>Fibre:</h4>
-                                            <p>{{ foodItem.fibre }}g</p>
+                                            <p>{{ foodItem.fibre }}{% if foodItem.fibre != "NA" %}g{% endif %}</p>
                                         </div>
                                         <div class="cardItem">
                                             <h4>Protein:</h4>
-                                            <p>{{ foodItem.protein }}g</p>
+                                            <p>{{ foodItem.protein }}{% if foodItem.protein != "NA" %}g{% endif %}</p>
                                         </div>
                                         <div class="cardItem">
                                             <h4>Salt:</h4>
-                                            <p>{{ foodItem.salt }}g</p>
+                                            <p>{{ foodItem.salt }}{% if foodItem.salt != "NA" %}g{% endif %}</p>
                                         </div>
                                     </div>
                                     <div class="card-button">
