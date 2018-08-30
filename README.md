@@ -153,3 +153,10 @@ I implemented the code to populate the classification input field with classes t
 I implemented adding new classes. I also added the functionality of returning to the calling page if the process is cancelled.
 
 Implemented editing a class.
+
+
+## Backups
+
+I implemented two routes that are used either to get a backup of the database, or replace the database from a backup file. This will help me in two cases. 
+1. I mess up the data during testing where it is quicker to replace the lot rather than edit indivual entries
+2. The data has been messed up by someone (possibly intentionally) - I am not currently implementing a log in system.

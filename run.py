@@ -134,6 +134,7 @@ def get_data_backup():
         file.write(classification)
     return redirect(url_for('get_food_items'))
 
+
 @app.route("/replace_data_from_backup")
 def replace_data_from_backup():
     nutrition100 = []
@@ -142,7 +143,7 @@ def replace_data_from_backup():
         nutrition100 = json.loads(file.read())
     with open("data_backup/classification.json", 'r') as file:
         classification = json.loads(file.read())
-        
+
     foods = mongo.db.nutrition100
     foods.drop()
     for ndx, each_food in enumerate(nutrition100):
