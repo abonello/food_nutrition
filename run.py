@@ -91,8 +91,8 @@ def add_class(cameFrom=""): # I want to check that class does not exist
     return render_template("addclass.html", classification=mongo.db.classification.find(), cameFrom=cameFrom)
 
 
-@app.route("/insert_class", methods=['POST'])
-def insert_class():
+@app.route("/insert_class/<cameFrom>", methods=['POST'])
+def insert_class(cameFrom=""):
     classification = mongo.db.classification
     data = request.form.to_dict()
     del data["action"]
@@ -104,7 +104,13 @@ def insert_class():
 
     data['class'] = data['class'].capitalize()
     classification.insert_one(data)
-    return redirect(url_for("get_classification"))
+    # return redirect(url_for("get_classification"))
+    if cameFrom == 'add_food_item':
+        return redirect(url_for('add_food_item'))
+    elif cameFrom == 'get_classification':
+        return redirect(url_for('get_classification'))
+    else:
+        return redirect(url_for('get_classification'))
 
 
 @app.route('/edit_class/<class_id>')
