@@ -128,13 +128,6 @@ def get_data_backup():
     classes = mongo.db.classification.find()
     nutrition100 = dumps(food)
     classification = dumps(classes)
-    print("\n\nFOOD ITEMS\n==========\n")
-    print(food)
-    print(nutrition100)
-    print("\n\nFOOD CLASSIFICATION\n===================\n")
-    print(classes)
-    print(classification)
-    # file = "data_backup/" + file_name
     with open("data_backup/nutrition100.json", 'w') as file:
         file.write(nutrition100)
     with open("data_backup/classification.json", 'w') as file:
@@ -154,19 +147,6 @@ def replace_data_from_backup():
     for ndx, each_food in enumerate(nutrition100):
         del nutrition100[ndx]["_id"]
         foods.insert_one(nutrition100[ndx])
-    # print(nutrition100)
-    # print(len(nutrition100))
-    # print(type(nutrition100))
-
-    # print("\n\n")
-    # print(nutrition100[0])
-
-    # s = '[{"i":"imap.gmail.com","p":"someP@ss"},{"i":"imap.aol.com","p":"anoterPass"}]'
-    # jdata = json.loads(s)
-    # for d in nutrition100:
-    #     for key, value in d.iteritems():
-    #         print(key, value)
-
     return redirect(url_for('get_food_items'))
 
 
