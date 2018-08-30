@@ -160,3 +160,20 @@ Implemented editing a class.
 I implemented two routes that are used either to get a backup of the database, or replace the database from a backup file. This will help me in two cases. 
 1. I mess up the data during testing where it is quicker to replace the lot rather than edit indivual entries
 2. The data has been messed up by someone (possibly intentionally) - I am not currently implementing a log in system.
+
+## Dashboard
+
+Drafted a dsahboard with 2 scatter plots - fats vs sat, carbs vs sugar.
+
+I plan to have 4 scatter plots and a bubble chart:
+1. All Fat vs Saturated
+2. All Carbohydrates vs Sugar
+3. Energy vs Protein (have not decided which Energy value I will use)
+4. Sugar vs Salt
+5. All Fat vs Carbohydrates with the following additions:
+    * size of bubble - Protein
+    * color - changes with quantity of Sat fat
+    * border color - changes with sugar content.
+
+I want to be able to cancel each individual filter and all filters.
+I would like to be able to transfer the filters to the get_food_items view, if it is possible, to display only the selected foods in the accordion.
