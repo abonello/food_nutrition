@@ -14,9 +14,16 @@
         <h2>Scatter Plot</h2>
 
         <div class="row">
+
             <div class="group1">
-                <h3>Fats vs Saturated Fats</h3>
-                <div id="scatterChart"></div>
+                <div class="col col-md-6">
+                    <h3>Fats vs Saturated Fats</h3>
+                    <div id="scatterChart1"></div>
+                </div>
+                <div class="col col-md-6">
+                    <h3>Carbohydrates vs Sugar</h3>
+                    <div id="scatterChart2"></div>
+                </div>
             </div>
         </div>
 
@@ -44,8 +51,8 @@
                 "energy2": "79kcal", 
                 "fat": "0.5", 
                 "saturated": "0.1", 
-                "carbohydrates": "14.0g", 
-                "sugar": "14.0g", 
+                "carbohydrates": "14.0", 
+                "sugar": "14.0", 
                 "fibre": "1.8g", 
                 "protein": "4.3g", 
                 "salt": "1.6g", 
@@ -60,8 +67,8 @@
                 "energy2": "163kcal", 
                 "fat": "11.9", 
                 "saturated": "1.4", 
-                "carbohydrates": "7.0g", 
-                "sugar": "6.4g", 
+                "carbohydrates": "7.0", 
+                "sugar": "6.4", 
                 "fibre": "7.9", 
                 "protein": "3.0g", 
                 "salt": "2.8g", 
@@ -76,8 +83,8 @@
                 "energy2": "50kcal", 
                 "fat": "1.8", 
                 "saturated": "1.1", 
-                "carbohydrates": "4.8g", 
-                "sugar": "4.8g", 
+                "carbohydrates": "4.8", 
+                "sugar": "4.8", 
                 "fibre": "0.0g", 
                 "protein": "3.6g", 
                 "salt": "0.1g", 
@@ -92,8 +99,8 @@
                 "energy2": "416kcal", 
                 "fat": "34.9", 
                 "saturated": "21.7", 
-                "carbohydrates": "0.1g", 
-                "sugar": "0.1g", 
+                "carbohydrates": "0.1", 
+                "sugar": "0.1", 
                 "fibre": "0.0g", 
                 "protein": "25.4g", 
                 "salt": "1.8g", 
@@ -104,18 +111,20 @@
 
         var facts = crossfilter(data);
 
-        var scatterDimension = facts.dimension(function(d) { return [d.fat, d.saturated]; });
-        var scatterGroup = scatterDimension.group();
+        var scatterDimensionFatSat = facts.dimension(function(d) { return [d.saturated, d.fat]; });
+        var scatterDimensionCarbSug = facts.dimension(function(d) { return [d.sugar, d.carbohydrates]; });
+        var scatterGroupFatSat = scatterDimensionFatSat.group();
+        var scatterGroupCarbSug = scatterDimensionCarbSug.group();
 
 
-        var scatter = dc.scatterPlot("#scatterChart")
-            .width(800)
+        var scatterFatSat = dc.scatterPlot("#scatterChart1")
+            .width(400)
             .height(250)
             .margins({top:15, bottom:30, left:60, right:50})
-            .dimension(scatterDimension)
-            .group(scatterGroup)
-            .x(d3.scale.linear().domain([0, 35])) // [min, max] 
-            .y(d3.scale.linear().domain([0, 25])) // Can be left out to set automatically
+            .dimension(scatterDimensionFatSat)
+            .group(scatterGroupFatSat)
+            .x(d3.scale.linear().domain([0, 25])) // [min, max] 
+            .y(d3.scale.linear().domain([0, 35])) // Can be left out to set automatically
             .yAxisLabel("All Fats")
             .xAxisLabel("Saturated")
             .renderHorizontalGridLines(true)
@@ -127,7 +136,33 @@
             .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
             ;
 
-        scatter.yAxis().ticks(4); 
+        scatterFatSat.yAxis().ticks(4); 
+
+
+        var scatterCarbSug = dc.scatterPlot("#scatterChart2")
+            .width(400)
+            .height(250)
+            .margins({top:15, bottom:30, left:60, right:50})
+            .dimension(scatterDimensionCarbSug)
+            .group(scatterGroupCarbSug)
+            .x(d3.scale.linear().domain([0, 15])) // [min, max] 
+            .y(d3.scale.linear().domain([0, 15])) // Can be left out to set automatically
+            .yAxisLabel("Carbohydrates")
+            .xAxisLabel("Sugar")
+            .renderHorizontalGridLines(true)
+            .renderVerticalGridLines(true)
+            .symbolSize(10)
+            .clipPadding(22)
+            .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
+            .colors(d3.scale.category20b())
+            .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            ;
+
+        scatterCarbSug.yAxis().ticks(4); 
+
+
+
+
 
         dc.renderAll();
     </script>
