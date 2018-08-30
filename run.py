@@ -1,6 +1,7 @@
 import os
-from flask import Flask, redirect, render_template, request, url_for #, json
+from flask import Flask, redirect, render_template, request, url_for
 from flask_pymongo import PyMongo
+import json
 from bson.objectid import ObjectId
 from bson.json_util import dumps
 
@@ -143,6 +144,28 @@ def get_data_backup():
 
 @app.route("/replace_data_from_backup")
 def replace_data_from_backup():
+    nutrition100 = []
+    classification = []
+    with open("data_backup/nutrition100.json", 'r') as file:
+        nutrition100 = json.loads(file.read())
+    with open("data_backup/classification.json", 'r') as file:
+        classification = json.loads(file.read())
+    foods = mongo.db.nutrition100
+    for ndx, each_food in enumerate(nutrition100):
+        del nutrition100[ndx]["_id"]
+        foods.insert_one(nutrition100[ndx])
+    # print(nutrition100)
+    # print(len(nutrition100))
+    # print(type(nutrition100))
+
+    # print("\n\n")
+    # print(nutrition100[0])
+
+    # s = '[{"i":"imap.gmail.com","p":"someP@ss"},{"i":"imap.aol.com","p":"anoterPass"}]'
+    # jdata = json.loads(s)
+    # for d in nutrition100:
+    #     for key, value in d.iteritems():
+    #         print(key, value)
 
     return redirect(url_for('get_food_items'))
 
