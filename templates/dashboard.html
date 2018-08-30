@@ -24,6 +24,14 @@
                     <h3>Carbohydrates vs Sugar</h3>
                     <div id="scatterChart2"></div>
                 </div>
+                <div class="col col-md-6">
+                    <h3>Energy vs Protein</h3>
+                    <div id="scatterChart3"></div>
+                </div>
+                <div class="col col-md-6">
+                    <h3>Salt vs Sugar</h3>
+                    <div id="scatterChart4"></div>
+                </div>
             </div>
         </div>
 
@@ -47,15 +55,15 @@
                 "classification": "Tomato Puree", 
                 "name": "Tomato Puree", 
                 "brand": "Cucina", 
-                "energy1": "335kJ", 
+                "energy1": "335", 
                 "energy2": "79kcal", 
                 "fat": "0.5", 
                 "saturated": "0.1", 
                 "carbohydrates": "14.0", 
                 "sugar": "14.0", 
                 "fibre": "1.8g", 
-                "protein": "4.3g", 
-                "salt": "1.6g", 
+                "protein": "4.3", 
+                "salt": "1.6", 
                 "shop": "Aldi", 
                 "notes": "Double Concentrate / 20g = 1/5-a-day"
             }, 
@@ -63,15 +71,15 @@
                 "classification": "Dried Tomatoes", 
                 "name": "Sundried Tomatoes", 
                 "brand": "Tesco", 
-                "energy1": "674kJ", 
+                "energy1": "674", 
                 "energy2": "163kcal", 
                 "fat": "11.9", 
                 "saturated": "1.4", 
                 "carbohydrates": "7.0", 
                 "sugar": "6.4", 
                 "fibre": "7.9", 
-                "protein": "3.0g", 
-                "salt": "2.8g", 
+                "protein": "3.0", 
+                "salt": "2.8", 
                 "shop": "Tesco", 
                 "notes": "Marinated with garlic in sunflower oil and virgin olive oil / drained"
             }, 
@@ -79,15 +87,15 @@
                 "classification": "Milk", 
                 "name": "Semi Skimmed Milk", 
                 "brand": "Tesco", 
-                "energy1": "209kJ", 
+                "energy1": "209", 
                 "energy2": "50kcal", 
                 "fat": "1.8", 
                 "saturated": "1.1", 
                 "carbohydrates": "4.8", 
                 "sugar": "4.8", 
                 "fibre": "0.0g", 
-                "protein": "3.6g", 
-                "salt": "0.1g", 
+                "protein": "3.6", 
+                "salt": "0.1", 
                 "shop": "Tesco", 
                 "notes": ""
             }, 
@@ -95,15 +103,15 @@
                 "classification": "Cheese", 
                 "name": "Mature Cheddar", 
                 "brand": "Creamfields", 
-                "energy1": "1725kJ", 
+                "energy1": "1725", 
                 "energy2": "416kcal", 
                 "fat": "34.9", 
                 "saturated": "21.7", 
                 "carbohydrates": "0.1", 
                 "sugar": "0.1", 
                 "fibre": "0.0g", 
-                "protein": "25.4g", 
-                "salt": "1.8g", 
+                "protein": "25.4", 
+                "salt": "1.8", 
                 "shop": "Tesco", 
                 "notes": "Exclusive at Tesco"
             }
@@ -113,9 +121,12 @@
 
         var scatterDimensionFatSat = facts.dimension(function(d) { return [d.saturated, d.fat]; });
         var scatterDimensionCarbSug = facts.dimension(function(d) { return [d.sugar, d.carbohydrates]; });
+        var scatterDimensionEnergyProt = facts.dimension(function(d) { return [d.energy1, d.protein]; });
+        var scatterDimensionSugSalt = facts.dimension(function(d) { return [d.sugar, d.salt]; });
         var scatterGroupFatSat = scatterDimensionFatSat.group();
         var scatterGroupCarbSug = scatterDimensionCarbSug.group();
-
+        var scatterGroupEnergyProt = scatterDimensionEnergyProt.group();
+        var scatterGroupSugSalt = scatterDimensionSugSalt.group();
 
         var scatterFatSat = dc.scatterPlot("#scatterChart1")
             .width(400)
@@ -135,9 +146,7 @@
             .colors(d3.scale.category20b())
             .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
             ;
-
         scatterFatSat.yAxis().ticks(4); 
-
 
         var scatterCarbSug = dc.scatterPlot("#scatterChart2")
             .width(400)
@@ -157,9 +166,47 @@
             .colors(d3.scale.category20b())
             .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
             ;
-
         scatterCarbSug.yAxis().ticks(4); 
 
+        var scatterEnergyProt = dc.scatterPlot("#scatterChart3")
+            .width(400)
+            .height(250)
+            .margins({top:15, bottom:30, left:60, right:50})
+            .dimension(scatterDimensionEnergyProt)
+            .group(scatterGroupEnergyProt)
+            .x(d3.scale.linear().domain([0, 2000])) // [min, max] 
+            .y(d3.scale.linear().domain([0, 30])) // Can be left out to set automatically
+            .yAxisLabel("Protein")
+            .xAxisLabel("Energy")
+            .renderHorizontalGridLines(true)
+            .renderVerticalGridLines(true)
+            .symbolSize(10)
+            .clipPadding(22)
+            .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
+            .colors(d3.scale.category20b())
+            .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            ;
+        scatterEnergyProt.yAxis().ticks(4);
+
+        var scatterSugSalt = dc.scatterPlot("#scatterChart4")
+            .width(400)
+            .height(250)
+            .margins({top:15, bottom:30, left:60, right:50})
+            .dimension(scatterDimensionSugSalt)
+            .group(scatterGroupSugSalt)
+            .x(d3.scale.linear().domain([0, 15])) // [min, max] 
+            .y(d3.scale.linear().domain([0, 3])) // Can be left out to set automatically
+            .yAxisLabel("Salt")
+            .xAxisLabel("Sugar")
+            .renderHorizontalGridLines(true)
+            .renderVerticalGridLines(true)
+            .symbolSize(10)
+            .clipPadding(22)
+            .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
+            .colors(d3.scale.category20b())
+            .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            ;
+        scatterSugSalt.yAxis().ticks(4); 
 
 
 
