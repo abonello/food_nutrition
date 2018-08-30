@@ -24,6 +24,8 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/get_food_items")
 def get_food_items():
+    # food=mongo.db.nutrition100.find()
+    # print(food)
     return render_template("index.html", food=mongo.db.nutrition100.find())
 
 
@@ -36,15 +38,6 @@ def add_food_item():
 def insert_food_item():
     foods = mongo.db.nutrition100
     data = request.form.to_dict()
-    data["energy1"] = data["energy1"] + "kJ"
-    data["energy2"] = data["energy2"] + "kcal"
-    data["fat"] = data["fat"] + "g"
-    data["saturated"] = data["saturated"] + "g"
-    data["carbohydrates"] = data["carbohydrates"] + "g"
-    data["sugar"] = data["sugar"] + "g"
-    data["fibre"] = data["fibre"] + "g"
-    data["protein"] = data["protein"] + "g"
-    data["salt"] = data["salt"] + "g"
     del data["action"]
     foods.insert_one(data)
     return redirect(url_for("get_food_items"))

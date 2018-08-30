@@ -177,3 +177,5 @@ I plan to have 4 scatter plots and a bubble chart:
 
 I want to be able to cancel each individual filter and all filters.
 I would like to be able to transfer the filters to the get_food_items view, if it is possible, to display only the selected foods in the accordion.
+
+There is something that need to be changed in the database. Currently, the values are stored in the database with the units attached. This is not what crossfilter etc wants. Numbers should be numbers. I can do the processing in javascript(jQuery) to remove the units before passing the data to crossfilter or I can store the numbers without the units. This is the way I am choosing to do. As a result, the display of data in the accordion view will show without units unless I change the code to add them for display. This is the next step. I also have to remove the code which was adding the units when adding a new food item.
