@@ -87,7 +87,7 @@ def delete_class(class_id):
 
 @app.route("/add_class/<cameFrom>")
 @app.route("/add_class")
-def add_class(cameFrom=""): # I want to check that class does not exist
+def add_class(cameFrom=""):
     return render_template("addclass.html", classification=mongo.db.classification.find(), cameFrom=cameFrom)
 
 
@@ -97,14 +97,11 @@ def insert_class(cameFrom=""):
     data = request.form.to_dict()
     del data["action"]
     for food_class in classification.find():
-        print(food_class['class'])
         if data['class'].lower() == food_class['class'].lower():
-            print("There is a match")
             return render_template("addclass.html", classification=mongo.db.classification.find(), entry=data['class'])
 
     data['class'] = data['class'].capitalize()
     classification.insert_one(data)
-    # return redirect(url_for("get_classification"))
     if cameFrom == 'add_food_item':
         return redirect(url_for('add_food_item'))
     elif cameFrom == 'get_classification':
