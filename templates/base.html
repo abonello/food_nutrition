@@ -14,7 +14,55 @@
             integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
             crossorigin="anonymous" />
     <!-- <link rel="stylesheet" href="./static/css/style.css" /> -->
+    <link rel="stylesheet" href="./static/vendor/dc.css" />
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
+    <style> <!-- Temporary style for dashboard -->
+        a { 
+            text-decoration: none;
+            color: rgb(17, 27, 33)
+        }
+
+        h2 {
+            margin-top: 70px;
+            display: block;
+            background-color: rgb(214, 242, 239);
+            padding: 5px 15px;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            -webkit-box-sizing: border-box;
+               -moz-box-sizing: border-box;
+                    box-sizing: border-box;
+        }
+
+        h2 {
+            font-family: helvetica, arial, sans-serif;
+            font-weight: 100;
+            color: rgb(110, 129, 160);
+            font-size: 26px;
+        }
+
+        div#scatterChart svg g g.axis g.tick text {
+            font-size: 16px;
+        }
+
+        div#scatterChart svg g g.x {
+            fill: red;
+            stroke: red;
+        }
+
+        div#chascatterChartrt2 svg g g.y {
+            fill: rgb(83, 0, 124);
+            stroke: rgb(83, 0, 124);
+        }
+    
+    </style>
 </head>
 <body>
     
@@ -27,12 +75,14 @@
                     <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
                     <ul id="wide-menu" class="right hide-on-med-and-down">
                         <li><a href="{{ url_for('get_food_items') }}">Home</a></li>
+                        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
                         <li><a href="{{ url_for('add_food_item') }}">New Item</a></li>
                         <li><a href="{{ url_for('get_classification') }}">Food Classes</a></li>
                         <!-- <li><a href="{#{ url_for('add_category') }#}">Add Category</a></li> -->
                     </ul>
                     <ul class="side-nav" id="mobile-menu">
                         <li><a href="{{ url_for('get_food_items') }}">Home</a></li>
+                        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
                         <li><a href="{{ url_for('add_food_item') }}">New Item</a></li>
                         <li><a href="{{ url_for('get_classification') }}">Food Classes</a></li>
                         <!-- <li><a href="{#{ url_for('add_category') }#}">Add Category</a></li> -->

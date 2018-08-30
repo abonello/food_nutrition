@@ -124,6 +124,15 @@ def update_class(class_id):
     return redirect(url_for('get_classification'))
 
 
+#-------------DASHBOARD-----------------------------
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
+
+
+
+
 #-------------DATA BACKUP-----------------------------
 @app.route("/get_data_backup")
 def get_data_backup():
