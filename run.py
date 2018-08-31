@@ -143,8 +143,8 @@ def dashboard2():
         # eachItem["id"] = str(eachItem["_id"])
         eachItem["_id"] = str(eachItem["_id"])
         # del eachItem["_id"]
-        del eachItem["shop"]
-        del eachItem["notes"]
+        # del eachItem["shop"]
+        # del eachItem["notes"]
         foodList.append(eachItem)
     # print(foodList)
     # print(type(foodList))

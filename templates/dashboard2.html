@@ -13,7 +13,7 @@
                     <button class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Selected Food</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="fillDataHere">
                     
                 </div>
                 <div class="modal-footer"></div>
@@ -48,8 +48,36 @@
     <script>
         var graphData = {{ data.food_list | safe }}
 
-        function fill() {
-            $('.modal-body').text(graphData[1].name +", "+ graphData[1].brand +", "+ graphData[1].classification);
+        function dataSearch(data, idToLookFor) {
+            for (var i=0; i < data.length; i++) {
+                if (data[i]._id == idToLookFor) {
+                    return(data[i]);
+                }
+            }
+        };
+
+
+        function fill(item) {
+            // console.log(item.getAttribute("data"));
+            thisData = dataSearch(graphData, item.getAttribute("data"));
+            // console.log(thisData);
+            
+            /* $('.modal-body').innerHTML = "<p>"+thisData.name +", "+ thisData.brand +" - "+ thisData.classification+"<br>"+
+                            "Fats: "+thisData.fat+", of which Saturated: "+thisData.saturated+"<br>"+
+                            "Carbohydrates: "+thisData.carbohydrates+", of which Sugar: "+thisData.sugar+
+                            "</p>"; */
+
+            var modalContent = "<p><strong>"+
+                            thisData.name +"</strong>, "+ thisData.brand +" - "+ thisData.classification+"<br>"+
+                            "Energy: "+thisData.energy1+"kJ / "+thisData.energy2+"kcal<br>"+
+                            "Fats: "+thisData.fat+"g, of which Saturated: "+thisData.saturated+"g<br>"+
+                            "Carbohydrates: "+thisData.carbohydrates+"g, of which Sugar: "+thisData.sugar+"g<br>"+
+                            "Protein: "+thisData.protein+"g, Fibre: "+thisData.fibre+"g, Salt: "+thisData.salt+"g<br>"+
+                            "<hr><br>Item bought from: "+thisData.shop+"<br>"+
+                            "<br>Notes: "+thisData.notes+"</p>"
+
+            $(".modal-body").html(modalContent);
+                
         };
         
         // console.log(graphData);
@@ -116,7 +144,8 @@
             .height(300)
             .dimension(idDimension)
             .group(function(d) { return d; })
-            .columns([  {label:'Name', format: function(d) { return "<a href='#' data-target='#displayModal' data-toggle='modal' onclick='fill()'>"+d.name+"</a>"; }},
+            .columns([  {label:'Name', format: function(d) { 
+                        return "<a href='#' data-target='#displayModal' data-toggle='modal' data="+d._id+" onclick='fill(this)'>"+d.name+"</a>"; }},
                         {label:'Brand', format: function(d) { return d.brand; }},
                         {label:'Type', format: function(d) { return d.classification; }}
                     ]) 
