@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h2>Dashboard 2</h2>
+
+    <!-- {{ data.food_list }} -->
+
+    <div class="row">
+        <div id="scatterChart1" class="col col-md-6">
+            <h3>All Fats vs Saturated Fats</h3>
+            <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span>
+            <a class="reset" style="display:none" href="javascript:scatterSatFat.filterAll(); dc.redrawAll();">reset</a>
+        </div>
+        <div id="scatterChart2"  class="col col-md-6">
+            <h3>Carbohydrates vs Sugar</h3>
+            <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span>
+            <a class="reset" style="display:none" href="javascript:scatterSugCarb.filterAll(); dc.redrawAll();">reset</a>
+        </div>
+
+
+
+        
+        <div class="col col-sm-12">
+            <table id="table" class="table table-hover " ></table>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="./static/vendor/d3.js"></script>
+    <script type="text/javascript" src="./static/vendor/crossfilter.js"></script>
+    <script type="text/javascript" src="./static/vendor/dc.js"></script>
+    <script>
+        var graphData = {{ data.food_list | safe }}
+        // console.log(graphData);
+
+        var facts = crossfilter(graphData);
+        // Scatter Chart dimensions
+        var scatterDimensionSatFat = facts.dimension(function(d) { return [d.saturated, d.fat]; });
+        var scatterDimensionSugCarb = facts.dimension(function(d) { return [d.sugar, d.carbohydrates]; });
+        // Scatter Chart groups
+        var scatterGroupSatFat = scatterDimensionSatFat.group();
+        var scatterGroupSugCarb = scatterDimensionSugCarb.group();
+
+        // Table dimension
+        var idDimension = facts.dimension(function(d) { return d._id; });
+
+        // CHARTS
+        var scatterSatFat = dc.scatterPlot("#scatterChart1")
+            .width(450)
+            .height(250)
+            .margins({top:15, bottom:30, left:60, right:50})
+            .dimension(scatterDimensionSatFat)
+            .group(scatterGroupSatFat)
+            .x(d3.scale.linear().domain([0, 25])) // [min, max] 0 25
+            .y(d3.scale.linear().domain([0, 35])) // Can be left out to set automatically 0 35
+            .yAxisLabel("All Fats")
+            .xAxisLabel("Saturated")
+            .renderHorizontalGridLines(true)
+            .renderVerticalGridLines(true)
+            .symbolSize(10)
+            .clipPadding(22)
+            .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
+            .colors(d3.scale.category20b())
+            .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            ;
+        scatterSatFat.yAxis().ticks(4); 
+
+        var scatterSugCarb = dc.scatterPlot("#scatterChart2")
+            .width(450)
+            .height(250)
+            .margins({top:15, bottom:30, left:60, right:50})
+            .dimension(scatterDimensionSugCarb)
+            .group(scatterGroupSugCarb)
+            .x(d3.scale.linear().domain([0, 80])) // [min, max] 0 15
+            .y(d3.scale.linear().domain([0, 80])) // Can be left out to set automatically 0 15
+            .yAxisLabel("Carbohydrates")
+            .xAxisLabel("Sugar")
+            .renderHorizontalGridLines(true)
+            .renderVerticalGridLines(true)
+            .symbolSize(10)
+            .clipPadding(22)
+            .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
+            .colors(d3.scale.category20b())
+            .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            ;
+        scatterSugCarb.yAxis().ticks(4); 
+
+
+
+
+
+
+        var dataTable = dc.dataTable("#table")
+            .width(1360)
+            .height(300)
+            .dimension(idDimension)
+            .group(function(d) { return d; })
+            .columns([  {label:'Name', format: function(d) { return d.name; }},
+                        {label:'Brand', format: function(d) { return d.brand; }},
+                        {label:'Type', format: function(d) { return d.classification; }}
+                    ]) 
+            ;
+
+
+        dc.renderAll();
+
+    </script>
+
+    
+
+{% endblock %}

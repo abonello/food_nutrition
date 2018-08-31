@@ -64,6 +64,22 @@
         }
     
     </style>
+    <!-- <style>
+        path {
+            stroke-width: 2;
+            fill: none;
+        }
+        .axis path, .axis line {
+            fill: none;
+            stroke: grey;
+            stroke-width: 1;
+            shape-rendering: crispEdges;
+        }
+        .area {
+            fill: #F0F8FF;
+            stroke-width: 0;
+        }
+    </style> -->
 </head>
 <body>
     
@@ -76,14 +92,16 @@
                     <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
                     <ul id="wide-menu" class="right hide-on-med-and-down">
                         <li><a href="{{ url_for('get_food_items') }}">Home</a></li>
-                        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                        <li><a href="{{ url_for('dashboard1') }}">Dashboard 1</a></li>
+                        <li><a href="{{ url_for('dashboard2') }}">Dashboard 2</a></li>
                         <li><a href="{{ url_for('add_food_item') }}">New Item</a></li>
                         <li><a href="{{ url_for('get_classification') }}">Food Classes</a></li>
                         <!-- <li><a href="{#{ url_for('add_category') }#}">Add Category</a></li> -->
                     </ul>
                     <ul class="side-nav" id="mobile-menu">
                         <li><a href="{{ url_for('get_food_items') }}">Home</a></li>
-                        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                        <li><a href="{{ url_for('dashboard1') }}">Dashboard 1</a></li>
+                        <li><a href="{{ url_for('dashboard2') }}">Dashboard 2</a></li>
                         <li><a href="{{ url_for('add_food_item') }}">New Item</a></li>
                         <li><a href="{{ url_for('get_classification') }}">Food Classes</a></li>
                         <!-- <li><a href="{#{ url_for('add_category') }#}">Add Category</a></li> -->

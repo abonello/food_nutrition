@@ -118,8 +118,8 @@ def update_class(class_id):
 
 
 #-------------DASHBOARD-----------------------------
-@app.route("/dashboard")
-def dashboard():
+@app.route("/dashboard1")
+def dashboard1():
     foodItems=mongo.db.nutrition100.find()
     foodList = []
     for eachItem in foodItems:
@@ -128,25 +128,44 @@ def dashboard():
         del eachItem["notes"]
         foodList.append(eachItem)
 
-    # print(foodList)
-    # print("=======================================")
-    # print(type(foodList))
-
-    # str1 = ''
-    # str1.join(foodList)
-    # str1 = ''
-    # str1 = str1.join(str(e)+',' for e in foodList)
     str1 = ''.join(str(foodList))
-    # str1 = str1[:-1]
-    print(str1)
-    print(type(str1))
-    # str2 = '['
-    # str2 = str2.join(str1).join("]")
-    # print(str2)
-    # print(type(str2))
+
     return render_template("dashboard.html", foodList=json.dumps(foodList))
 
+@app.route("/dashboard2")
+def dashboard2():
+    foodItems=mongo.db.nutrition100.find()
+    # for each in foodItems:
+    #     print(each)
+    foodList = []
+    for eachItem in foodItems:
+        # print(eachItem["_id"])
+        # eachItem["id"] = str(eachItem["_id"])
+        eachItem["_id"] = str(eachItem["_id"])
+        # del eachItem["_id"]
+        del eachItem["shop"]
+        del eachItem["notes"]
+        foodList.append(eachItem)
+    # print(foodList)
+    # print(type(foodList))
+    foodList = json.dumps(foodList, indent=2)
+    # print("-------------------------------------------------------------------------")
+    # print(foodList)
+    # print(type(foodList))
+    data = {'food_list': foodList}
+    # print("-------------------------------------------------------------------------")
+    # print(data)
+    # print(type(data))
 
+    # df = pd.read_csv('data').drop('Open', axis=1)
+    # chart_data = df.to_dict(orient='records')
+    # chart_data = json.dumps(chart_data, indent=2)
+    # data = {'chart_data': chart_data}
+    # return render_template("index.html", data=data)
+
+
+
+    return render_template("dashboard2.html", data=data)
 
 
 
