@@ -4,6 +4,23 @@
     <h2>Dashboard 2</h2>
 
     <!-- {{ data.food_list }} -->
+    <!-- <div class="btn btn-primary btn-sm" data-target="#displayModal" data-toggle="modal" onclick="fill()">Display</div> -->
+
+    <div class="modal" id="displayModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Selected Food</h4>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+                <div class="modal-footer"></div>
+                <button class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div id="scatterChart1" class="col col-md-6">
@@ -19,7 +36,7 @@
 
 
 
-        
+
         <div class="col col-sm-12">
             <table id="table" class="table table-hover " ></table>
         </div>
@@ -30,6 +47,11 @@
     <script type="text/javascript" src="./static/vendor/dc.js"></script>
     <script>
         var graphData = {{ data.food_list | safe }}
+
+        function fill() {
+            $('.modal-body').text(graphData[1].name +", "+ graphData[1].brand +", "+ graphData[1].classification);
+        };
+        
         // console.log(graphData);
 
         var facts = crossfilter(graphData);
@@ -94,7 +116,7 @@
             .height(300)
             .dimension(idDimension)
             .group(function(d) { return d; })
-            .columns([  {label:'Name', format: function(d) { return d.name; }},
+            .columns([  {label:'Name', format: function(d) { return "<a href='#' data-target='#displayModal' data-toggle='modal' onclick='fill()'>"+d.name+"</a>"; }},
                         {label:'Brand', format: function(d) { return d.brand; }},
                         {label:'Type', format: function(d) { return d.classification; }}
                     ]) 
