@@ -9,6 +9,10 @@
             </div>
         </div>
     </div>
+    <div class="row hidden" id="data">
+        {{ foodList }}
+    </div>
+    
 
     <div class="row">
         <h2>Scatter Plot</h2>
@@ -50,72 +54,81 @@
             console.log(filter+"("+f.length+") = "+JSON.stringify(f).replace("[","[\n\t").replace(/}\,/g,"},\n\t").replace("]","\n]"));
         }
 
-    var data = [
-            {
-                "classification": "Tomato Puree", 
-                "name": "Tomato Puree", 
-                "brand": "Cucina", 
-                "energy1": "335", 
-                "energy2": "79kcal", 
-                "fat": "0.5", 
-                "saturated": "0.1", 
-                "carbohydrates": "14.0", 
-                "sugar": "14.0", 
-                "fibre": "1.8g", 
-                "protein": "4.3", 
-                "salt": "1.6", 
-                "shop": "Aldi", 
-                "notes": "Double Concentrate / 20g = 1/5-a-day"
-            }, 
-            {
-                "classification": "Dried Tomatoes", 
-                "name": "Sundried Tomatoes", 
-                "brand": "Tesco", 
-                "energy1": "674", 
-                "energy2": "163kcal", 
-                "fat": "11.9", 
-                "saturated": "1.4", 
-                "carbohydrates": "7.0", 
-                "sugar": "6.4", 
-                "fibre": "7.9", 
-                "protein": "3.0", 
-                "salt": "2.8", 
-                "shop": "Tesco", 
-                "notes": "Marinated with garlic in sunflower oil and virgin olive oil / drained"
-            }, 
-            {
-                "classification": "Milk", 
-                "name": "Semi Skimmed Milk", 
-                "brand": "Tesco", 
-                "energy1": "209", 
-                "energy2": "50kcal", 
-                "fat": "1.8", 
-                "saturated": "1.1", 
-                "carbohydrates": "4.8", 
-                "sugar": "4.8", 
-                "fibre": "0.0g", 
-                "protein": "3.6", 
-                "salt": "0.1", 
-                "shop": "Tesco", 
-                "notes": ""
-            }, 
-            {
-                "classification": "Cheese", 
-                "name": "Mature Cheddar", 
-                "brand": "Creamfields", 
-                "energy1": "1725", 
-                "energy2": "416kcal", 
-                "fat": "34.9", 
-                "saturated": "21.7", 
-                "carbohydrates": "0.1", 
-                "sugar": "0.1", 
-                "fibre": "0.0g", 
-                "protein": "25.4", 
-                "salt": "1.8", 
-                "shop": "Tesco", 
-                "notes": "Exclusive at Tesco"
-            }
-        ]
+    // var data = [
+    //         {
+    //             "classification": "Tomato Puree", 
+    //             "name": "Tomato Puree", 
+    //             "brand": "Cucina", 
+    //             "energy1": "335", 
+    //             "energy2": "79kcal", 
+    //             "fat": "0.5", 
+    //             "saturated": "0.1", 
+    //             "carbohydrates": "14.0", 
+    //             "sugar": "14.0", 
+    //             "fibre": "1.8g", 
+    //             "protein": "4.3", 
+    //             "salt": "1.6", 
+    //             "shop": "Aldi", 
+    //             "notes": "Double Concentrate / 20g = 1/5-a-day"
+    //         }, 
+    //         {
+    //             "classification": "Dried Tomatoes", 
+    //             "name": "Sundried Tomatoes", 
+    //             "brand": "Tesco", 
+    //             "energy1": "674", 
+    //             "energy2": "163kcal", 
+    //             "fat": "11.9", 
+    //             "saturated": "1.4", 
+    //             "carbohydrates": "7.0", 
+    //             "sugar": "6.4", 
+    //             "fibre": "7.9", 
+    //             "protein": "3.0", 
+    //             "salt": "2.8", 
+    //             "shop": "Tesco", 
+    //             "notes": "Marinated with garlic in sunflower oil and virgin olive oil / drained"
+    //         }, 
+    //         {
+    //             "classification": "Milk", 
+    //             "name": "Semi Skimmed Milk", 
+    //             "brand": "Tesco", 
+    //             "energy1": "209", 
+    //             "energy2": "50kcal", 
+    //             "fat": "1.8", 
+    //             "saturated": "1.1", 
+    //             "carbohydrates": "4.8", 
+    //             "sugar": "4.8", 
+    //             "fibre": "0.0g", 
+    //             "protein": "3.6", 
+    //             "salt": "0.1", 
+    //             "shop": "Tesco", 
+    //             "notes": ""
+    //         }, 
+    //         {
+    //             "classification": "Cheese", 
+    //             "name": "Mature Cheddar", 
+    //             "brand": "Creamfields", 
+    //             "energy1": "1725", 
+    //             "energy2": "416kcal", 
+    //             "fat": "34.9", 
+    //             "saturated": "21.7", 
+    //             "carbohydrates": "0.1", 
+    //             "sugar": "0.1", 
+    //             "fibre": "0.0g", 
+    //             "protein": "25.4", 
+    //             "salt": "1.8", 
+    //             "shop": "Tesco", 
+    //             "notes": "Exclusive at Tesco"
+    //         }
+    //     ]
+ 
+
+        function myFunc(vars) {
+            return vars;
+        }
+
+        var dataStr = myFunc({{ foodList|tojson }})
+        var data = JSON.parse(dataStr);
+
 
         var facts = crossfilter(data);
 
@@ -128,14 +141,34 @@
         var scatterGroupEnergyProt = scatterDimensionEnergyProt.group();
         var scatterGroupSugSalt = scatterDimensionSugSalt.group();
 
+
+        // Trying to automatically calculate the min and max of each column
+        saturatedMin = Math.min(facts.dimension(function(d) { return [d.saturated]; }));
+        // console.log(saturatedMin);
+        // console.log(typeof(saturatedMin));
+
+        var saturatedDataDim = facts.dimension(function(d) {return d.saturated;});
+        var minSaturated = saturatedDataDim.bottom(1)[0].saturated;
+        var maxSaturated = saturatedDataDim.top(1)[0].saturated;
+        // console.log(minSaturated);
+        // console.log(maxSaturated);
+        var hits = saturatedDataDim.group().reduceCount();
+        console.log(hits.all());
+        // var page_id_with_most_entries = hits.top(1)[0].key;
+        // var number_of_entries = hits.top(1)[0].value;
+        // console.log(page_id_with_most_entries);
+        // console.log(number_of_entries);
+
+
+
         var scatterFatSat = dc.scatterPlot("#scatterChart1")
-            .width(400)
+            .width(450)
             .height(250)
             .margins({top:15, bottom:30, left:60, right:50})
             .dimension(scatterDimensionFatSat)
             .group(scatterGroupFatSat)
-            .x(d3.scale.linear().domain([0, 25])) // [min, max] 
-            .y(d3.scale.linear().domain([0, 35])) // Can be left out to set automatically
+            .x(d3.scale.linear().domain([0, 25])) // [min, max] 0 25
+            .y(d3.scale.linear().domain([0, 35])) // Can be left out to set automatically 0 35
             .yAxisLabel("All Fats")
             .xAxisLabel("Saturated")
             .renderHorizontalGridLines(true)
@@ -149,13 +182,13 @@
         scatterFatSat.yAxis().ticks(4); 
 
         var scatterCarbSug = dc.scatterPlot("#scatterChart2")
-            .width(400)
+            .width(450)
             .height(250)
             .margins({top:15, bottom:30, left:60, right:50})
             .dimension(scatterDimensionCarbSug)
             .group(scatterGroupCarbSug)
-            .x(d3.scale.linear().domain([0, 15])) // [min, max] 
-            .y(d3.scale.linear().domain([0, 15])) // Can be left out to set automatically
+            .x(d3.scale.linear().domain([0, 80])) // [min, max] 0 15
+            .y(d3.scale.linear().domain([0, 80])) // Can be left out to set automatically 0 15
             .yAxisLabel("Carbohydrates")
             .xAxisLabel("Sugar")
             .renderHorizontalGridLines(true)
@@ -174,8 +207,8 @@
             .margins({top:15, bottom:30, left:60, right:50})
             .dimension(scatterDimensionEnergyProt)
             .group(scatterGroupEnergyProt)
-            .x(d3.scale.linear().domain([0, 2000])) // [min, max] 
-            .y(d3.scale.linear().domain([0, 30])) // Can be left out to set automatically
+            .x(d3.scale.linear().domain([0, 2100])) // [min, max] 0 2000
+            .y(d3.scale.linear().domain([0, 30])) // Can be left out to set automatically 0 30
             .yAxisLabel("Protein")
             .xAxisLabel("Energy")
             .renderHorizontalGridLines(true)
@@ -194,8 +227,8 @@
             .margins({top:15, bottom:30, left:60, right:50})
             .dimension(scatterDimensionSugSalt)
             .group(scatterGroupSugSalt)
-            .x(d3.scale.linear().domain([0, 15])) // [min, max] 
-            .y(d3.scale.linear().domain([0, 3])) // Can be left out to set automatically
+            .x(d3.scale.linear().domain([0, 80])) // [min, max] 0 15
+            .y(d3.scale.linear().domain([0, 7])) // Can be left out to set automatically 0 3
             .yAxisLabel("Salt")
             .xAxisLabel("Sugar")
             .renderHorizontalGridLines(true)
