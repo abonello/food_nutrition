@@ -5,17 +5,17 @@ import json
 from bson.objectid import ObjectId
 from bson.json_util import dumps
 
-# from connection import getDbName, getURI  # Needed to run locally - Comment out for heroku
+from connection import getDbName, getURI  # Needed to run locally - Comment out for heroku
 
 
 app = Flask(__name__)
 # Use the following to run LOCALLY will need the import
-# app.config["MONGO_DBNAME"] = getDbName()
-# app.config["MONGO_URI"] = getURI()
+app.config["MONGO_DBNAME"] = getDbName()
+app.config["MONGO_URI"] = getURI()
 
 # Use the following to run from HEROKU - remove the import
-app.config["MONGO_DBNAME"] = os.getenv('MONGO_DBNAME')
-app.config["MONGO_URI"] = os.getenv('MONGO_URI')
+# app.config["MONGO_DBNAME"] = os.getenv('MONGO_DBNAME')
+# app.config["MONGO_URI"] = os.getenv('MONGO_URI')
 
 
 mongo = PyMongo(app)
@@ -163,9 +163,22 @@ def dashboard2():
     # data = {'chart_data': chart_data}
     # return render_template("index.html", data=data)
 
-
-
     return render_template("dashboard2.html", data=data)
+
+@app.route("/dashboard3")
+def dashboard3():
+    foodItems=mongo.db.nutrition100.find()
+    foodList = []
+    for eachItem in foodItems:
+        eachItem["_id"] = str(eachItem["_id"])
+        # del eachItem["_id"]
+        # del eachItem["shop"]
+        # del eachItem["notes"]
+        foodList.append(eachItem)
+
+    foodList = json.dumps(foodList, indent=2)
+    data = {'food_list': foodList}
+    return render_template("dashboard3.html", data=data)
 
 
 
