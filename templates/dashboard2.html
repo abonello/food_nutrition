@@ -3,10 +3,7 @@
 
     <h2>Dashboard 2</h2>
 
-    <!-- {{ data.food_list }} -->
-    <!-- <div class="btn btn-primary btn-sm" data-target="#displayModal" data-toggle="modal" onclick="fill()">Display</div> -->
-
-    <div class="modal fade" id="displayModal" tabindex="-1">
+    <div class="modal" id="displayModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -14,7 +11,7 @@
                     <h4 class="modal-title">Selected Food</h4>
                 </div>
                 <div class="modal-body" id="fillDataHere">
-                    
+                    <!-- Modal Data will be added here programmatically. -->
                 </div>
                 <div class="modal-footer"></div>
                 <button class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -23,22 +20,56 @@
     </div>
 
     <div class="row">
+        <div class="col col-sm-12 col-md-8">
+            <div id="rowChart1">
+                <h3>Food Classification</h3>
+                <!-- <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span>
+                <a class="reset" style="display:none" href="javascript:classRowChart.filterAll(); dc.redrawAll();">reset</a> -->
+                <!-- Row Chart will be added here programmatically. -->
+            </div>
+        </div>
+        <div class="col col-sm-12 col-md-4">
+                <div id="rowChart1">
+                    <h3>Info</h3>
+                    <!-- <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span>
+                    <a class="reset" style="display:none" href="javascript:classRowChart.filterAll(); dc.redrawAll();">reset</a> -->
+                    <!-- Row Chart will be added here programmatically. -->
+                </div>
+            </div>
         <div id="scatterChart1" class="col col-md-6">
             <h3>All Fats vs Saturated Fats</h3>
-            <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span>
-            <a class="reset" style="display:none" href="javascript:scatterSatFat.filterAll(); dc.redrawAll();">reset</a>
+            <!-- <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span> -->
+            <!-- <a class="reset" style="display:none" href="javascript:scatterSatFat.filterAll(); dc.redrawAll();">reset</a> -->
+            <!-- Scatter Chart will be added here programmatically. -->
         </div>
         <div id="scatterChart2"  class="col col-md-6">
             <h3>Carbohydrates vs Sugar</h3>
-            <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span>
-            <a class="reset" style="display:none" href="javascript:scatterSugCarb.filterAll(); dc.redrawAll();">reset</a>
+            <!-- <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span> -->
+            <!-- <a class="reset" style="display:none" href="javascript:scatterSugCarb.filterAll(); dc.redrawAll();">reset</a> -->
+            <!-- Scatter Chart will be added here programmatically. -->
         </div>
-
-
-
+        <div class="col col-md-6">
+            <div id="scatterChart3">
+                <h3>Energy vs Protein</h3>
+                <!-- <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span> -->
+                <!-- <a class="reset" style="display:none" href="javascript:scatterEnergyProt.filterAll(); dc.redrawAll();">reset</a><br> -->
+                <!-- Scatter Chart will be added here programmatically. -->
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <div id="scatterChart4">
+                <h3>Salt vs Sugar</h3>
+                <!-- <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span> -->
+                <!-- <a class="reset" style="display:none" href="javascript:scatterSugSalt.filterAll(); dc.redrawAll();">reset</a> -->
+                <!-- Scatter Chart will be added here programmatically. -->
+            </div>
+        </div>
+        
 
         <div class="col col-sm-12">
-            <table id="table" class="table table-hover " ></table>
+            <table id="table" class="table table-hover " >
+                <!-- Table content will be added here programmatically. -->
+            </table>
         </div>
     </div>
 
@@ -58,14 +89,7 @@
 
 
         function fill(item) {
-            // console.log(item.getAttribute("data"));
             thisData = dataSearch(graphData, item.getAttribute("data"));
-            // console.log(thisData);
-            
-            /* $('.modal-body').innerHTML = "<p>"+thisData.name +", "+ thisData.brand +" - "+ thisData.classification+"<br>"+
-                            "Fats: "+thisData.fat+", of which Saturated: "+thisData.saturated+"<br>"+
-                            "Carbohydrates: "+thisData.carbohydrates+", of which Sugar: "+thisData.sugar+
-                            "</p>"; */
 
             var modalContent = "<p><strong>"+
                             thisData.name +"</strong>, "+ thisData.brand +" - "+ thisData.classification+"<br>"+
@@ -86,24 +110,34 @@
         // Scatter Chart dimensions
         var scatterDimensionSatFat = facts.dimension(function(d) { return [d.saturated, d.fat]; });
         var scatterDimensionSugCarb = facts.dimension(function(d) { return [d.sugar, d.carbohydrates]; });
+        // var scatterDimensionEnergyProt = facts.dimension(function(d) { return [d.energy1, d.protein]; });
+        var scatterDimensionEnergyProt = facts.dimension(function(d) { return [d.energy2, d.protein]; });
+        var scatterDimensionSugSalt = facts.dimension(function(d) { return [d.sugar, d.salt]; });
+        // Row Chart dimension
+        var classDimension = facts.dimension(function(d) { return d.classification });
+        // Table dimension
+        var idDimension = facts.dimension(function(d) { return d._id; });
+
         // Scatter Chart groups
         var scatterGroupSatFat = scatterDimensionSatFat.group();
         var scatterGroupSugCarb = scatterDimensionSugCarb.group();
+        var scatterGroupEnergyProt = scatterDimensionEnergyProt.group();
+        var scatterGroupSugSalt = scatterDimensionSugSalt.group();
+        var classGroup = classDimension.group()
 
-        // Table dimension
-        var idDimension = facts.dimension(function(d) { return d._id; });
+        
 
         // CHARTS
         var scatterSatFat = dc.scatterPlot("#scatterChart1")
             .width(450)
             .height(250)
-            .margins({top:15, bottom:30, left:60, right:50})
+            .margins({top:15, bottom:30, left:30, right:50})
             .dimension(scatterDimensionSatFat)
             .group(scatterGroupSatFat)
             .x(d3.scale.linear().domain([0, 25])) // [min, max] 0 25
             .y(d3.scale.linear().domain([0, 35])) // Can be left out to set automatically 0 35
-            .yAxisLabel("All Fats")
-            .xAxisLabel("Saturated")
+            .yAxisLabel("All Fats (g)")
+            .xAxisLabel("Saturated (g)")
             .renderHorizontalGridLines(true)
             .renderVerticalGridLines(true)
             .symbolSize(10)
@@ -117,13 +151,13 @@
         var scatterSugCarb = dc.scatterPlot("#scatterChart2")
             .width(450)
             .height(250)
-            .margins({top:15, bottom:30, left:60, right:50})
+            .margins({top:15, bottom:30, left:30, right:50})
             .dimension(scatterDimensionSugCarb)
             .group(scatterGroupSugCarb)
             .x(d3.scale.linear().domain([0, 80])) // [min, max] 0 15
             .y(d3.scale.linear().domain([0, 80])) // Can be left out to set automatically 0 15
-            .yAxisLabel("Carbohydrates")
-            .xAxisLabel("Sugar")
+            .yAxisLabel("Carbohydrates (g)")
+            .xAxisLabel("Sugar (g)")
             .renderHorizontalGridLines(true)
             .renderVerticalGridLines(true)
             .symbolSize(10)
@@ -134,7 +168,61 @@
             ;
         scatterSugCarb.yAxis().ticks(4); 
 
+        var scatterEnergyProt = dc.scatterPlot("#scatterChart3")
+            .width(450)
+            .height(250)
+            .margins({top:15, bottom:30, left:30, right:50})
+            .dimension(scatterDimensionEnergyProt)
+            .group(scatterGroupEnergyProt)
+            // .x(d3.scale.linear().domain([0, 2100])) // [min, max] 0 2000 Energy1 kJ
+            .x(d3.scale.linear().domain([0, 600])) // [min, max] 0 2000 Energy2 kcal
+            .y(d3.scale.linear().domain([0, 30])) // Can be left out to set automatically 0 30
+            .yAxisLabel("Protein (g)")
+            .xAxisLabel("Energy (kcal)")
+            .renderHorizontalGridLines(true)
+            .renderVerticalGridLines(true)
+            .symbolSize(10)
+            .clipPadding(22)
+            .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
+            .colors(d3.scale.category20b())
+            .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            ;
+        scatterEnergyProt.yAxis().ticks(4);
 
+        var scatterSugSalt = dc.scatterPlot("#scatterChart4")
+            .width(450)
+            .height(250)
+            .margins({top:15, bottom:30, left:30, right:50})
+            .dimension(scatterDimensionSugSalt)
+            .group(scatterGroupSugSalt)
+            .x(d3.scale.linear().domain([0, 80])) // [min, max] 0 15
+            .y(d3.scale.linear().domain([0, 7])) // Can be left out to set automatically 0 3
+            .yAxisLabel("Salt (g)")
+            .xAxisLabel("Sugar (g)")
+            .renderHorizontalGridLines(true)
+            .renderVerticalGridLines(true)
+            .symbolSize(10)
+            .clipPadding(22)
+            .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
+            .colors(d3.scale.category20b())
+            .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            ;
+        scatterSugSalt.yAxis().ticks(4); 
+
+        
+
+        var classRowChart = dc.rowChart('#rowChart1') /* dc.rowChart('#day-of-week-chart', 'chartGroup') */
+            .width(450)
+            .height(300)
+            .margins({top: 20, left: 10, right: 10, bottom: 20})
+            .group(classGroup)
+            .dimension(classDimension)
+            .title(function (d) {
+                return d.value;
+            })
+            .elasticX(true)
+            .xAxis().ticks(4)
+            ;
 
 
 
