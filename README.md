@@ -179,3 +179,22 @@ I want to be able to cancel each individual filter and all filters.
 I would like to be able to transfer the filters to the get_food_items view, if it is possible, to display only the selected foods in the accordion.
 
 There is something that need to be changed in the database. Currently, the values are stored in the database with the units attached. This is not what crossfilter etc wants. Numbers should be numbers. I can do the processing in javascript(jQuery) to remove the units before passing the data to crossfilter or I can store the numbers without the units. This is the way I am choosing to do. As a result, the display of data in the accordion view will show without units unless I change the code to add them for display. This is the next step. I also have to remove the code which was adding the units when adding a new food item.
+
+
+## Resetting filters for Row Chart
+
+I had a problem with resetting the classification row chart stopping working. I tried to see how I can force an svg group name to use with redrawAll(). This led to nowhere. After a long time of trying various things such as trying to use renderlet and on renderlet (both fail), I commented out some of the code that I had and suddenly the reset link worked.  
+At this point I started uncommenting one line at a time and managed to narrow the error to 
+~~~~javascript
+ .xAxis().ticks(4) // DO NOT ADD: This will break the reset filters 
+~~~~
+
+Adding this line will stop the resetting of the filters.
+
+By the way the above line of code will also stop
+~~~~javascript
+.controlsUseVisibility(true)
+~~~~
+from working. Otherwise it works fine.
+
+Now I turned the reset link to a button to match that for the scatter plots.

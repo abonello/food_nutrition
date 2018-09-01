@@ -27,8 +27,9 @@
                 </div>
                 <div id="rowChart1">
                     <h3>Food Classification</h3>
-                    <!-- <span class="reset" style="display: none;">Range: <span class="filter"></span> | </span>
-                    <a class="reset" style="display: none;" href="javascript:classRowChart.filterAll(); dc.redrawAll();">reset</a> -->
+                    <a class="reset" style="visibility: hidden;" href="javascript:classRowChart.filterAll(); dc.redrawAll();"><button class="btn btn-primary btn-sm">reset</button></a>
+                    <span class="reset" style="visibility: hidden;">Range: <span class="filter"></span></span>
+                    <a class="reset" href="javascript:classRowChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
                     <div class="clearfix"></div>
                     <!-- Row Chart will be added here programmatically. -->
                 </div>
@@ -263,14 +264,16 @@
             .width(450)
             .height(1000)
             .margins({top: 20, left: 10, right: 10, bottom: 20})
-            .group(classGroup)
             .dimension(classDimension)
+            .group(classGroup)
             .title(function (d) {
                 return (d.key +": "+ d.value);
                 })
             .elasticX(true)
-            .xAxis().ticks(4)
+            // .xAxis().ticks(4) // DO NOT ADD: This will break the reset filters 
+            .controlsUseVisibility(true)
             ;
+        
 
         var dataTable = dc.dataTable("#table")
             .width(1360)
@@ -284,7 +287,8 @@
                 {label:'Type', format: function(d) { return d.classification; }}
                 ]) 
             ;
-
+        
+        
 
         dc.renderAll();
 
