@@ -20,51 +20,60 @@
     </div>
 
     <div class="row">
-        <div class="col col-sm-12 col-md-8">
+        <div class="col col-sm-12 col-md-6">
+            <div id="info">
+                <h3>Info</h3>
+                <div class="dc-data-count"></div>
+            </div>
+        </div>
+        <div class="col col-sm-12 col-md-6">
             <div id="rowChart1">
                 <h3>Food Classification</h3>
-                <!-- <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span>
-                <a class="reset" style="display:none" href="javascript:classRowChart.filterAll(); dc.redrawAll();">reset</a> -->
+                <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span>
+                <!-- <a class="reset" style="display:none" href="javascript:classRowChart.filterAll(); dc.redrawAll();">reset</a> -->
+                <div class="clearfix"></div>
                 <!-- Row Chart will be added here programmatically. -->
             </div>
         </div>
-        <div class="col col-sm-12 col-md-4">
-                <div id="rowChart1">
-                    <h3>Info</h3>
-                    <!-- <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span>
-                    <a class="reset" style="display:none" href="javascript:classRowChart.filterAll(); dc.redrawAll();">reset</a> -->
-                    <!-- Row Chart will be added here programmatically. -->
-                </div>
-            </div>
+        <div class="clearfix"></div>
         <div id="scatterChart1" class="col col-md-6">
             <h3>All Fats vs Saturated Fats</h3>
-            <!-- <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span> -->
-            <!-- <a class="reset" style="display:none" href="javascript:scatterSatFat.filterAll(); dc.redrawAll();">reset</a> -->
+            <a class="reset" style="visibility: hidden;" href="javascript:scatterSatFat.filterAll(); dc.redrawAll();">
+                    <button class="btn btn-primary btn-sm">reset</button></a>
+            <span class="reset" style="visibility: hidden;">Range: <span class="filter"></span></span>
+            <div class="clearfix"></div>
             <!-- Scatter Chart will be added here programmatically. -->
         </div>
         <div id="scatterChart2"  class="col col-md-6">
             <h3>Carbohydrates vs Sugar</h3>
-            <!-- <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span> -->
-            <!-- <a class="reset" style="display:none" href="javascript:scatterSugCarb.filterAll(); dc.redrawAll();">reset</a> -->
+            <a class="reset" style="visibility: hidden;" href="javascript:scatterSugCarb.filterAll(); dc.redrawAll();">
+                    <button class="btn btn-primary btn-sm">reset</button></a>
+            <span class="reset" style="visibility: hidden;">Range: <span class="filter"></span></span>
+            <div class="clearfix"></div>
             <!-- Scatter Chart will be added here programmatically. -->
         </div>
+        <div class="clearfix"></div>
         <div class="col col-md-6">
             <div id="scatterChart3">
                 <h3>Energy vs Protein</h3>
-                <!-- <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span> -->
-                <!-- <a class="reset" style="display:none" href="javascript:scatterEnergyProt.filterAll(); dc.redrawAll();">reset</a><br> -->
+                <a class="reset" style="visibility: hidden;" href="javascript:scatterEnergyProt.filterAll(); dc.redrawAll();">
+                        <button class="btn btn-primary btn-sm">reset</button></a>
+                <span class="reset" style="visibility: hidden;">Range: <span class="filter"></span></span>
+                <div class="clearfix"></div>
                 <!-- Scatter Chart will be added here programmatically. -->
             </div>
         </div>
         <div class="col col-md-6">
             <div id="scatterChart4">
                 <h3>Salt vs Sugar</h3>
-                <!-- <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span> -->
-                <!-- <a class="reset" style="display:none" href="javascript:scatterSugSalt.filterAll(); dc.redrawAll();">reset</a> -->
+                <a class="reset" style="visibility: hidden;" href="javascript:scatterSugSalt.filterAll(); dc.redrawAll();">
+                        <button class="btn btn-primary btn-sm">reset</button></a>
+                <span class="reset" style="visibility: hidden;">Range: <span class="filter"></span></span>
+                <div class="clearfix"></div>
                 <!-- Scatter Chart will be added here programmatically. -->
             </div>
         </div>
-        
+        <div class="clearfix"></div>
 
         <div class="col col-sm-12">
             <table id="table" class="table table-hover " >
@@ -77,8 +86,19 @@
     <script type="text/javascript" src="./static/vendor/crossfilter.js"></script>
     <script type="text/javascript" src="./static/vendor/dc.js"></script>
     <script>
+        // Utility function
+        function print_filter(filter) {
+            var f=eval(filter);
+            if (typeof(f.length) != "undefined") {}else{}
+            if (typeof(f.top) != "undefined") {f=f.top(Infinity);}else{}
+            if (typeof(f.dimension) != "undefined") {f=f.dimension(function(d) { return "";}).top(Infinity);}else{}
+            console.log(filter+"("+f.length+") = "+JSON.stringify(f).replace("[","[\n\t").replace(/}\,/g,"},\n\t").replace("]","\n]"));
+        }
+
+
         var graphData = {{ data.food_list | safe }}
 
+        // Look for data for Modal
         function dataSearch(data, idToLookFor) {
             for (var i=0; i < data.length; i++) {
                 if (data[i]._id == idToLookFor) {
@@ -86,7 +106,6 @@
                 }
             }
         };
-
 
         function fill(item) {
             thisData = dataSearch(graphData, item.getAttribute("data"));
@@ -107,6 +126,7 @@
         // console.log(graphData);
 
         var facts = crossfilter(graphData);
+        var all = facts.groupAll();
         // Scatter Chart dimensions
         var scatterDimensionSatFat = facts.dimension(function(d) { return [d.saturated, d.fat]; });
         var scatterDimensionSugCarb = facts.dimension(function(d) { return [d.sugar, d.carbohydrates]; });
@@ -114,7 +134,7 @@
         var scatterDimensionEnergyProt = facts.dimension(function(d) { return [d.energy2, d.protein]; });
         var scatterDimensionSugSalt = facts.dimension(function(d) { return [d.sugar, d.salt]; });
         // Row Chart dimension
-        var classDimension = facts.dimension(function(d) { return d.classification });
+        var classDimension = facts.dimension(function(d) { return d.classification; });
         // Table dimension
         var idDimension = facts.dimension(function(d) { return d._id; });
 
@@ -125,7 +145,13 @@
         var scatterGroupSugSalt = scatterDimensionSugSalt.group();
         var classGroup = classDimension.group()
 
-        
+        var dataCount = dc.dataCount(".dc-data-count")
+            .dimension(facts)
+            .group(all)
+            .html({
+                some: '<strong>%filter-count</strong> selected out of <strong>%total-count</strong> records. | <a href="javascript:dc.filterAll(); dc.renderAll()"><button class="btn btn-success">Reset All</button></a>',
+                all: 'All records selected. Please click on the graphs to apply filters.'
+            });
 
         // CHARTS
         var scatterSatFat = dc.scatterPlot("#scatterChart1")
@@ -145,6 +171,13 @@
             .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
             .colors(d3.scale.category20b())
             .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            .controlsUseVisibility(true)
+            .filterPrinter(function(filters) { 
+                var range = 'From ['+Math.round(filters[0][0][0],0)+', '
+                                    +Math.round(filters[0][0][1],0)+'] to ['
+                                    +Math.round(filters[0][1][0],0)+', '
+                                    +Math.round(filters[0][1][1],0)+']'
+                return range; })
             ;
         scatterSatFat.yAxis().ticks(4); 
 
@@ -165,6 +198,13 @@
             .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
             .colors(d3.scale.category20b())
             .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            .controlsUseVisibility(true)
+            .filterPrinter(function(filters) { 
+                var range = 'From ['+Math.round(filters[0][0][0],0)+', '
+                                    +Math.round(filters[0][0][1],0)+'] to ['
+                                    +Math.round(filters[0][1][0],0)+', '
+                                    +Math.round(filters[0][1][1],0)+']'
+                return range; })
             ;
         scatterSugCarb.yAxis().ticks(4); 
 
@@ -186,6 +226,13 @@
             .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
             .colors(d3.scale.category20b())
             .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            .controlsUseVisibility(true)
+            .filterPrinter(function(filters) { 
+                var range = 'From ['+Math.round(filters[0][0][0],0)+', '
+                                    +Math.round(filters[0][0][1],0)+'] to ['
+                                    +Math.round(filters[0][1][0],0)+', '
+                                    +Math.round(filters[0][1][1],0)+']'
+                return range; })
             ;
         scatterEnergyProt.yAxis().ticks(4);
 
@@ -203,15 +250,21 @@
             .renderVerticalGridLines(true)
             .symbolSize(10)
             .clipPadding(22)
-            .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
-            .colors(d3.scale.category20b())
+            // .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
+            // .colors(d3.scale.category20b())
             .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            .controlsUseVisibility(true)
+            .filterPrinter(function(filters) { 
+                var range = 'From ['+Math.round(filters[0][0][0],0)+', '
+                                    +Math.round(filters[0][0][1],0)+'] to ['
+                                    +Math.round(filters[0][1][0],0)+', '
+                                    +Math.round(filters[0][1][1],0)+']'
+                return range; })
             ;
         scatterSugSalt.yAxis().ticks(4); 
 
-        
 
-        var classRowChart = dc.rowChart('#rowChart1') /* dc.rowChart('#day-of-week-chart', 'chartGroup') */
+        var classRowChart = dc.rowChart('#rowChart1')
             .width(450)
             .height(300)
             .margins({top: 20, left: 10, right: 10, bottom: 20})
@@ -219,24 +272,22 @@
             .dimension(classDimension)
             .title(function (d) {
                 return d.value;
-            })
+                })
             .elasticX(true)
             .xAxis().ticks(4)
             ;
-
-
-
 
         var dataTable = dc.dataTable("#table")
             .width(1360)
             .height(300)
             .dimension(idDimension)
             .group(function(d) { return d; })
-            .columns([  {label:'Name', format: function(d) { 
-                        return "<a href='#' data-target='#displayModal' data-toggle='modal' data="+d._id+" onclick='fill(this)'>"+d.name+"</a>"; }},
-                        {label:'Brand', format: function(d) { return d.brand; }},
-                        {label:'Type', format: function(d) { return d.classification; }}
-                    ]) 
+            .columns([  
+                {label:'Name', format: function(d) { 
+                    return "<a href='#' data-target='#displayModal' data-toggle='modal' data="+d._id+" onclick='fill(this)'>"+d.name+"</a>"; }},
+                {label:'Brand', format: function(d) { return d.brand; }},
+                {label:'Type', format: function(d) { return d.classification; }}
+                ]) 
             ;
 
 
