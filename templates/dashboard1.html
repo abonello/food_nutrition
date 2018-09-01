@@ -1,0 +1,359 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="section-title text-center">
+                <h2>Nutrition Dashboard</h2>
+                <p>Currently using hard-coded data.</p>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row hidden" id="data">
+        {#{ foodList }#}
+    </div> -->
+    
+
+    <div class="row">
+        <!-- <h2>Scatter Plot</h2> -->
+
+        <div class="row">
+
+            <div class="group1">
+                <div class="col col-md-6">
+                    <div id="scatterChart1">
+                        <h3>Fats vs Saturated Fats</h3>
+                        <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span>
+                        <a class="reset" style="display:none" href="javascript:scatterFatSat.filterAll(); dc.redrawAll();">reset</a>
+                    </div>
+                </div>
+                <div class="col col-md-6">
+                    <div id="scatterChart2">
+                        <h3>Carbohydrates vs Sugar</h3>
+                        <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span>
+                        <a class="reset" style="display:none" href="javascript:scatterCarbSug.filterAll(); dc.redrawAll();">reset</a>
+                    </div>
+                </div>
+                <div class="col col-md-6">
+                    <div id="scatterChart3">
+                        <h3>Energy vs Protein</h3>
+                        <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span>
+                        <a class="reset" style="display:none" href="javascript:scatterEnergyProt.filterAll(); dc.redrawAll();">reset</a>
+                    </div>
+                </div>
+                <div class="col col-md-6">
+                    <div id="scatterChart4">
+                        <h3>Salt vs Sugar</h3>
+                        <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span>
+                        <a class="reset" style="display:none" href="javascript:scatterSugSalt.filterAll(); dc.redrawAll();">reset</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col col-sm-12" id="bubble-chart">
+                <h3>Fat-Carbohydrate Relation</h3>
+                <a class="reset" style="display:none" href="javascript:bubbleChart.filterAll(); dc.redrawAll();">reset</a>
+                <p>Size: Protein, Color: Saturated Fats, Border Color: Sugar</p>
+            </div>
+            </div>
+        </div> -->
+
+    </div>
+
+    <script type="text/javascript" src="./static/vendor/d3.js"></script>
+    <script type="text/javascript" src="./static/vendor/crossfilter.js"></script>
+    <script type="text/javascript" src="./static/vendor/dc.js"></script>
+    <!-- <script type="text/javascript" src="./static/vendor/colorbrewer.js"></script>     -->
+    <script type="text/javascript">
+
+        function print_filter(filter) {
+            var f=eval(filter);
+            if (typeof(f.length) != "undefined") {}else{}
+            if (typeof(f.top) != "undefined") {f=f.top(Infinity);}else{}
+            if (typeof(f.dimension) != "undefined") {f=f.dimension(function(d) { return "";}).top(Infinity);}else{}
+            console.log(filter+"("+f.length+") = "+JSON.stringify(f).replace("[","[\n\t").replace(/}\,/g,"},\n\t").replace("]","\n]"));
+        }
+
+    // var data = [
+    //         {
+    //             "classification": "Tomato Puree", 
+    //             "name": "Tomato Puree", 
+    //             "brand": "Cucina", 
+    //             "energy1": "335", 
+    //             "energy2": "79kcal", 
+    //             "fat": "0.5", 
+    //             "saturated": "0.1", 
+    //             "carbohydrates": "14.0", 
+    //             "sugar": "14.0", 
+    //             "fibre": "1.8g", 
+    //             "protein": "4.3", 
+    //             "salt": "1.6", 
+    //             "shop": "Aldi", 
+    //             "notes": "Double Concentrate / 20g = 1/5-a-day"
+    //         }, 
+    //         {
+    //             "classification": "Dried Tomatoes", 
+    //             "name": "Sundried Tomatoes", 
+    //             "brand": "Tesco", 
+    //             "energy1": "674", 
+    //             "energy2": "163kcal", 
+    //             "fat": "11.9", 
+    //             "saturated": "1.4", 
+    //             "carbohydrates": "7.0", 
+    //             "sugar": "6.4", 
+    //             "fibre": "7.9", 
+    //             "protein": "3.0", 
+    //             "salt": "2.8", 
+    //             "shop": "Tesco", 
+    //             "notes": "Marinated with garlic in sunflower oil and virgin olive oil / drained"
+    //         }, 
+    //         {
+    //             "classification": "Milk", 
+    //             "name": "Semi Skimmed Milk", 
+    //             "brand": "Tesco", 
+    //             "energy1": "209", 
+    //             "energy2": "50kcal", 
+    //             "fat": "1.8", 
+    //             "saturated": "1.1", 
+    //             "carbohydrates": "4.8", 
+    //             "sugar": "4.8", 
+    //             "fibre": "0.0g", 
+    //             "protein": "3.6", 
+    //             "salt": "0.1", 
+    //             "shop": "Tesco", 
+    //             "notes": ""
+    //         }, 
+    //         {
+    //             "classification": "Cheese", 
+    //             "name": "Mature Cheddar", 
+    //             "brand": "Creamfields", 
+    //             "energy1": "1725", 
+    //             "energy2": "416kcal", 
+    //             "fat": "34.9", 
+    //             "saturated": "21.7", 
+    //             "carbohydrates": "0.1", 
+    //             "sugar": "0.1", 
+    //             "fibre": "0.0g", 
+    //             "protein": "25.4", 
+    //             "salt": "1.8", 
+    //             "shop": "Tesco", 
+    //             "notes": "Exclusive at Tesco"
+    //         }
+    //     ]
+ 
+
+        function myFunc(vars) {
+            return vars;
+        }
+
+        var dataStr = myFunc({{ foodList|tojson }})
+        var data = JSON.parse(dataStr);
+
+        // d3.json('{{ foodList|tojson }}').then(function(data) {
+        //     console.log(data);
+        // });
+
+        console.log(data);
+        var facts = crossfilter(data);
+        // console.log(facts);
+        // print_filter(facts);
+        var all = facts.groupAll();
+
+        var scatterDimensionFatSat = facts.dimension(function(d) { return [d.saturated, d.fat]; });
+        var scatterDimensionCarbSug = facts.dimension(function(d) { return [d.sugar, d.carbohydrates]; });
+        var scatterDimensionEnergyProt = facts.dimension(function(d) { return [d.energy1, d.protein]; });
+        var scatterDimensionSugSalt = facts.dimension(function(d) { return [d.sugar, d.salt]; });
+        // var scatterDimensionCarbsFat = facts.dimension(function(d) { return [d.carbohydrates, d.fat, d.protein]; });
+        var scatterGroupFatSat = scatterDimensionFatSat.group();
+        var scatterGroupCarbSug = scatterDimensionCarbSug.group();
+        var scatterGroupEnergyProt = scatterDimensionEnergyProt.group();
+        var scatterGroupSugSalt = scatterDimensionSugSalt.group();
+        // var scatterGroupCarbsFat = scatterDimensionCarbsFat.group();
+
+        // var scatterGroupCarbsFat = scatterDimensionCarbsFat.group().reduce(
+            /* callback for when data is added to the current filter results */
+            // function (p, v) {
+            //     ++p.count;
+            //     p.protein += v.protein;
+                // p.fluctuation += Math.abs(v.close - v.open);
+                // p.sumIndex += (v.open + v.close) / 2;
+                // p.avgIndex = p.sumIndex / p.count;
+                // p.percentageGain = p.avgIndex ? (p.absGain / p.avgIndex) * 100 : 0;
+                // p.fluctuationPercentage = p.avgIndex ? (p.fluctuation / p.avgIndex) * 100 : 0;
+                // return p;
+            // },
+            /* callback for when data is removed from the current filter results */
+            // function (p, v) {
+            //     --p.count;
+            //     p.protein -= v.protein;
+                // p.fluctuation -= Math.abs(v.close - v.open);
+                // p.sumIndex -= (v.open + v.close) / 2;
+                // p.avgIndex = p.count ? p.sumIndex / p.count : 0;
+                // p.percentageGain = p.avgIndex ? (p.absGain / p.avgIndex) * 100 : 0;
+                // p.fluctuationPercentage = p.avgIndex ? (p.fluctuation / p.avgIndex) * 100 : 0;
+                // return p;
+            // },
+            /* initialize p */
+        //     function () {
+        //         return {
+        //             count: 0,
+        //             protein: 0,
+        //             // saturated: 0,
+        //             // sugar: 0
+        //         };
+        //     }
+        // );
+
+
+
+
+        // var bubbleChart = dc.bubbleChart("#bubble-chart")  // Changed from bar to line
+        //     .width(600)
+        //     .height(500)
+        //     .margins({top:40, bottom:40, left:80, right:60})
+        //     .transitionDuration(1500)
+
+        //     .dimension(scatterDimensionCarbsFat)
+        //     .group(scatterGroupCarbsFat)
+        //     .renderHorizontalGridLines(true)
+        //     .renderVerticalGridLines(true)
+        //     .clipPadding(70)
+        //     .colorAccessor(function(d) { return d.key[2]; })
+        //     .colors(colorbrewer.RdPu[6])
+        //     .colorDomain([0, 26])
+        //     .keyAccessor(function(d) { return d.key[0]; }) // specify x-Axis
+        //     .valueAccessor(function(d) { return d.key[1]; })  // specify y-Axis
+        //     .radiusValueAccessor(function(d) { return d.value; })
+        //     .maxBubbleRelativeSize(0.2)
+        //     .r(d3.scale.linear().domain([0,26])) // radius -- here set it to row count
+        //     .y(d3.scale.linear().domain([0, 35])) // optional -- we are showing tip
+        //     .x(d3.scale.linear().domain([0, 30])) // [min, max]  -- showing Total
+        //     .title(function(d) { return 'Carbohydrates: ' +d.key[0]+ ', Fats: ' +d.key[1]+ ', val: ' +d.value; })
+            // Change domain to work min and max automatically. -- see code above
+            // Add axis Label
+            // .yAxisLabel("All Fats")
+            // .xAxisLabel("Carbohydrates");
+
+
+
+
+        // Trying to automatically calculate the min and max of each column
+        // saturatedMin = Math.min(facts.dimension(function(d) { return [d.saturated]; }));
+        // console.log(saturatedMin);
+        // console.log(typeof(saturatedMin));
+        // var minSat = scatterDimensionFatSat.bottom(1)[0].saturated;
+        // var maxSat = scatterDimensionFatSat.top(1)[0].saturated;
+        // console.log("min / max");
+        // console.log(minSat, maxSat);
+        // var minfat = scatterDimensionFatSat.bottom(1)[0].fat;
+        // var maxfat = scatterDimensionFatSat.top(1)[0].fat;
+        // console.log("min / max");
+        // console.log(minfat, maxfat);
+
+        var saturatedDataDim = facts.dimension(function(d) {return d.saturated;});
+        var minSaturated = saturatedDataDim.bottom(1)[0].saturated;
+        var maxSaturated = saturatedDataDim.top(1)[0].saturated;
+        // console.log(minSaturated);
+        // console.log(maxSaturated);
+        var hits = saturatedDataDim.group().reduceCount();
+        // console.log(hits.all());
+        // var page_id_with_most_entries = hits.top(1)[0].key;
+        // var number_of_entries = hits.top(1)[0].value;
+        // console.log(page_id_with_most_entries);
+        // console.log(number_of_entries);
+
+
+
+
+
+
+        // CHARTS
+
+        var scatterFatSat = dc.scatterPlot("#scatterChart1")
+            .width(450)
+            .height(250)
+            .margins({top:15, bottom:30, left:60, right:50})
+            .dimension(scatterDimensionFatSat)
+            .group(scatterGroupFatSat)
+            .x(d3.scale.linear().domain([0, 25])) // [min, max] 0 25
+            .y(d3.scale.linear().domain([0, 35])) // Can be left out to set automatically 0 35
+            .yAxisLabel("All Fats")
+            .xAxisLabel("Saturated")
+            .renderHorizontalGridLines(true)
+            .renderVerticalGridLines(true)
+            .symbolSize(10)
+            .clipPadding(22)
+            .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
+            .colors(d3.scale.category20b())
+            .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            ;
+        scatterFatSat.yAxis().ticks(4); 
+
+        var scatterCarbSug = dc.scatterPlot("#scatterChart2")
+            .width(450)
+            .height(250)
+            .margins({top:15, bottom:30, left:60, right:50})
+            .dimension(scatterDimensionCarbSug)
+            .group(scatterGroupCarbSug)
+            .x(d3.scale.linear().domain([0, 80])) // [min, max] 0 15
+            .y(d3.scale.linear().domain([0, 80])) // Can be left out to set automatically 0 15
+            .yAxisLabel("Carbohydrates")
+            .xAxisLabel("Sugar")
+            .renderHorizontalGridLines(true)
+            .renderVerticalGridLines(true)
+            .symbolSize(10)
+            .clipPadding(22)
+            .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
+            .colors(d3.scale.category20b())
+            .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            ;
+        scatterCarbSug.yAxis().ticks(4); 
+
+        var scatterEnergyProt = dc.scatterPlot("#scatterChart3")
+            .width(400)
+            .height(250)
+            .margins({top:15, bottom:30, left:60, right:50})
+            .dimension(scatterDimensionEnergyProt)
+            .group(scatterGroupEnergyProt)
+            .x(d3.scale.linear().domain([0, 2100])) // [min, max] 0 2000
+            .y(d3.scale.linear().domain([0, 30])) // Can be left out to set automatically 0 30
+            .yAxisLabel("Protein")
+            .xAxisLabel("Energy")
+            .renderHorizontalGridLines(true)
+            .renderVerticalGridLines(true)
+            .symbolSize(10)
+            .clipPadding(22)
+            .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
+            .colors(d3.scale.category20b())
+            .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            ;
+        scatterEnergyProt.yAxis().ticks(4);
+
+        var scatterSugSalt = dc.scatterPlot("#scatterChart4")
+            .width(400)
+            .height(250)
+            .margins({top:15, bottom:30, left:60, right:50})
+            .dimension(scatterDimensionSugSalt)
+            .group(scatterGroupSugSalt)
+            .x(d3.scale.linear().domain([0, 80])) // [min, max] 0 15
+            .y(d3.scale.linear().domain([0, 7])) // Can be left out to set automatically 0 3
+            .yAxisLabel("Salt")
+            .xAxisLabel("Sugar")
+            .renderHorizontalGridLines(true)
+            .renderVerticalGridLines(true)
+            .symbolSize(10)
+            .clipPadding(22)
+            .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
+            .colors(d3.scale.category20b())
+            .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            ;
+        scatterSugSalt.yAxis().ticks(4); 
+
+
+
+
+        dc.renderAll();
+    </script>
+
+{% endblock %}

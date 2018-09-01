@@ -1,72 +1,88 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="section-title text-center">
-                <h2>Nutrition Dashboard</h2>
-                <p>Currently using hard-coded data.</p>
+    <h2>Dashboard</h2>
+
+    <div class="modal" id="displayModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Selected Food</h4>
+                </div>
+                <div class="modal-body" id="fillDataHere">
+                    <!-- Modal Data will be added here programmatically. -->
+                </div>
+                <div class="modal-footer"></div>
+                <button class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-    <!-- <div class="row hidden" id="data">
-        {#{ foodList }#}
-    </div> -->
-    
-
-    <div class="row">
-        <!-- <h2>Scatter Plot</h2> -->
-
+    <div class="group1">
         <div class="row">
-
-            <div class="group1">
-                <div class="col col-md-6">
-                    <div id="scatterChart1">
-                        <h3>Fats vs Saturated Fats</h3>
-                        <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span>
-                        <a class="reset" style="display:none" href="javascript:scatterFatSat.filterAll(); dc.redrawAll();">reset</a>
-                    </div>
+            <div class="col col-sm-12 col-md-6"> <!-- Start Column 1 -->
+                <div id="info">
+                    <h3>Info</h3>
+                    <div class="dc-data-count"></div>
                 </div>
-                <div class="col col-md-6">
-                    <div id="scatterChart2">
-                        <h3>Carbohydrates vs Sugar</h3>
-                        <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span>
-                        <a class="reset" style="display:none" href="javascript:scatterCarbSug.filterAll(); dc.redrawAll();">reset</a>
-                    </div>
+                <div id="rowChart1">
+                    <h3>Food Classification</h3>
+                    <a class="reset" style="visibility: hidden;" href="javascript:classRowChart.filterAll(); dc.redrawAll();"><button class="btn btn-primary btn-sm">reset</button></a>
+                    <span class="reset" style="visibility: hidden;">Range: <span class="filter"></span></span>
+                    <a class="reset" href="javascript:classRowChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+                    <div class="clearfix"></div>
+                    <!-- Row Chart will be added here programmatically. -->
                 </div>
-                <div class="col col-md-6">
-                    <div id="scatterChart3">
-                        <h3>Energy vs Protein</h3>
-                        <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span>
-                        <a class="reset" style="display:none" href="javascript:scatterEnergyProt.filterAll(); dc.redrawAll();">reset</a>
-                    </div>
+            </div> <!-- End Column 1 -->
+            <!-- <div class="clearfix"></div> -->
+            <div class="col col-sm-12 col-md-6"> <!-- Start Column 2 -->
+                <div id="scatterChart1">
+                    <h3>All Fats vs Saturated Fats</h3>
+                    <a class="reset" style="visibility: hidden;" href="javascript:scatterSatFat.filterAll(); dc.redrawAll();"><button class="btn btn-primary btn-sm">reset</button></a>
+                    <span class="reset" style="visibility: hidden;">Range: <span class="filter"></span></span>
+                    <div class="clearfix"></div>
+                    <!-- Scatter Chart will be added here programmatically. -->
                 </div>
-                <div class="col col-md-6">
-                    <div id="scatterChart4">
-                        <h3>Salt vs Sugar</h3>
-                        <span class="reset" style="display:none;">Range: <span class="filter"></span> | </span>
-                        <a class="reset" style="display:none" href="javascript:scatterSugSalt.filterAll(); dc.redrawAll();">reset</a>
-                    </div>
+                <div id="scatterChart2">
+                    <h3>Carbohydrates vs Sugar</h3>
+                    <a class="reset" style="visibility: hidden;" href="javascript:scatterSugCarb.filterAll(); dc.redrawAll();"><button class="btn btn-primary btn-sm">reset</button></a>
+                    <span class="reset" style="visibility: hidden;">Range: <span class="filter"></span></span>
+                    <div class="clearfix"></div>
+                    <!-- Scatter Chart will be added here programmatically. -->
                 </div>
+                <!-- <div class="clearfix"></div> -->
+                <div id="scatterChart3">
+                    <h3>Energy vs Protein</h3>
+                    <a class="reset" style="visibility: hidden;" href="javascript:scatterEnergyProt.filterAll(); dc.redrawAll();"><button class="btn btn-primary btn-sm">reset</button></a>
+                    <span class="reset" style="visibility: hidden;">Range: <span class="filter"></span></span>
+                    <div class="clearfix"></div>
+                    <!-- Scatter Chart will be added here programmatically. -->
+                </div>
+                <div id="scatterChart4">
+                    <h3>Salt vs Sugar</h3>
+                    <a class="reset" style="visibility: hidden;" href="javascript:scatterSugSalt.filterAll(); dc.redrawAll();"><button class="btn btn-primary btn-sm">reset</button></a>
+                    <span class="reset" style="visibility: hidden;">Range: <span class="filter"></span></span>
+                    <div class="clearfix"></div>
+                    <!-- Scatter Chart will be added here programmatically. -->
+                </div>
+            </div> <!-- End Column 2 -->
+            
+            <div class="clearfix"></div>
+        </div>
+        <div class="row">
+            <div class="col col-sm-12">
+                <table id="table" class="table table-hover " >
+                    <!-- Table content will be added here programmatically. -->
+                </table>
             </div>
         </div>
-        <!-- <div class="row">
-            <div class="col col-sm-12" id="bubble-chart">
-                <h3>Fat-Carbohydrate Relation</h3>
-                <a class="reset" style="display:none" href="javascript:bubbleChart.filterAll(); dc.redrawAll();">reset</a>
-                <p>Size: Protein, Color: Saturated Fats, Border Color: Sugar</p>
-            </div>
-            </div>
-        </div> -->
-
     </div>
 
     <script type="text/javascript" src="./static/vendor/d3.js"></script>
     <script type="text/javascript" src="./static/vendor/crossfilter.js"></script>
     <script type="text/javascript" src="./static/vendor/dc.js"></script>
-    <!-- <script type="text/javascript" src="./static/vendor/colorbrewer.js"></script>     -->
-    <script type="text/javascript">
-
+    <script>
+        // Utility function
         function print_filter(filter) {
             var f=eval(filter);
             if (typeof(f.length) != "undefined") {}else{}
@@ -75,211 +91,209 @@
             console.log(filter+"("+f.length+") = "+JSON.stringify(f).replace("[","[\n\t").replace(/}\,/g,"},\n\t").replace("]","\n]"));
         }
 
-    // var data = [
-    //         {
-    //             "classification": "Tomato Puree", 
-    //             "name": "Tomato Puree", 
-    //             "brand": "Cucina", 
-    //             "energy1": "335", 
-    //             "energy2": "79kcal", 
-    //             "fat": "0.5", 
-    //             "saturated": "0.1", 
-    //             "carbohydrates": "14.0", 
-    //             "sugar": "14.0", 
-    //             "fibre": "1.8g", 
-    //             "protein": "4.3", 
-    //             "salt": "1.6", 
-    //             "shop": "Aldi", 
-    //             "notes": "Double Concentrate / 20g = 1/5-a-day"
-    //         }, 
-    //         {
-    //             "classification": "Dried Tomatoes", 
-    //             "name": "Sundried Tomatoes", 
-    //             "brand": "Tesco", 
-    //             "energy1": "674", 
-    //             "energy2": "163kcal", 
-    //             "fat": "11.9", 
-    //             "saturated": "1.4", 
-    //             "carbohydrates": "7.0", 
-    //             "sugar": "6.4", 
-    //             "fibre": "7.9", 
-    //             "protein": "3.0", 
-    //             "salt": "2.8", 
-    //             "shop": "Tesco", 
-    //             "notes": "Marinated with garlic in sunflower oil and virgin olive oil / drained"
-    //         }, 
-    //         {
-    //             "classification": "Milk", 
-    //             "name": "Semi Skimmed Milk", 
-    //             "brand": "Tesco", 
-    //             "energy1": "209", 
-    //             "energy2": "50kcal", 
-    //             "fat": "1.8", 
-    //             "saturated": "1.1", 
-    //             "carbohydrates": "4.8", 
-    //             "sugar": "4.8", 
-    //             "fibre": "0.0g", 
-    //             "protein": "3.6", 
-    //             "salt": "0.1", 
-    //             "shop": "Tesco", 
-    //             "notes": ""
-    //         }, 
-    //         {
-    //             "classification": "Cheese", 
-    //             "name": "Mature Cheddar", 
-    //             "brand": "Creamfields", 
-    //             "energy1": "1725", 
-    //             "energy2": "416kcal", 
-    //             "fat": "34.9", 
-    //             "saturated": "21.7", 
-    //             "carbohydrates": "0.1", 
-    //             "sugar": "0.1", 
-    //             "fibre": "0.0g", 
-    //             "protein": "25.4", 
-    //             "salt": "1.8", 
-    //             "shop": "Tesco", 
-    //             "notes": "Exclusive at Tesco"
-    //         }
-    //     ]
- 
 
-        function myFunc(vars) {
-            return vars;
-        }
+        var graphData = {{ data.food_list | safe }}
 
-        var dataStr = myFunc({{ foodList|tojson }})
-        var data = JSON.parse(dataStr);
+        // Look for data for Modal
+        function dataSearch(data, idToLookFor) {
+            for (var i=0; i < data.length; i++) {
+                if (data[i]._id == idToLookFor) {
+                    return(data[i]);
+                }
+            }
+        };
 
-        // d3.json('{{ foodList|tojson }}').then(function(data) {
-        //     console.log(data);
-        // });
+        function fill(item) {
+            thisData = dataSearch(graphData, item.getAttribute("data"));
 
-        console.log(data);
-        var facts = crossfilter(data);
-        // console.log(facts);
-        // print_filter(facts);
+            var modalEnergy = function() {
+                var text = "Energy: "+thisData.energy1
+                if (thisData.energy1 != "NA" && thisData.energy1 != "") {
+                    text = text + "kJ"
+                }
+                if (thisData.energy1 == "" || thisData.energy2 == "") {}
+                else {text = text + " / "}
+                text = text + thisData.energy2
+                if (thisData.energy2 != "NA" && thisData.energy2 != "") {
+                    text = text + "kJcal"
+                }
+                return text;
+            }
+            
+            var modalFats = function() {
+                var text = "Fats: "
+                if (thisData.fat == "") {
+                    text = text + "_. Saturated: "
+                }
+                else if (thisData.fat === "NA") {
+                    text = text + thisData.fat + ". Saturated: "
+                }
+                else {
+                    text = text + thisData.fat
+                }
+
+                if (thisData.fat != "NA" && thisData.fat != "") {
+                    text = text + "g, of which Saturated: "
+                }
+                
+                if (thisData.saturated == "") {
+                    text = text + "_."
+                }
+                else if (thisData.saturated == "NA") {
+                    text = text + thisData.saturated+"."
+                }
+                else {
+                    text = text + thisData.saturated
+                }
+
+                if (thisData.saturated != "NA" && thisData.saturated != "") {
+                    text = text + "g."
+                }
+
+                return text;
+            }
+
+            var modalCarbs = function() {
+                var text = "Carbohydrates: "
+                if (thisData.carbohydrates == "") {
+                    text = text + "_. Sugar: "
+                }
+                else if (thisData.carbohydrates === "NA") {
+                    text = text + thisData.carbohydrates + ". Sugar: "
+                }
+                else {
+                    text = text + thisData.carbohydrates
+                }
+
+                if (thisData.carbohydrates != "NA" && thisData.carbohydrates != "") {
+                    text = text + "g, of which Sugar: "
+                }
+                
+                if (thisData.sugar == "") {
+                    text = text + "_."
+                }
+                else if (thisData.sugar == "NA") {
+                    text = text + thisData.sugar+"."
+                }
+                else {
+                    text = text + thisData.sugar
+                }
+
+                if (thisData.sugar != "NA" && thisData.sugar != "") {
+                    text = text + "g."
+                }
+
+                return text;
+            }
+            
+            var modalOthers = function() {
+                var text = "Protein: "
+                if (thisData.protein == "") {
+                    text = text + "_. Fibre: "
+                }
+                else if (thisData.protein === "NA") {
+                    text = text + thisData.protein + ". Fibre: "
+                }
+                else {
+                    text = text + thisData.protein + "g. Fibre: "
+                }
+
+
+                if (thisData.fibre == "") {
+                    text = text + "_. Salt: "
+                }
+                else if (thisData.fibre === "NA") {
+                    text = text + thisData.fibre + ". Salt: "
+                }
+                else {
+                    text = text + thisData.fibre + "g. Salt: "
+                }
+
+                if (thisData.salt == "") {
+                    text = text + "_."
+                }
+                else if (thisData.salt === "NA") {
+                    text = text + thisData.salt + ". "
+                }
+                else {
+                    text = text + thisData.salt + "g."
+                }
+                return text;
+            }
+            
+            var energyText = modalEnergy();
+            var fatsText = modalFats();
+            var carbsText = modalCarbs();
+            var othersText = modalOthers();
+            
+            // console.log(energyText);
+            // console.log(fatsText);
+            // console.log(carbsText);
+
+
+            var modalContent = "<p><strong>"+ thisData.name +"</strong>, "+ 
+                            thisData.brand +" - "+ thisData.classification+"<br>"+
+                            energyText+"<br>"+fatsText+"<br>"+carbsText+"<br>"+othersText+"<br>"+
+                            // "Energy: "+thisData.energy1+"kJ / "+thisData.energy2+"kcal<br>"+
+                            // "Fats: "+thisData.fat+"g, of which Saturated: "+thisData.saturated+"g<br>"+
+                            // "Carbohydrates: "+thisData.carbohydrates+"g, of which Sugar: "+thisData.sugar+"g<br>"+
+                            // "Protein: "+thisData.protein+"g, Fibre: "+thisData.fibre+"g, Salt: "+thisData.salt+"g<br>"+
+                            "<hr><br>Item bought from: "+thisData.shop+"<br>"+
+                            "<br>Notes: "+thisData.notes+"</p>"
+
+            
+            
+            
+
+
+
+
+
+            $(".modal-body").html(modalContent);
+                
+        };
+        
+        // console.log(graphData);
+
+        var facts = crossfilter(graphData);
         var all = facts.groupAll();
-
-        var scatterDimensionFatSat = facts.dimension(function(d) { return [d.saturated, d.fat]; });
-        var scatterDimensionCarbSug = facts.dimension(function(d) { return [d.sugar, d.carbohydrates]; });
-        var scatterDimensionEnergyProt = facts.dimension(function(d) { return [d.energy1, d.protein]; });
+        // Scatter Chart dimensions
+        var scatterDimensionSatFat = facts.dimension(function(d) { return [d.saturated, d.fat]; });
+        var scatterDimensionSugCarb = facts.dimension(function(d) { return [d.sugar, d.carbohydrates]; });
+        // var scatterDimensionEnergyProt = facts.dimension(function(d) { return [d.energy1, d.protein]; });
+        var scatterDimensionEnergyProt = facts.dimension(function(d) { return [d.energy2, d.protein]; });
         var scatterDimensionSugSalt = facts.dimension(function(d) { return [d.sugar, d.salt]; });
-        // var scatterDimensionCarbsFat = facts.dimension(function(d) { return [d.carbohydrates, d.fat, d.protein]; });
-        var scatterGroupFatSat = scatterDimensionFatSat.group();
-        var scatterGroupCarbSug = scatterDimensionCarbSug.group();
+        // Row Chart dimension
+        var classDimension = facts.dimension(function(d) { return d.classification; });
+        // Table dimension
+        var idDimension = facts.dimension(function(d) { return d._id; });
+
+        // Scatter Chart groups
+        var scatterGroupSatFat = scatterDimensionSatFat.group();
+        var scatterGroupSugCarb = scatterDimensionSugCarb.group();
         var scatterGroupEnergyProt = scatterDimensionEnergyProt.group();
         var scatterGroupSugSalt = scatterDimensionSugSalt.group();
-        // var scatterGroupCarbsFat = scatterDimensionCarbsFat.group();
+        var classGroup = classDimension.group()
 
-        // var scatterGroupCarbsFat = scatterDimensionCarbsFat.group().reduce(
-            /* callback for when data is added to the current filter results */
-            // function (p, v) {
-            //     ++p.count;
-            //     p.protein += v.protein;
-                // p.fluctuation += Math.abs(v.close - v.open);
-                // p.sumIndex += (v.open + v.close) / 2;
-                // p.avgIndex = p.sumIndex / p.count;
-                // p.percentageGain = p.avgIndex ? (p.absGain / p.avgIndex) * 100 : 0;
-                // p.fluctuationPercentage = p.avgIndex ? (p.fluctuation / p.avgIndex) * 100 : 0;
-                // return p;
-            // },
-            /* callback for when data is removed from the current filter results */
-            // function (p, v) {
-            //     --p.count;
-            //     p.protein -= v.protein;
-                // p.fluctuation -= Math.abs(v.close - v.open);
-                // p.sumIndex -= (v.open + v.close) / 2;
-                // p.avgIndex = p.count ? p.sumIndex / p.count : 0;
-                // p.percentageGain = p.avgIndex ? (p.absGain / p.avgIndex) * 100 : 0;
-                // p.fluctuationPercentage = p.avgIndex ? (p.fluctuation / p.avgIndex) * 100 : 0;
-                // return p;
-            // },
-            /* initialize p */
-        //     function () {
-        //         return {
-        //             count: 0,
-        //             protein: 0,
-        //             // saturated: 0,
-        //             // sugar: 0
-        //         };
-        //     }
-        // );
-
-
-
-
-        // var bubbleChart = dc.bubbleChart("#bubble-chart")  // Changed from bar to line
-        //     .width(600)
-        //     .height(500)
-        //     .margins({top:40, bottom:40, left:80, right:60})
-        //     .transitionDuration(1500)
-
-        //     .dimension(scatterDimensionCarbsFat)
-        //     .group(scatterGroupCarbsFat)
-        //     .renderHorizontalGridLines(true)
-        //     .renderVerticalGridLines(true)
-        //     .clipPadding(70)
-        //     .colorAccessor(function(d) { return d.key[2]; })
-        //     .colors(colorbrewer.RdPu[6])
-        //     .colorDomain([0, 26])
-        //     .keyAccessor(function(d) { return d.key[0]; }) // specify x-Axis
-        //     .valueAccessor(function(d) { return d.key[1]; })  // specify y-Axis
-        //     .radiusValueAccessor(function(d) { return d.value; })
-        //     .maxBubbleRelativeSize(0.2)
-        //     .r(d3.scale.linear().domain([0,26])) // radius -- here set it to row count
-        //     .y(d3.scale.linear().domain([0, 35])) // optional -- we are showing tip
-        //     .x(d3.scale.linear().domain([0, 30])) // [min, max]  -- showing Total
-        //     .title(function(d) { return 'Carbohydrates: ' +d.key[0]+ ', Fats: ' +d.key[1]+ ', val: ' +d.value; })
-            // Change domain to work min and max automatically. -- see code above
-            // Add axis Label
-            // .yAxisLabel("All Fats")
-            // .xAxisLabel("Carbohydrates");
-
-
-
-
-        // Trying to automatically calculate the min and max of each column
-        // saturatedMin = Math.min(facts.dimension(function(d) { return [d.saturated]; }));
-        // console.log(saturatedMin);
-        // console.log(typeof(saturatedMin));
-        // var minSat = scatterDimensionFatSat.bottom(1)[0].saturated;
-        // var maxSat = scatterDimensionFatSat.top(1)[0].saturated;
-        // console.log("min / max");
-        // console.log(minSat, maxSat);
-        // var minfat = scatterDimensionFatSat.bottom(1)[0].fat;
-        // var maxfat = scatterDimensionFatSat.top(1)[0].fat;
-        // console.log("min / max");
-        // console.log(minfat, maxfat);
-
-        var saturatedDataDim = facts.dimension(function(d) {return d.saturated;});
-        var minSaturated = saturatedDataDim.bottom(1)[0].saturated;
-        var maxSaturated = saturatedDataDim.top(1)[0].saturated;
-        // console.log(minSaturated);
-        // console.log(maxSaturated);
-        var hits = saturatedDataDim.group().reduceCount();
-        // console.log(hits.all());
-        // var page_id_with_most_entries = hits.top(1)[0].key;
-        // var number_of_entries = hits.top(1)[0].value;
-        // console.log(page_id_with_most_entries);
-        // console.log(number_of_entries);
-
-
-
-
-
+        var dataCount = dc.dataCount(".dc-data-count")
+            .dimension(facts)
+            .group(all)
+            .html({
+                some: '<strong>%filter-count</strong> selected out of <strong>%total-count</strong> records. | <a href="javascript:dc.filterAll(); dc.renderAll()"><button class="btn btn-success">Reset All</button></a>',
+                all: 'All records selected. Please click on the graphs to apply filters.'
+            });
 
         // CHARTS
-
-        var scatterFatSat = dc.scatterPlot("#scatterChart1")
+        var scatterSatFat = dc.scatterPlot("#scatterChart1")
             .width(450)
-            .height(250)
-            .margins({top:15, bottom:30, left:60, right:50})
-            .dimension(scatterDimensionFatSat)
-            .group(scatterGroupFatSat)
+            .height(200)
+            .margins({top:15, bottom:30, left:30, right:50})
+            .dimension(scatterDimensionSatFat)
+            .group(scatterGroupSatFat)
             .x(d3.scale.linear().domain([0, 25])) // [min, max] 0 25
-            .y(d3.scale.linear().domain([0, 35])) // Can be left out to set automatically 0 35
-            .yAxisLabel("All Fats")
-            .xAxisLabel("Saturated")
+            .y(d3.scale.linear().domain([0, 50])) // Can be left out to set automatically 0 35
+            .yAxisLabel("All Fats (g)")
+            .xAxisLabel("Saturated (g)")
             .renderHorizontalGridLines(true)
             .renderVerticalGridLines(true)
             .symbolSize(10)
@@ -287,19 +301,26 @@
             .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
             .colors(d3.scale.category20b())
             .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            .controlsUseVisibility(true)
+            .filterPrinter(function(filters) { 
+                var range = 'From ['+Math.round(filters[0][0][0],0)+', '
+                                    +Math.round(filters[0][0][1],0)+'] to ['
+                                    +Math.round(filters[0][1][0],0)+', '
+                                    +Math.round(filters[0][1][1],0)+']'
+                return range; })
             ;
-        scatterFatSat.yAxis().ticks(4); 
+        scatterSatFat.yAxis().ticks(4); 
 
-        var scatterCarbSug = dc.scatterPlot("#scatterChart2")
+        var scatterSugCarb = dc.scatterPlot("#scatterChart2")
             .width(450)
-            .height(250)
-            .margins({top:15, bottom:30, left:60, right:50})
-            .dimension(scatterDimensionCarbSug)
-            .group(scatterGroupCarbSug)
+            .height(200)
+            .margins({top:15, bottom:30, left:30, right:50})
+            .dimension(scatterDimensionSugCarb)
+            .group(scatterGroupSugCarb)
             .x(d3.scale.linear().domain([0, 80])) // [min, max] 0 15
             .y(d3.scale.linear().domain([0, 80])) // Can be left out to set automatically 0 15
-            .yAxisLabel("Carbohydrates")
-            .xAxisLabel("Sugar")
+            .yAxisLabel("Carbohydrates (g)")
+            .xAxisLabel("Sugar (g)")
             .renderHorizontalGridLines(true)
             .renderVerticalGridLines(true)
             .symbolSize(10)
@@ -307,19 +328,27 @@
             .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
             .colors(d3.scale.category20b())
             .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            .controlsUseVisibility(true)
+            .filterPrinter(function(filters) { 
+                var range = 'From ['+Math.round(filters[0][0][0],0)+', '
+                                    +Math.round(filters[0][0][1],0)+'] to ['
+                                    +Math.round(filters[0][1][0],0)+', '
+                                    +Math.round(filters[0][1][1],0)+']'
+                return range; })
             ;
-        scatterCarbSug.yAxis().ticks(4); 
+        scatterSugCarb.yAxis().ticks(4); 
 
         var scatterEnergyProt = dc.scatterPlot("#scatterChart3")
-            .width(400)
-            .height(250)
-            .margins({top:15, bottom:30, left:60, right:50})
+            .width(450)
+            .height(200)
+            .margins({top:15, bottom:30, left:30, right:50})
             .dimension(scatterDimensionEnergyProt)
             .group(scatterGroupEnergyProt)
-            .x(d3.scale.linear().domain([0, 2100])) // [min, max] 0 2000
+            // .x(d3.scale.linear().domain([0, 2100])) // [min, max] 0 2000 Energy1 kJ
+            .x(d3.scale.linear().domain([0, 600])) // [min, max] 0 2000 Energy2 kcal
             .y(d3.scale.linear().domain([0, 30])) // Can be left out to set automatically 0 30
-            .yAxisLabel("Protein")
-            .xAxisLabel("Energy")
+            .yAxisLabel("Protein (g)")
+            .xAxisLabel("Energy (kcal)")
             .renderHorizontalGridLines(true)
             .renderVerticalGridLines(true)
             .symbolSize(10)
@@ -327,33 +356,81 @@
             .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
             .colors(d3.scale.category20b())
             .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            .controlsUseVisibility(true)
+            .filterPrinter(function(filters) { 
+                var range = 'From ['+Math.round(filters[0][0][0],0)+', '
+                                    +Math.round(filters[0][0][1],0)+'] to ['
+                                    +Math.round(filters[0][1][0],0)+', '
+                                    +Math.round(filters[0][1][1],0)+']'
+                return range; })
             ;
         scatterEnergyProt.yAxis().ticks(4);
 
         var scatterSugSalt = dc.scatterPlot("#scatterChart4")
-            .width(400)
-            .height(250)
-            .margins({top:15, bottom:30, left:60, right:50})
+            .width(450)
+            .height(200)
+            .margins({top:15, bottom:30, left:30, right:50})
             .dimension(scatterDimensionSugSalt)
             .group(scatterGroupSugSalt)
             .x(d3.scale.linear().domain([0, 80])) // [min, max] 0 15
             .y(d3.scale.linear().domain([0, 7])) // Can be left out to set automatically 0 3
-            .yAxisLabel("Salt")
-            .xAxisLabel("Sugar")
+            .yAxisLabel("Salt (g)")
+            .xAxisLabel("Sugar (g)")
             .renderHorizontalGridLines(true)
             .renderVerticalGridLines(true)
             .symbolSize(10)
             .clipPadding(22)
-            .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
-            .colors(d3.scale.category20b())
+            // .colorAccessor(function(d) { return d.value; }) // shows if a dot represents one item or more
+            // .colors(d3.scale.category20b())
             .symbol("circle") // cross, diamond, circle, square, triangle-down, triangle-up
+            .controlsUseVisibility(true)
+            .filterPrinter(function(filters) { 
+                var range = 'From ['+Math.round(filters[0][0][0],0)+', '
+                                    +Math.round(filters[0][0][1],0)+'] to ['
+                                    +Math.round(filters[0][1][0],0)+', '
+                                    +Math.round(filters[0][1][1],0)+']'
+                return range; })
             ;
         scatterSugSalt.yAxis().ticks(4); 
 
 
+        var classRowChart = dc.rowChart('#rowChart1')
+            .width(450)
+            .height(1000)
+            .margins({top: 20, left: 10, right: 10, bottom: 20})
+            .dimension(classDimension)
+            .group(classGroup)
+            .title(function (d) {
+                return (d.key +": "+ d.value);
+                })
+            .elasticX(true)
+            // .xAxis().ticks(4) // DO NOT ADD: This will break the reset filters 
+            .controlsUseVisibility(true)
+            ;
+        
 
+        var dataTable = dc.dataTable("#table")
+            .width(1360)
+            .height(300)
+            .dimension(idDimension)
+            .group(function(d) { return d; })
+            .showGroups(false)
+            .columns([  
+                {label:'Name', format: function(d) { 
+                    return "<a href='#' data-target='#displayModal' data-toggle='modal' data="+d._id+" onclick='fill(this)'>"+d.name+"</a>"; }},
+                {label:'Brand', format: function(d) { return d.brand; }},
+                {label:'Type', format: function(d) { return d.classification; }}
+                ]) 
+            .sortBy(function(d) { return d.name; })
+            .size(1000)
+            ;
+        
+        
 
         dc.renderAll();
+
     </script>
+
+    
 
 {% endblock %}

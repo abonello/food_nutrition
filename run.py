@@ -118,6 +118,7 @@ def update_class(class_id):
 
 
 #-------------DASHBOARD-----------------------------
+'''
 @app.route("/dashboard1")
 def dashboard1():
     foodItems=mongo.db.nutrition100.find()
@@ -174,6 +175,19 @@ def dashboard3():
         # del eachItem["_id"]
         # del eachItem["shop"]
         # del eachItem["notes"]
+        foodList.append(eachItem)
+
+    foodList = json.dumps(foodList, indent=2)
+    data = {'food_list': foodList}
+    return render_template("dashboard3.html", data=data)
+'''
+
+@app.route("/dashboard")
+def dashboard():
+    foodItems=mongo.db.nutrition100.find()
+    foodList = []
+    for eachItem in foodItems:
+        eachItem["_id"] = str(eachItem["_id"])
         foodList.append(eachItem)
 
     foodList = json.dumps(foodList, indent=2)
