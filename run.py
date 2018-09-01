@@ -192,7 +192,7 @@ def dashboard():
 
     foodList = json.dumps(foodList, indent=2)
     data = {'food_list': foodList}
-    return render_template("dashboard.html", data=data)
+    return render_template("dashboard4.html", data=data)
 
 
 
