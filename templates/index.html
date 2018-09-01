@@ -47,36 +47,37 @@
                                     <div class="cardContent">
                                         <div class="cardItem">
                                             <h4>Energy:</h4>
-                                            <p>{{ foodItem.energy1 }}{% if foodItem.energy1 != "NA" %}kJ{% endif %}  / 
-                                                {{ foodItem.energy2 }}{% if foodItem.energy2 != "NA" %}kcal{% endif %}</p>
+                                            <p>{{ foodItem.energy1 }}{% if foodItem.energy1 != "NA" and foodItem.energy1 != "" %}kJ{% endif %} 
+                                                    {% if foodItem.energy1 == "" or foodItem.energy2 == "" %}{% else %} / {% endif %}  
+                                                {{ foodItem.energy2 }}{% if foodItem.energy2 != "NA" and foodItem.energy2 != "" %}kcal{% endif %}</p>
                                         </div>
                                         <div class="cardItem">
                                             <h4>Fats:</h4>
-                                            <p>{{ foodItem.fat }}{% if foodItem.fat != "NA" %}g{% endif %}</p>
+                                            <p>{{ foodItem.fat }}{% if foodItem.fat != "NA" and foodItem.fat != "" %}g{% endif %}</p>
                                         </div>
                                         <div class="cardItem">
                                             <h4>Saturate:</h4>
-                                            <p>{{ foodItem.saturated }}{% if foodItem.saturated != "NA" %}g{% endif %}</p>
+                                            <p>{{ foodItem.saturated }}{% if foodItem.saturated != "NA" and foodItem.saturated != "" %}g{% endif %}</p>
                                         </div>
                                         <div class="cardItem">
                                             <h4>Carbohydrates:</h4>
-                                            <p>{{ foodItem.carbohydrates }}{% if foodItem.carbohydrates != "NA" %}g{% endif %}</p>
+                                            <p>{{ foodItem.carbohydrates }}{% if foodItem.carbohydrates != "NA" and foodItem.carbohydrates != "" %}g{% endif %}</p>
                                         </div>
                                         <div class="cardItem">
                                             <h4>Sugar:</h4>
-                                            <p>{{ foodItem.sugar }}{% if foodItem.sugar != "NA" %}g{% endif %}</p>
+                                            <p>{{ foodItem.sugar }}{% if foodItem.sugar != "NA" and foodItem.sugar != "" %}g{% endif %}</p>
                                         </div>
                                         <div class="cardItem">
                                             <h4>Fibre:</h4>
-                                            <p>{{ foodItem.fibre }}{% if foodItem.fibre != "NA" %}g{% endif %}</p>
+                                            <p>{{ foodItem.fibre }}{% if foodItem.fibre != "NA" and foodItem.fibre != "" %}g{% endif %}</p>
                                         </div>
                                         <div class="cardItem">
                                             <h4>Protein:</h4>
-                                            <p>{{ foodItem.protein }}{% if foodItem.protein != "NA" %}g{% endif %}</p>
+                                            <p>{{ foodItem.protein }}{% if foodItem.protein != "NA" and foodItem.protein != "" %}g{% endif %}</p>
                                         </div>
                                         <div class="cardItem">
                                             <h4>Salt:</h4>
-                                            <p>{{ foodItem.salt }}{% if foodItem.salt != "NA" %}g{% endif %}</p>
+                                            <p>{{ foodItem.salt }}{% if foodItem.salt != "NA" and foodItem.salt != "" %}g{% endif %}</p>
                                         </div>
                                     </div>
                                     <div class="card-button">

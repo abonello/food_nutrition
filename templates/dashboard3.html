@@ -106,14 +106,148 @@
         function fill(item) {
             thisData = dataSearch(graphData, item.getAttribute("data"));
 
-            var modalContent = "<p><strong>"+
-                            thisData.name +"</strong>, "+ thisData.brand +" - "+ thisData.classification+"<br>"+
-                            "Energy: "+thisData.energy1+"kJ / "+thisData.energy2+"kcal<br>"+
-                            "Fats: "+thisData.fat+"g, of which Saturated: "+thisData.saturated+"g<br>"+
-                            "Carbohydrates: "+thisData.carbohydrates+"g, of which Sugar: "+thisData.sugar+"g<br>"+
-                            "Protein: "+thisData.protein+"g, Fibre: "+thisData.fibre+"g, Salt: "+thisData.salt+"g<br>"+
+            var modalEnergy = function() {
+                var text = "Energy: "+thisData.energy1
+                if (thisData.energy1 != "NA" && thisData.energy1 != "") {
+                    text = text + "kJ"
+                }
+                if (thisData.energy1 == "" || thisData.energy2 == "") {}
+                else {text = text + " / "}
+                text = text + thisData.energy2
+                if (thisData.energy2 != "NA" && thisData.energy2 != "") {
+                    text = text + "kJcal"
+                }
+                return text;
+            }
+            
+            var modalFats = function() {
+                var text = "Fats: "
+                if (thisData.fat == "") {
+                    text = text + "_. Saturated: "
+                }
+                else if (thisData.fat === "NA") {
+                    text = text + thisData.fat + ". Saturated: "
+                }
+                else {
+                    text = text + thisData.fat
+                }
+
+                if (thisData.fat != "NA" && thisData.fat != "") {
+                    text = text + "g, of which Saturated: "
+                }
+                
+                if (thisData.saturated == "") {
+                    text = text + "_."
+                }
+                else if (thisData.saturated == "NA") {
+                    text = text + thisData.saturated+"."
+                }
+                else {
+                    text = text + thisData.saturated
+                }
+
+                if (thisData.saturated != "NA" && thisData.saturated != "") {
+                    text = text + "g."
+                }
+
+                return text;
+            }
+
+            var modalCarbs = function() {
+                var text = "Carbohydrates: "
+                if (thisData.carbohydrates == "") {
+                    text = text + "_. Sugar: "
+                }
+                else if (thisData.carbohydrates === "NA") {
+                    text = text + thisData.carbohydrates + ". Sugar: "
+                }
+                else {
+                    text = text + thisData.carbohydrates
+                }
+
+                if (thisData.carbohydrates != "NA" && thisData.carbohydrates != "") {
+                    text = text + "g, of which Sugar: "
+                }
+                
+                if (thisData.sugar == "") {
+                    text = text + "_."
+                }
+                else if (thisData.sugar == "NA") {
+                    text = text + thisData.sugar+"."
+                }
+                else {
+                    text = text + thisData.sugar
+                }
+
+                if (thisData.sugar != "NA" && thisData.sugar != "") {
+                    text = text + "g."
+                }
+
+                return text;
+            }
+            
+            var modalOthers = function() {
+                var text = "Protein: "
+                if (thisData.protein == "") {
+                    text = text + "_. Fibre: "
+                }
+                else if (thisData.protein === "NA") {
+                    text = text + thisData.protein + ". Fibre: "
+                }
+                else {
+                    text = text + thisData.protein + "g. Fibre: "
+                }
+
+
+                if (thisData.fibre == "") {
+                    text = text + "_. Salt: "
+                }
+                else if (thisData.fibre === "NA") {
+                    text = text + thisData.fibre + ". Salt: "
+                }
+                else {
+                    text = text + thisData.fibre + "g. Salt: "
+                }
+
+                if (thisData.salt == "") {
+                    text = text + "_."
+                }
+                else if (thisData.salt === "NA") {
+                    text = text + thisData.salt + ". "
+                }
+                else {
+                    text = text + thisData.salt + "g."
+                }
+                return text;
+            }
+            
+            var energyText = modalEnergy();
+            var fatsText = modalFats();
+            var carbsText = modalCarbs();
+            var othersText = modalOthers();
+            
+            // console.log(energyText);
+            // console.log(fatsText);
+            // console.log(carbsText);
+
+
+            var modalContent = "<p><strong>"+ thisData.name +"</strong>, "+ 
+                            thisData.brand +" - "+ thisData.classification+"<br>"+
+                            energyText+"<br>"+fatsText+"<br>"+carbsText+"<br>"+othersText+"<br>"+
+                            // "Energy: "+thisData.energy1+"kJ / "+thisData.energy2+"kcal<br>"+
+                            // "Fats: "+thisData.fat+"g, of which Saturated: "+thisData.saturated+"g<br>"+
+                            // "Carbohydrates: "+thisData.carbohydrates+"g, of which Sugar: "+thisData.sugar+"g<br>"+
+                            // "Protein: "+thisData.protein+"g, Fibre: "+thisData.fibre+"g, Salt: "+thisData.salt+"g<br>"+
                             "<hr><br>Item bought from: "+thisData.shop+"<br>"+
                             "<br>Notes: "+thisData.notes+"</p>"
+
+            
+            
+            
+
+
+
+
 
             $(".modal-body").html(modalContent);
                 
@@ -288,6 +422,7 @@
                 {label:'Type', format: function(d) { return d.classification; }}
                 ]) 
             .sortBy(function(d) { return d.name; })
+            .size(1000)
             ;
         
         
