@@ -280,12 +280,14 @@
             .height(300)
             .dimension(idDimension)
             .group(function(d) { return d; })
+            .showGroups(false)
             .columns([  
                 {label:'Name', format: function(d) { 
                     return "<a href='#' data-target='#displayModal' data-toggle='modal' data="+d._id+" onclick='fill(this)'>"+d.name+"</a>"; }},
                 {label:'Brand', format: function(d) { return d.brand; }},
                 {label:'Type', format: function(d) { return d.classification; }}
                 ]) 
+            .sortBy(function(d) { return d.name; })
             ;
         
         
