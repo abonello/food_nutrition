@@ -28,9 +28,16 @@
                                     <span class="delClass"><!-- absolute right 5px -->
                                         <a href="{{ url_for('edit_class', class_id=class._id) }}">
                                         <i class="material-icons prefix classList">create</i>Edit </a> | 
-                                        <a href="#">
-                                        <i class="material-icons prefix classList">clear</i>
-                                        <a href="{{ url_for('confirm_delete_class', class_id=class._id) }}" >Delete </a>
+
+                                        {% if class.count == "0" %}
+                                            <i class="material-icons prefix classList">clear</i>
+                                            <a href="{{ url_for('confirm_delete_class', class_id=class._id) }}" >Delete </a>
+                                        {% else %}
+                                            <i class="material-icons prefix classList">clear</i> Delete
+                                        {% endif %}
+
+
+
                                     </span>
                                 </li>
                             
