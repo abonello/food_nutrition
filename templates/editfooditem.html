@@ -11,7 +11,7 @@
     </div>
 
     <div class="row">
-            <form action="{{ url_for('update_food_item', food_item_id=foodItem._id) }}" method="POST" class="col s12">
+            <form action="{{ url_for('update_food_item', food_item_id=foodItem._id, oldClass=foodItem.classification) }}" method="POST" class="col s12">
                 <div class="row">
                     
                     <span id="linkToClassCreate">If class does not exist create one <a href="{{ url_for('add_class', cameFrom='add_food_item') }}">here</a>.</span>

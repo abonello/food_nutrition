@@ -58,7 +58,7 @@ def delete_food_item(food_item_id):
     foodItem = mongo.db.nutrition100.find_one({"_id": ObjectId(food_item_id)})
     classes = mongo.db.classification
     targetClass = foodItem["classification"]
-    thisClass = mongo.db.classification.find_one({"class": targetClass})
+    thisClass = classes.find_one({"class": targetClass})
     thisClass['count'] = str(int(thisClass['count']) - 1)
     classes.update({"class": targetClass}, thisClass)
     mongo.db.nutrition100.remove({"_id": ObjectId(food_item_id)})
@@ -71,11 +71,25 @@ def edit_food_item(food_item_id):
     return render_template("editfooditem.html", foodItem=food_item, classification=mongo.db.classification.find())
     
     
-@app.route("/update_food_item/<food_item_id>", methods=["POST"])
-def update_food_item(food_item_id):
+@app.route("/update_food_item/<food_item_id>/<oldClass>", methods=["POST"])
+def update_food_item(food_item_id, oldClass):
     nutrition100 = mongo.db.nutrition100
     data = request.form.to_dict()
     del data["action"]
+    print("Old Class is: {}".format(oldClass))
+    print("New Class is: {}".format(data['classification']))
+
+    if oldClass == data['classification']:
+        pass # do nothing
+    else:
+        classes = mongo.db.classification
+        thisClass = classes.find_one({"class": oldClass})
+        thisClass['count'] = str(int(thisClass['count']) - 1)
+        classes.update({"class": oldClass}, thisClass)
+        thisClass = classes.find_one({"class": data["classification"]})
+        thisClass['count'] = str(int(thisClass['count']) + 1)
+        classes.update({"class": data["classification"]}, thisClass)
+
     nutrition100.update({"_id": ObjectId(food_item_id)}, data)
     return redirect(url_for('get_food_items'))
 
