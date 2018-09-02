@@ -211,3 +211,7 @@ Combinations tested: NA "", value "", NA value, NA NA, "" NA, "" value, "" "", v
 
 Accordion Done.
 
+
+## Confirm Delete
+
+Implemented route to delete food item. Tested by creating a test item and deleting it.

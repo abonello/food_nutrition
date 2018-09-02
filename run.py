@@ -43,6 +43,14 @@ def insert_food_item():
     return redirect(url_for("get_food_items"))
 
 
+@app.route("/confirm_delete_food_item/<food_item_id>")
+def confirm_delete_food_item(food_item_id):
+    foodItem = mongo.db.nutrition100.find_one({"_id": ObjectId(food_item_id)})
+    # print(food_item_id)
+    # print(foodItem)
+    return render_template("confirmdeletefooditem.html", foodItem=foodItem)
+
+
 @app.route("/delete_food_item/<food_item_id>")
 def delete_food_item(food_item_id):
     mongo.db.nutrition100.remove({"_id": ObjectId(food_item_id)})

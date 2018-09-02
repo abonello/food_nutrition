@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+    <h2 class="warning">Deleting <strong>{{ foodItem.name }} | {{ foodItem.brand }}</strong></h2>
+
+    <div class="row">
+        <div class="col col-xs-4 col-sm-3">
+            <h4>Energy:</h4>
+            <p>{{ foodItem.energy1 }}{% if foodItem.energy1 != "NA" and foodItem.energy1 != "" %}kJ{% endif %} 
+                    {% if foodItem.energy1 == "" or foodItem.energy2 == "" %}{% else %} / {% endif %}  
+                {{ foodItem.energy2 }}{% if foodItem.energy2 != "NA" and foodItem.energy2 != "" %}kcal{% endif %}</p>
+        </div>
+        <div class="col col-xs-4 col-sm-3">
+            <h4>Fats:</h4>
+            <p>{{ foodItem.fat }}{% if foodItem.fat != "NA" and foodItem.fat != "" %}g{% endif %}</p>
+        </div>
+        <div class="col col-xs-4 col-sm-3">
+            <h4>Saturate:</h4>
+            <p>{{ foodItem.saturated }}{% if foodItem.saturated != "NA" and foodItem.saturated != "" %}g{% endif %}</p>
+        </div>
+        <div class="col col-xs-6 col-sm-3">
+            <h4>Carbohydrates:</h4>
+            <p>{{ foodItem.carbohydrates }}{% if foodItem.carbohydrates != "NA" and foodItem.carbohydrates != "" %}g{% endif %}</p>
+        </div>
+        <div class="col col-xs-6 col-sm-3">
+            <h4>Sugar:</h4>
+            <p>{{ foodItem.sugar }}{% if foodItem.sugar != "NA" and foodItem.sugar != "" %}g{% endif %}</p>
+        </div>
+        <div class="col col-xs-6 col-sm-3">
+            <h4>Protein:</h4>
+            <p>{{ foodItem.protein }}{% if foodItem.protein != "NA" and foodItem.protein != "" %}g{% endif %}</p>
+        </div>
+        <div class="col col-xs-6 col-sm-3">
+            <h4>Salt:</h4>
+            <p>{{ foodItem.salt }}{% if foodItem.salt != "NA" and foodItem.salt != "" %}g{% endif %}</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <p>This item was bought from {{ foodItem.shop }}.</p>
+        <p>{{ foodItem.notes }}</p>
+        <p class="redwarning">If you proceed, this item will be <stong>DELETED PERMANENTLY</stong>.</p>
+        <p class="wayout">If you want to leave this item in the database, select <strong>Cancel</strong>.</p>
+    </div>
+
+    <div class="row">
+        <a href="{{ url_for('delete_food_item', food_item_id=foodItem._id) }}" >
+        <button class="btnDelete" onclick=""><strong>Delete</strong></button></a>
+        <a href="{{ url_for('get_food_items') }}" >
+        <button class="btnCancel" onclick=""><strong>Cancel</strong></button></a>
+    </div>
+
+
+
+{% endblock %}
