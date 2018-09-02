@@ -40,7 +40,7 @@ def insert_food_item():
     classes = mongo.db.classification
     data = request.form.to_dict()
     del data["action"]
-    thisClass = mongo.db.classification.find_one({"class": data["classification"]})
+    thisClass = classes.find_one({"class": data["classification"]})
     thisClass['count'] = str(int(thisClass['count']) + 1)
     classes.update({"class": data["classification"]}, thisClass)
     foods.insert_one(data)
@@ -55,6 +55,12 @@ def confirm_delete_food_item(food_item_id):
 
 @app.route("/delete_food_item/<food_item_id>")
 def delete_food_item(food_item_id):
+    foodItem = mongo.db.nutrition100.find_one({"_id": ObjectId(food_item_id)})
+    classes = mongo.db.classification
+    targetClass = foodItem["classification"]
+    thisClass = mongo.db.classification.find_one({"class": targetClass})
+    thisClass['count'] = str(int(thisClass['count']) - 1)
+    classes.update({"class": targetClass}, thisClass)
     mongo.db.nutrition100.remove({"_id": ObjectId(food_item_id)})
     return redirect(url_for('get_food_items'))
 

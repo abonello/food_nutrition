@@ -229,9 +229,11 @@ Also If I come to delete a class, it the confirmation page will tell me how many
 2. Then, manually add a count key to all documents in the classification collection.
 3. Take new backup
 4. When I look at the classes route, I see a count of how many Food Items make use of that class.
-4. When I create a class, it will start with a default value of count = 0.
-5. When I add a food Item, the count is increased by 1.
+5. When I create a class, it will start with a default value of count = 0.
+6. When I add a food Item, the count is increased by 1.
+
 6. When I delete a food Item, the count is decreased by 1.
+
 7. If I change the class of a food item, its old class will be reduced by 1 and the new class is increased by 1.
 8. What will happen when I edit a class.
     1. I need to track all the food items that used the new class and have their class edited too.
