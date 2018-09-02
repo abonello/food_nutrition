@@ -19,16 +19,21 @@
                 <div class="classes">
                     <ul>
                         {% for class in classification %}
-                                <li><i class="material-icons prefix classList">send</i>{{ class.class }}
-                                    <span class="delClass">
+                                <li>
+                                        <i class="material-icons prefix classList">send</i>{{ class.class }}
+                                        &emsp;&emsp;
+                                        <i class="material-icons prefix classList">&emsp;forward</i>
+                                        <!-- <i class="fa fa-hashtag classList" aria-hidden="true"></i> -->
+                                        ({{ class.count }})
+                                    <span class="delClass"><!-- absolute right 5px -->
                                         <a href="{{ url_for('edit_class', class_id=class._id) }}">
                                         <i class="material-icons prefix classList">create</i>Edit </a> | 
                                         <a href="#">
                                         <i class="material-icons prefix classList">clear</i>
-                                        <!-- <a href="{#{ url_for('delete_class', class_id=class._id) }#}" >Delete </a> -->
                                         <a href="{{ url_for('confirm_delete_class', class_id=class._id) }}" >Delete </a>
                                     </span>
                                 </li>
+                            
                         {% endfor %}
                     </ul>
                     <div class="card-button">
