@@ -214,4 +214,7 @@ Accordion Done.
 
 ## Confirm Delete
 
-Implemented route to delete food item. Tested by creating a test item and deleting it.
+Implemented route to delete food item. Tested by creating a test items and deleting them.  
+Implemented route to delete food class. Tested by creating a test items and deleting them.
+
+Functionality includes the ability to cancel the delete process.

@@ -46,8 +46,6 @@ def insert_food_item():
 @app.route("/confirm_delete_food_item/<food_item_id>")
 def confirm_delete_food_item(food_item_id):
     foodItem = mongo.db.nutrition100.find_one({"_id": ObjectId(food_item_id)})
-    # print(food_item_id)
-    # print(foodItem)
     return render_template("confirmdeletefooditem.html", foodItem=foodItem)
 
 
@@ -78,6 +76,12 @@ def update_food_item(food_item_id):
 @app.route("/get_classification")
 def get_classification():
     return render_template("classification.html", classification=mongo.db.classification.find())
+
+
+@app.route("/confirm_delete_class/<class_id>")
+def confirm_delete_class(class_id):
+    foodType = mongo.db.classification.find_one({"_id": ObjectId(class_id)})
+    return render_template("confirmdeleteclass.html", classification=foodType)
 
 
 @app.route("/delete_class/<class_id>")

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h2 class="warning">Deleting Class: <strong>{{ classification.class }}</strong></h2>
+
+    <div class="row">
+        <p class="redwarning">If you proceed, this class will be <stong>DELETED PERMANENTLY</stong>.</p>
+        <p class="wayout">If you want to leave this class in the database, select <strong>Cancel</strong>.</p>
+    </div>
+
+    <div class="row">
+        <a href="{{ url_for('delete_class', class_id=classification._id) }}" >
+        <button class="btnDelete" onclick=""><strong>Delete</strong></button></a>
+        <a href="{{ url_for('get_classification') }}" >
+        <button class="btnCancel" onclick=""><strong>Cancel</strong></button></a>
+    </div>
+
+{% endblock %}
