@@ -106,6 +106,7 @@ def insert_class(cameFrom=""):
             return render_template("addclass.html", classification=mongo.db.classification.find(), entry=data['class'])
 
     data['class'] = data['class'].capitalize()
+    data['count'] = "0"
     classification.insert_one(data)
     if cameFrom == 'add_food_item':
         return redirect(url_for('add_food_item'))
