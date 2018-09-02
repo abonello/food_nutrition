@@ -37,8 +37,12 @@ def add_food_item():
 @app.route("/insert_food_item", methods=["POST"])
 def insert_food_item():
     foods = mongo.db.nutrition100
+    classes = mongo.db.classification
     data = request.form.to_dict()
     del data["action"]
+    thisClass = mongo.db.classification.find_one({"class": data["classification"]})
+    thisClass['count'] = str(int(thisClass['count']) + 1)
+    classes.update({"class": data["classification"]}, thisClass)
     foods.insert_one(data)
     return redirect(url_for("get_food_items"))
 
