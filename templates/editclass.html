@@ -6,6 +6,16 @@
             <div class="section-title text-center">
                 <h2>Edit a Food Class</h2>
                 <span></span>
+                <p>The following food class will be edited: <strong>{{ foodClass.class }}</strong></p>
+
+                <p>It is currently used by <strong>{{ foodClass.count }}</strong>
+                    {% if foodClass.count == "1" %}
+                        item.
+                    {% else %}
+                        items.
+                    {% endif %}
+                </p>
+                <!-- <p>Add the details for the food item you want to add and click the "Add" button.</p> -->
             </div>
         </div>
     </div>

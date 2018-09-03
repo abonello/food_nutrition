@@ -150,6 +150,8 @@ def update_class(class_id):
     classification = mongo.db.classification
     data = request.form.to_dict()
     del data["action"]
+    count = classification.find_one({"_id": ObjectId(class_id)})["count"]
+    data["count"] = count
     classification.update({"_id": ObjectId(class_id)}, data)
     return redirect(url_for('get_classification'))
 

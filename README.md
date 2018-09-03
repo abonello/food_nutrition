@@ -264,5 +264,7 @@ Also If I come to delete a class, it the confirmation page will tell me how many
     
     
     
-    
+    ## Bug - When I edit a class the count disappears
+
+    Fixed
     
