@@ -40,7 +40,7 @@ I want to allow for data which in Not Available (**NA**) and values which are ma
 ## Deploy to Heroku
 
 Name of app: **food-nutrition**  
-URI: [https://food-nutrition.herokuapp.com/]()
+URI: [https://food-nutrition.herokuapp.com/](https://food-nutrition.herokuapp.com/)
 
 I am using ***gunicorn*** server. I found that I will have to set less settings myself.  
 The differences include:
