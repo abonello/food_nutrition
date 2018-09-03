@@ -233,8 +233,36 @@ Also If I come to delete a class, it the confirmation page will tell me how many
 6. When I add a food Item, the count is increased by 1.
 7. When I delete a food Item, the count is decreased by 1.
 8. If I change the class of a food item, its old class will be reduced by 1 and the new class is increased by 1.
+9. Deleting a food class is only allowed if that class is not used by any food item.
 
 
 8. What will happen when I edit a class.
     1. I need to track all the food items that used the new class and have their class edited too.
     2. Having a count of the food items using that class should make sure that all items are edited.
+
+
+    Breakdown:  
+    1. Click edit button
+    2. Go to edit page taking id  /edit_class/<class_id>
+    3. Type the edit and press Edit Class button
+    4. This will take you to the update class page, still carrying id, but now have the form data /update_class/<class_id>
+    5. In the update route:
+        1. classification = mongo.db.classification
+        2. data = request.form.to_dict()
+        3. del data["action"]
+        4. Get old name of classification
+        5. Check that it does not match the new Name (There was a change)
+        6. If there was a change:
+            1. get food table
+            2. Find all food items that make use of old class name - make a list of objects
+            3. Extra check if needed - decide later: 
+                * Get class count and check that it matches the length of list of all food items using this class
+            4. For each food item in list of food items:
+                * Change the name of the class
+        7. classification.update({"_id": ObjectId(class_id)}, data)
+        8. return redirect(url_for('get_classification'))
+    
+    
+    
+    
+    
