@@ -252,11 +252,11 @@ Also If I come to delete a class, it the confirmation page will tell me how many
         3. del data["action"]
         4. Get old name of classification
         5. Check that it does not match the new Name (There was a change)
-        6. If there was a change:
+        6. If there was a change [ and count > 0] ie there are food items using this class:
             1. get food table
             2. Find all food items that make use of old class name - make a list of objects
-            3. Extra check if needed - decide later: 
-                * Get class count and check that it matches the length of list of all food items using this class
+            3. ~~Extra check if needed - decide later:~~
+                * ~~Get class count and check that it matches the length of list of all food items using this class~~
             4. For each food item in list of food items:
                 * Change the name of the class
         7. classification.update({"_id": ObjectId(class_id)}, data)

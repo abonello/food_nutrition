@@ -76,8 +76,8 @@ def update_food_item(food_item_id, oldClass):
     nutrition100 = mongo.db.nutrition100
     data = request.form.to_dict()
     del data["action"]
-    print("Old Class is: {}".format(oldClass))
-    print("New Class is: {}".format(data['classification']))
+    # print("Old Class is: {}".format(oldClass))
+    # print("New Class is: {}".format(data['classification']))
 
     if oldClass == data['classification']:
         pass # do nothing
@@ -152,6 +152,31 @@ def update_class(class_id):
     del data["action"]
     count = classification.find_one({"_id": ObjectId(class_id)})["count"]
     data["count"] = count
+    oldClassName = classification.find_one({"_id": ObjectId(class_id)})["class"]
+    # print("OLD CLASS NAME: {}".format(oldClassName))
+    # print("NEW CLASS NAME: {}".format(data["class"]))
+    if oldClassName != data["class"] and int(count) > 0:
+        print("Class has changed and some food items using it")
+        # get food table
+        nutrition100 = mongo.db.nutrition100
+        foodItemsUsingThisClass = list(nutrition100.find({"classification": oldClassName}))
+        # print("***************************")
+        # print(foodItemsUsingThisClass)
+        # print("***************************")
+        for item in foodItemsUsingThisClass:
+            # print(item)
+            itemId = item["_id"]
+            # print(itemId)
+            item["classification"] = data["class"]
+            # print(item)
+            # print("===================================")
+            nutrition100.update({"_id": ObjectId(itemId)}, item)
+
+    # else:
+        # print("class has not changed or no food items using it.")
+
+
+
     classification.update({"_id": ObjectId(class_id)}, data)
     return redirect(url_for('get_classification'))
 
