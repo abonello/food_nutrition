@@ -7,6 +7,10 @@
     display: none;
 }
 
+.disabled {
+    color: grey;
+}
+
 .body {
     font-family: 'Montserrat', sans-serif;
     font-size: 18px;
