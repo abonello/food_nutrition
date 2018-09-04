@@ -9,8 +9,196 @@
             rel="stylesheet" 
             integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
             crossorigin="anonymous" />
+    <style>
+        .modal-content {
+            /* box-shadow: 0 0 0 0; */ /* cancels box-shadow from bootstrap*/
+            position: relative;
+            margin: 40px auto;
+            background-color: yellow;
+            border-radius: 2px;
+            border: 0;
+            /* transition: all 1s; */
+            box-shadow: 0 2px 7px -2px rgba(0,0,0,0.5);
+        }
+        .modal-content::before,
+        .modal-content::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            width: 40%;
+            height: 20%;
+            /* transition: all 0.2s ease-in; */
+            /* background: red; */
+            z-index: -1;
+            /* box-shadow: 0 2px 7px -2px rgba(0,0,0,0.5); */
+        }
+
+        .modal-content::before {
+            transition: all 0.25s ease-in-out;
+            left: 20px;
+            transform: skew(-5deg) rotate(-5deg);
+            box-shadow: 0 10px 15px 0 rgba(0,0,0,0.6),
+                        -5px 20px 30px 0 rgba(0,0,0,0.4);
+        }
+
+        .modal-content::after {
+            transition: all 0.15s ease-in-out;
+            right: 15px;
+            transform: skew(5deg) rotate(5deg);
+            /* box-shadow: 3px 13px 20px 0 rgba(0,0,0,0.7); */
+            box-shadow: 0 7px 15px 0 rgba(0,0,0,0.6),
+                        5px 15px 30px 0 rgba(0,0,0,0.4);
+        }
+
+        
+
+        .modal-content:hover::before{
+            left: 2px;
+            transform: skew(-2deg) rotate(-2deg) translateY(5px);
+            box-shadow: 0px 5px 5px 0 rgba(0,0,0,0.5);
+        }
+
+        .modal-content:hover::after{
+            right: 2px;
+            transform: skew(2deg) rotate(2deg) translateY(5px);
+            box-shadow: 0px 4px 4px 0 rgba(0,0,0,0.5);
+        }
+
+        .cornerlessBorder {
+            margin: 40px auto;
+            background-color: #bdee90c2;
+            border-radius: 0px;
+            border: 0;
+            /* transition: all 1s; */
+            /* box-shadow: 0 10px 0 #a09494,
+                        0 -10px 0 #8f8989,
+                        -10px 0 0 #8f8989,
+                        10px 0 0 #a09494,
+                        0 0 0 12px #0f0; */
+            box-shadow: 0 20px 3px #a09494,
+                        0 -20px 3px #8f8989,
+                        -20px 0 3px #8f8989,
+                        20px 0 3px #a09494,
+                        0 0 1px 22px #0f0;
+            width: 300px;
+            height: 200px;
+        }
+        .curlyBorder {
+            margin: 40px auto;
+            background-color: #bdee90c2;
+            border-radius: 0px;
+            border: 0;
+            /* transition: all 1s; */
+            /* box-shadow: 0 10px 0 #a09494,
+                        0 -10px 0 #8f8989,
+                        -10px 0 0 #8f8989,
+                        10px 0 0 #a09494,
+                        0 0 0 12px #0f0; */
+            box-shadow: 0 20px 3px #a09494,
+                        0 -20px 3px #8f8989,
+                        -20px 0 3px #8f8989,
+                        20px 0 3px #a09494,
+                        0 0 1px 22px #0f0;
+            width: 300px;
+            height: 200px;
+            /* border-radius: 10px; */
+            border-radius: 20%;
+        }
+        .slantingCornerBorder {
+            position: relative;
+            margin: 40px auto;
+            background-color: #bdee90c2;
+            border-radius: 0px;
+            border: 0;
+            box-shadow: 0 10px 0 #a09494,
+                        0 -10px 0 #8f8989,
+                        -10px 0 0 #8f8989,
+                        10px 0 0 #a09494;
+                        /* 0 0 0 12px #0f0; */
+            width: 300px;
+            height: 200px;
+        }
+        .topLeft {
+            position: absolute;
+            top: -9px;
+            left: -6px;
+            width: 10px;
+            height: 14px;
+            background: #8f8989;
+            transform: rotate(45deg);
+
+        }
+        /* .slantingCornerBorder::before,
+        .slantingCornerBorder::after {
+            content: '';
+            position: absolute;
+            height: 10px;
+            width: 370px;
+            top: calc(50% - 5px);
+            left: calc(50% - 185px);
+            background: #a09494;
+            z-index: -1;
+        }
+        .slantingCornerBorder::before {
+            transform: rotate(-33.69deg);
+            box-shadow: 0 0 0 2px #a09494;
+        }
+        .slantingCornerBorder::after {
+            transform: rotate(33.69deg);
+        } */
+
+    
+    </style>
 </head>
 <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <button class="btn btn-primary btn-sm pull-right" data-target="#myModal" data-toggle="modal">Login</button>
+                <div class="modal" id="myModal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content" id="shadowTarget">
+                            <div class="modal-header">
+                                <button class="close" data-dismiss="modal">&times;</button>
+                                <h4>Login</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="">
+                                    <div class="form-group">
+                                        <label for="inputUserName">Username: </label>
+                                        <input type="text" class="form-control" placeholder="Login Username" id="inputUserName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword">Password: </label>
+                                        <input type="password" class="form-control" placeholder="password" id="inputPassword">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary">Login</button>
+                                <button class="btn btn-primary" data-dismiss="modal">Close</button>
+                            </div>
+                            <div id="left"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="cornerlessBorder"></div>
+        </div>
+        <div class="row">
+            <div class="curlyBorder"></div>
+        </div>
+        <div class="row">
+            <div class="slantingCornerBorder">
+                <div class="topLeft"></div>
+            </div>
+        </div>
+        
+    </div>
+
+    
 
     <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
