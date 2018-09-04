@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #eee; 
+        }
+        
+        .container {
+            position: relative;
+            margin: 50px auto;
+            width: 300px;
+            background: white;
+            height: 150px;
+            border-radius: -5px;
+        }
+        .container::before,
+        .container::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            height: 10px;
+            width: 100px;
+            background: red;
+            /* left: 0px; */
+        }
+        .container::before {
+            left: 5px;
+            transform: skew(-5deg) rotate(-5deg);
+            border-radius: -5px;
+        }
+        .container::after {
+            right: 5px;
+            transform: skew(5deg) rotate(5deg);
+        }
+    </style>
+    <style>
+
+
+/* .modal {
+    box-shadow: 0 0 0 100vh #595959f2;
+} */
+
+/* .modal-content {
+    box-shadow: 0 0 0 100vh #595959f5;
+} */
+
+.modal-content::before,
+.modal-content::after {
+    content: '';
+    position: absolute;
+    /* background-color: red; */
+    top: 90%;
+    bottom: 15px;
+    /* left: 0; */
+    /* width: 100px;
+    height: 100px; */
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    z-index: -1;
+}
+
+.modal-content::before {
+    background-color: lightblue;
+    left: 5px;
+    right: 45px;
+    transform: rotate(-3deg);
+}
+
+.modal-content::after {
+    background-color: red;
+    left: 45px;
+    right: 5px;
+    transform: rotate(3deg);
+}
+    </style>
+</head>
+<body>
+
+    <div class="container lift">
+
+    </div>
+    
+</body>
+</html>
