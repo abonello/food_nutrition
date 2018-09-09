@@ -14,6 +14,7 @@
 .body {
     font-family: 'Montserrat', sans-serif;
     font-size: 18px;
+    background: red;
 }
 
 a.brand-logo {
@@ -31,7 +32,8 @@ a.brand-logo:hover {
 }
 
 nav {
-    background-color: #2869a0;
+    background-color: #484538;
+    /* background-color: #2869a0; */
 }
 
 nav a {
@@ -96,21 +98,31 @@ a.button-collapse i:hover {
 
 .panel-primary>.panel-heading+.panel-collapse>.panel-body {
     border: 0;
-    background-color: red;
+    background-color: #b09398;
     border-radius: 20px;
-    background-color: #6abfa829;
+    /* background-color: #6abfa829; */
 }
 
 
 #accordion .panel-heading {
     border-radius: 30px;
+    background:  #5f5449;
 }
 
+#accordion .panel-heading:hover {
+    background: #f6e4f6;
+    color: #46494c;
+    border: 1px solid #f6bdd1;
+
+}
 
 .panel-heading.active {
-    border: 1px solid #337ab7;
+    border: 1px solid #5f5449;
+    background-color: #9b6a6c;
+    box-shadow: 0 3px 5px #9b6a6c, 0 0 20px #e8e8e8 inset;
+    /* border: 1px solid #337ab7;
     background-color: #5da7e6;
-    box-shadow: 0 3px 5px #5da7e6;
+    box-shadow: 0 3px 5px #5da7e6; */
     color: #ffe064;
 }
 
@@ -195,7 +207,17 @@ a.button-collapse i:hover {
 }
 
 .flip3D > .front {
-    background-color: #c0de87;
+    /* background-color: #c0de87; */
+
+
+    background: #cedfd9;
+    color: #5f5449;
+    font-weight: 700;
+    border: 0;
+    box-shadow: 0 0 50px 0px #ebfcfb inset, 0 0 1px 0 #5f5449;
+
+
+
     -webkit-transform: perspective(1000px) rotateY(0deg);       /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
         -ms-transform: perspective(1000px) rotateY(0deg);       /* IE 9 */
             transform: /* Start State for front */              /* IE 10, Fx 16+, Op 12.1+ */
@@ -218,8 +240,18 @@ a.button-collapse i:hover {
 }
 
 .flip3D > .back {
-    background-color: #d9f3a8;
-    border: 5px solid #c0de87;
+    /* background-color: #d9f3a8;
+    border: 5px solid #c0de87; */
+
+    background: #ebfcfb;
+    border: 5px solid #cedfd9;
+    color: #5f5449;
+    font-weight: 700;
+    box-shadow: 0 0 1px 0px #b09398 inset, 0 0 15px 2px #e8e8e8 inset, 0 0 2px 0 #5f5449;
+
+
+
+
     -webkit-transform: perspective(1000px) rotateY(180deg);     /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
         -ms-transform: perspective(1000px) rotateY(180deg);     /* IE 9 */
             transform: /* Start State for back */               /* IE 10, Fx 16+, Op 12.1+ */
