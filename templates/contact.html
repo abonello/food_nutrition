@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="row"> 
+        <div class="col-md-12">
+            <div class="section-title text-center">
+                <h2>Contact Us</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <form action='/contact', method='POST'>
+            <input name='name'>
+            <input name='email'>
+            <input name='subject'>
+            <input name='message'>
+            <input type='submit'>
+        </form>
+    </div>
+
+
+
+{% endblock %}
