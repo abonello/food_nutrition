@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="row"> 
+        <div class="col-md-12">
+            <div class="section-title text-center">
+                <h2>Message Sent</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <p><strong>{{ name }}</strong>, your message was sent successfully. </p>
+            
+        <p>The email address you used was <strong>{{ email }}</strong></p> 
+        <p><strong>subject: </strong>{{ subject }}</p>
+        <p><strong>message: </strong><br>{{ message }}</p>
+            
+            
+    </div>
+    <div class="row"> 
+        <p></p>
+        <p><strong>Please select where you would like to go from the menu.</strong></p>
+    </div>
+{% endblock %}

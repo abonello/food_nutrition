@@ -4,6 +4,7 @@ from flask_pymongo import PyMongo
 import json
 from bson.objectid import ObjectId
 from bson.json_util import dumps
+from flask_mail import Mail, Message
 
 from connection import getDbName, getURI  # Needed to run locally - Comment out for heroku
 
@@ -13,12 +14,18 @@ app = Flask(__name__)
 app.config["MONGO_DBNAME"] = getDbName()
 app.config["MONGO_URI"] = getURI()
 
+# app.config['MAIL_SERVER'] = 'host58.servers.prgn.misp.co.uk'
+# app.config['MAIL_PORT'] = 465
+# app.config['MAIL_USE_SSL'] = True
+app.config.from_pyfile('config.cfg')
+
 # Use the following to run from HEROKU - remove the import
 # app.config["MONGO_DBNAME"] = os.getenv('MONGO_DBNAME')
 # app.config["MONGO_URI"] = os.getenv('MONGO_URI')
 
 
 mongo = PyMongo(app)
+mail = Mail(app)
 
 
 @app.route("/")
@@ -296,6 +303,35 @@ def replace_data_from_backup():
         classes.insert_one(classification[ndx])
     return redirect(url_for('get_food_items'))
 
+@app.route("/about")
+def about():
+    # This is a place holder
+    return "About Page"
+
+@app.route("/contact", methods=['GET', 'POST'])
+def contact():
+    if request.method == "GET":
+        # return "<form action='/contact', method='POST'><input name='name'><input name='email'><input name='subject'><input name='message'><input type='submit'></form>"
+        return render_template ("contact.html")
+    try:
+        name = request.form['name']
+        email = request.form['email']
+        subject = request.form['subject']
+        message = request.form['message']
+
+        msg = Message(subject, sender=email, recipients=[app.config['MAIL_DEFAULT_SENDER']])
+        msg.body = "{} sent the following message through Nutrion website: \n\n{}".format(name, message)
+        mail.send(msg)
+    
+        # return "Peroson is {}. The email you entered is {}. Subject: {}. You said: '{}'.".format(name, email, subject, message)
+        return render_template("message_sent.html", name=name, email=email, subject=subject, message=message)
+    except Exception as e:
+        # print(e)
+        # return "It looks like the email address you entered is not in a valid format or is blacklisted. Please go back and try again."
+        return render_template("message_error.html", email=email)
+
+
+# smtplib.SMTPRecipientsRefused: {'websiteadmin@anthonybonello.co.uk': (550, b'Verification failed for <anthonybonello_music@hotmail>\nThe mail server could not deliver mail to anthonybonello_music@hotmail.  The account or domain may not exist, they may be blacklisted, or missing the proper dns entries.\nSender verify failed')}
 
 if __name__ == '__main__':
     # app.run(host=os.getenv('IP'), port=int(os.getenv('PORT', 8080)), debug=True)
