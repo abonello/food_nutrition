@@ -306,7 +306,8 @@ def replace_data_from_backup():
 @app.route("/about")
 def about():
     # This is a place holder
-    return "About Page"
+    # return "About Page"
+    return render_template("about.html")
 
 @app.route("/contact", methods=['GET', 'POST'])
 def contact():
@@ -320,7 +321,7 @@ def contact():
         message = request.form['message']
 
         msg = Message(subject, sender=email, recipients=[app.config['MAIL_DEFAULT_SENDER']])
-        msg.body = "{} sent the following message through Nutrion website: \n\n{}".format(name, message)
+        msg.body = "{} sent the following message through the Nutrition website: \n\n{}".format(name, message)
         mail.send(msg)
     
         # return "Peroson is {}. The email you entered is {}. Subject: {}. You said: '{}'.".format(name, email, subject, message)
