@@ -208,16 +208,11 @@ a.button-collapse i:hover {
 
 .flip3D > .front {
     /* background-color: #c0de87; */
-
-
     background: #cedfd9;
     color: #5f5449;
     font-weight: 700;
     border: 0;
     box-shadow: 0 0 50px 0px #ebfcfb inset, 0 0 1px 0 #5f5449;
-
-
-
     -webkit-transform: perspective(1000px) rotateY(0deg);       /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
         -ms-transform: perspective(1000px) rotateY(0deg);       /* IE 9 */
             transform: /* Start State for front */              /* IE 10, Fx 16+, Op 12.1+ */
@@ -242,16 +237,11 @@ a.button-collapse i:hover {
 .flip3D > .back {
     /* background-color: #d9f3a8;
     border: 5px solid #c0de87; */
-
     background: #ebfcfb;
     border: 5px solid #cedfd9;
     color: #5f5449;
     font-weight: 700;
     box-shadow: 0 0 1px 0px #b09398 inset, 0 0 15px 2px #e8e8e8 inset, 0 0 2px 0 #5f5449;
-
-
-
-
     -webkit-transform: perspective(1000px) rotateY(180deg);     /* Ch <36, Saf 5.1+, iOS < 9.2, An =<4.4.4 */
         -ms-transform: perspective(1000px) rotateY(180deg);     /* IE 9 */
             transform: /* Start State for back */               /* IE 10, Fx 16+, Op 12.1+ */
@@ -391,6 +381,83 @@ p.wayout {
     text-align: center;
 }
 
+td a:hover {
+    text-decoration: none;
+}
+
+thead {
+    border-bottom: 2px solid #3e442b;
+    margin-bottom: 20px;
+    padding: 50px;
+}
+
+thead tr {
+    background: #5f5449;
+    padding: 7px 0;
+    border-radius: 3px;
+    box-shadow: 0 3px 5px #9b6a6c, 0 0 20px #e8e8e8 inset;
+    color: #ffe064;
+    /* margin-bottom: 10px; */
+}
+
+thead tr th {
+    padding: 5px 7px;
+    /* padding-left: 7px; */
+}
+
+.table-striped td {
+    padding: 5px 7px;
+    /* padding-left: 7px; */
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background: #cedfd9;
+}
+
+.table-striped>tbody>tr:nth-of-type(even) {
+    background: #ebfcfb;
+}
+
+/* .table-striped>tbody>tr>td>button { */
+.table-striped>tbody>tr>td>a>button {
+    color: #212529;
+    background-color: #fdd22d;
+    border-color: #ceac2a;
+    border-radius: 18px;
+    padding: 0px 20px;
+    margin: 5px 0;
+    outline: none;
+}
+
+/* .table-striped>tbody>tr>td>button:hover { */
+.table-striped>tbody>tr>td>a>button:hover {
+    background-color: #e5d0cc;
+    border-color: #ceac2a;
+    box-shadow: 0 0 3px #c0d8e0 inset;
+    outline: none;
+}
+
+/* .table-striped>tbody>tr>td>button:active { */
+.table-striped>tbody>tr>td>a>button:active, .table-striped>tbody>tr>td>a:active {
+    background-color: #e5d0cc;
+    border-color: #ceac2a;
+    /* box-shadow: 0 0 3px #c0d8e0 inset;  */
+    outline: none;
+}
+
+/* .table-striped>tbody>tr>td>button:hover a { */
+.table-striped>tbody>tr>td>a:hover button {
+    font-weight: 700;
+}
+
+/* .table-striped>tbody>tr>td>button>a { */
+.table-striped>tbody>tr>td>a:focus, .table-striped>tbody>tr>td>a:active {
+    outline: none;
+    text-decoration: none;
+}
+
+
+/* MODAL */
 .modal-content {
     position: relative;
     margin: 40px auto;

@@ -20,13 +20,13 @@
     </div>
     <div class="group1">
         <div class="row">
-            <div class="col col-sm-12 col-md-6"> <!-- Start Column 1 -->
+            <div class="col col-sm-12 col-md-5"> <!-- Start Column 1 -->
                 <div id="info">
                     <h3>Info</h3>
                     <div class="dc-data-count"></div>
                 </div>
                 <div id="rowChart1">
-                    <h3>Food Classification</h3>
+                    <h4>Food Classification</h4>
                     <a class="reset" style="visibility: hidden;" href="javascript:classRowChart.filterAll(); dc.redrawAll();"><button class="btn btn-primary btn-sm">reset</button></a>
                     <span class="reset" style="visibility: hidden;">Range: <span class="filter"></span></span>
                     <a class="reset" href="javascript:classRowChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
@@ -35,31 +35,33 @@
                 </div>
             </div> <!-- End Column 1 -->
             <!-- <div class="clearfix"></div> -->
-            <div class="col col-sm-12 col-md-6"> <!-- Start Column 2 -->
+            <div class="col col-sm-12 col-md-3"> <!-- Start Column 2 -->
                 <div id="scatterChart1">
-                    <h3>All Fats vs Saturated Fats</h3>
+                    <h4>All Fats vs Saturated Fats</h4>
                     <a class="reset" style="visibility: hidden;" href="javascript:scatterSatFat.filterAll(); dc.redrawAll();"><button class="btn btn-primary btn-sm">reset</button></a>
                     <span class="reset" style="visibility: hidden;">Range: <span class="filter"></span></span>
                     <div class="clearfix"></div>
                     <!-- Scatter Chart will be added here programmatically. -->
                 </div>
                 <div id="scatterChart2">
-                    <h3>Carbohydrates vs Sugar</h3>
+                    <h4>Carbohydrates vs Sugar</h4>
                     <a class="reset" style="visibility: hidden;" href="javascript:scatterSugCarb.filterAll(); dc.redrawAll();"><button class="btn btn-primary btn-sm">reset</button></a>
                     <span class="reset" style="visibility: hidden;">Range: <span class="filter"></span></span>
                     <div class="clearfix"></div>
                     <!-- Scatter Chart will be added here programmatically. -->
                 </div>
+            </div>
                 <!-- <div class="clearfix"></div> -->
+            <div class="col col-sm-12 col-md-3 col-md-offset-1"> <!-- Start Column 2 -->
                 <div id="scatterChart3">
-                    <h3>Energy vs Protein</h3>
+                    <h4>Energy vs Protein</h4>
                     <a class="reset" style="visibility: hidden;" href="javascript:scatterEnergyProt.filterAll(); dc.redrawAll();"><button class="btn btn-primary btn-sm">reset</button></a>
                     <span class="reset" style="visibility: hidden;">Range: <span class="filter"></span></span>
                     <div class="clearfix"></div>
                     <!-- Scatter Chart will be added here programmatically. -->
                 </div>
                 <div id="scatterChart4">
-                    <h3>Salt vs Sugar</h3>
+                    <h4>Salt vs Sugar</h4>
                     <a class="reset" style="visibility: hidden;" href="javascript:scatterSugSalt.filterAll(); dc.redrawAll();"><button class="btn btn-primary btn-sm">reset</button></a>
                     <span class="reset" style="visibility: hidden;">Range: <span class="filter"></span></span>
                     <div class="clearfix"></div>
@@ -234,20 +236,8 @@
             var modalContent = "<p><strong>"+ thisData.name +"</strong>, "+ 
                             thisData.brand +" - "+ thisData.classification+"<br>"+
                             energyText+"<br>"+fatsText+"<br>"+carbsText+"<br>"+othersText+"<br>"+
-                            // "Energy: "+thisData.energy1+"kJ / "+thisData.energy2+"kcal<br>"+
-                            // "Fats: "+thisData.fat+"g, of which Saturated: "+thisData.saturated+"g<br>"+
-                            // "Carbohydrates: "+thisData.carbohydrates+"g, of which Sugar: "+thisData.sugar+"g<br>"+
-                            // "Protein: "+thisData.protein+"g, Fibre: "+thisData.fibre+"g, Salt: "+thisData.salt+"g<br>"+
                             "<hr><br>Item bought from: "+thisData.shop+"<br>"+
                             "<br>Notes: "+thisData.notes+"</p>"
-
-            
-            
-            
-
-
-
-
 
             $(".modal-body").html(modalContent);
                 
@@ -279,14 +269,14 @@
             .dimension(facts)
             .group(all)
             .html({
-                some: '<strong>%filter-count</strong> selected out of <strong>%total-count</strong> records. | <a href="javascript:dc.filterAll(); dc.renderAll()"><button class="btn btn-success">Reset All</button></a>',
+                some: '<strong>%filter-count</strong> selected out of <strong>%total-count</strong> records. <a href="javascript:dc.filterAll(); dc.renderAll()"><button class="btn btn-success">Reset All</button></a>',
                 all: 'All records selected. Please click on the graphs to apply filters.'
             });
 
         // CHARTS
         var scatterSatFat = dc.scatterPlot("#scatterChart1")
-            .width(450)
-            .height(200)
+            .width(300)
+            .height(220)
             .margins({top:15, bottom:30, left:30, right:50})
             .dimension(scatterDimensionSatFat)
             .group(scatterGroupSatFat)
@@ -312,8 +302,8 @@
         scatterSatFat.yAxis().ticks(4); 
 
         var scatterSugCarb = dc.scatterPlot("#scatterChart2")
-            .width(450)
-            .height(200)
+            .width(300)
+            .height(220)
             .margins({top:15, bottom:30, left:30, right:50})
             .dimension(scatterDimensionSugCarb)
             .group(scatterGroupSugCarb)
@@ -339,8 +329,8 @@
         scatterSugCarb.yAxis().ticks(4); 
 
         var scatterEnergyProt = dc.scatterPlot("#scatterChart3")
-            .width(450)
-            .height(200)
+            .width(300)
+            .height(220)
             .margins({top:15, bottom:30, left:30, right:50})
             .dimension(scatterDimensionEnergyProt)
             .group(scatterGroupEnergyProt)
@@ -367,8 +357,8 @@
         scatterEnergyProt.yAxis().ticks(4);
 
         var scatterSugSalt = dc.scatterPlot("#scatterChart4")
-            .width(450)
-            .height(200)
+            .width(300)
+            .height(220)
             .margins({top:15, bottom:30, left:30, right:50})
             .dimension(scatterDimensionSugSalt)
             .group(scatterGroupSugSalt)
@@ -395,8 +385,8 @@
 
 
         var classRowChart = dc.rowChart('#rowChart1')
-            .width(450)
-            .height(1000)
+            .width(400)
+            .height(400)
             .margins({top: 20, left: 10, right: 10, bottom: 20})
             .dimension(classDimension)
             .group(classGroup)
@@ -417,13 +407,16 @@
             .showGroups(false)
             .columns([  
                 {label:'Name', format: function(d) { 
-                    return "<a href='#' data-target='#displayModal' data-toggle='modal' data="+d._id+" onclick='fill(this)'>"+d.name+"</a>"; }},
+                    // return "<button class='btn'><a href='#' data-target='#displayModal' data-toggle='modal' data="+d._id+" onclick='fill(this)'>"+d.name+"</a></button>"; }},
+                    return "<a href='#' data-target='#displayModal' data-toggle='modal' data="+d._id+" onclick='fill(this)'><button class='btn'>"+d.name+"</button></a>"; }},
                 {label:'Brand', format: function(d) { return d.brand; }},
                 {label:'Type', format: function(d) { return d.classification; }}
                 ]) 
             .sortBy(function(d) { return d.name; })
             .size(1000)
             ;
+
+        d3.selectAll(".table").attr("class", "table-striped");
         
         
 
