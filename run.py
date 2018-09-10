@@ -319,7 +319,6 @@ def contact():
     subject = request.form['subject']
     message = request.form['message']
 
-    
     msg = Message(subject, sender=email, recipients=[app.config['MAIL_DEFAULT_SENDER']])
     msg.body = "{} sent the following message: {}".format(name, message)
     mail.send(msg)
