@@ -326,7 +326,8 @@ def contact():
         return "Peroson is {}. The email you entered is {}. Subject: {}. You said: '{}'.".format(name, email, subject, message)
     except Exception as e:
         print(e)
-        return "It looks like the email address you entered is not in a valid format or is blacklisted. Please go back and try again."
+        # return "It looks like the email address you entered is not in a valid format or is blacklisted. Please go back and try again."
+        return render_template("message_error.html")
 
 
 # smtplib.SMTPRecipientsRefused: {'websiteadmin@anthonybonello.co.uk': (550, b'Verification failed for <anthonybonello_music@hotmail>\nThe mail server could not deliver mail to anthonybonello_music@hotmail.  The account or domain may not exist, they may be blacklisted, or missing the proper dns entries.\nSender verify failed')}
