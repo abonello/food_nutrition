@@ -320,10 +320,11 @@ def contact():
         message = request.form['message']
 
         msg = Message(subject, sender=email, recipients=[app.config['MAIL_DEFAULT_SENDER']])
-        msg.body = "{} sent the following message: {}".format(name, message)
+        msg.body = "{} sent the following message through Nutrion website: \n\n{}".format(name, message)
         mail.send(msg)
     
-        return "Peroson is {}. The email you entered is {}. Subject: {}. You said: '{}'.".format(name, email, subject, message)
+        # return "Peroson is {}. The email you entered is {}. Subject: {}. You said: '{}'.".format(name, email, subject, message)
+        return render_template("message_sent.html", name=name, email=email, subject=subject, message=message)
     except Exception as e:
         print(e)
         # return "It looks like the email address you entered is not in a valid format or is blacklisted. Please go back and try again."
