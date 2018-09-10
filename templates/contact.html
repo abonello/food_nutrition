@@ -21,7 +21,7 @@
             <input name='message'>
             <input type='submit'>
         </form> -->
-        <form action='/contact' method="POST" id="contactForm">
+        <form action='/contact' method="POST" id="contactForm" data-toggle="validator" role="form">
             <div class="form-group">
                 <label for="name" id="nameLabel">Name:</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Your Name here" required/>
@@ -45,6 +45,96 @@
         </form>
     </div>
 
+    <script>
+        // Form Validation and alert
+        // $("#btn-submit").on("click", function() {
+        // if (validateForm()) {
+        //     var params = {};
+        //     $('#contact :input').each(function() {
+        //         params[this.name] = this.value;
+        //     });
+
+        //     // Change to your service ID, or keep using the default service
+        //     var service_id = "default_service";
+        //     var template_id = "template1";
+
+        //     (function(){
+        //         $("#btn-submit").text("Sending...");
+        //         emailjs.init("user_MV94f6Xs0GmNusEwKfXoL");
+        //         emailjs.send(service_id,template_id,params)
+        //             .then(function(){ 
+        //                 alert("Message sent!");
+        //                 $("#btn-submit").text("Submit");
+        //                 $("#name").val("");
+        //                 $("#email").val("");
+        //                 $("#subject").val("");
+        //                 $("#message").val("");
+        //                 // location.reload();
+        //             }, function(err) {
+        //                 $("#btn-submit").text("Submit");
+        //                 $("#name").val("");
+        //                 $("#email").val("");
+        //                 $("#subject").val("");
+        //                 $("#message").val("");
+        //                 alert("Send email failed!\r\n Response:\n " + JSON.stringify(err));
+        //             });
+        //     })();
+        //     return false;
+        // }
+
+        // }); 
+
+        // $("#btn-submit").on("click", function() {
+        //     if (validateForm()) return true;
+        //     else return false;
+        //     )}; 
+
+        // function validateForm(){
+
+        //     var nameReg = /^[A-Za-z ]+$/;
+        //     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        //     var subjectReg = /^[A-Za-z0-9 ]+$/;
+        //     var name = $('#name').val();
+        //     var email = $('#email').val();
+        //     var subject = $('#subject').val();
+        //     var message = $('#message').val();
+        //     var inputVal = new Array(name, email, subject, message);
+
+        //     $('.error').hide();
+        //     if(inputVal[0] == ""){
+        //         $('#nameLabel').after('<span class="error"> Please enter your name</span>');
+        //         return false;
+        //     } 
+        //     else if(!nameReg.test(name)){
+        //         $('#nameLabel').after('<span class="error"> Letters only</span>');
+        //         return false;
+        //     }
+
+        //     if(inputVal[1] == ""){
+        //         $('#emailLabel').after('<span class="error"> Please enter your email</span>');
+        //         return false;
+        //     } 
+        //     else if(!emailReg.test(email)){
+        //         $('#emailLabel').after('<span class="error"> Please enter a valid email address</span>');
+        //         return false;
+        //     }
+
+        //     if(inputVal[2] == ""){
+        //         $('#subjectLabel').after('<span class="error"> Please enter a Subject for your message</span>');
+        //         return false;
+        //     } 
+        //     else if(!subjectReg.test(subject)){
+        //         $('#subjectLabel').after('<span class="error"> Letters or numbers only</span>');
+        //         return false;
+        //     }
+
+        //     if(inputVal[3] == ""){
+        //         $('#messageLabel').after('<span class="error"> Please enter your message</span>');
+        //         return false;
+        //     }
+        //     return true; 
+        // }   
+    </script>
 
 
 {% endblock %}

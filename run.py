@@ -313,18 +313,23 @@ def contact():
     if request.method == "GET":
         # return "<form action='/contact', method='POST'><input name='name'><input name='email'><input name='subject'><input name='message'><input type='submit'></form>"
         return render_template ("contact.html")
+    try:
+        name = request.form['name']
+        email = request.form['email']
+        subject = request.form['subject']
+        message = request.form['message']
 
-    name = request.form['name']
-    email = request.form['email']
-    subject = request.form['subject']
-    message = request.form['message']
-
-    msg = Message(subject, sender=email, recipients=[app.config['MAIL_DEFAULT_SENDER']])
-    msg.body = "{} sent the following message: {}".format(name, message)
-    mail.send(msg)
+        msg = Message(subject, sender=email, recipients=[app.config['MAIL_DEFAULT_SENDER']])
+        msg.body = "{} sent the following message: {}".format(name, message)
+        mail.send(msg)
     
-    return "Peroson is {}. The email you entered is {}. Subject: {}. You said: '{}'.".format(name, email, subject, message)
+        return "Peroson is {}. The email you entered is {}. Subject: {}. You said: '{}'.".format(name, email, subject, message)
+    except Exception as e:
+        print(e)
+        return "It looks like the email address you entered is not in a valid format or is blacklisted. Please go back and try again."
 
+
+# smtplib.SMTPRecipientsRefused: {'websiteadmin@anthonybonello.co.uk': (550, b'Verification failed for <anthonybonello_music@hotmail>\nThe mail server could not deliver mail to anthonybonello_music@hotmail.  The account or domain may not exist, they may be blacklisted, or missing the proper dns entries.\nSender verify failed')}
 
 if __name__ == '__main__':
     # app.run(host=os.getenv('IP'), port=int(os.getenv('PORT', 8080)), debug=True)
