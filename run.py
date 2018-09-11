@@ -31,11 +31,16 @@ mail = Mail(app)
 
 
 @app.route("/")
+def index():
+    # return "This is the landing page"
+    return render_template("index.html")
+
 @app.route("/get_food_items")
 def get_food_items():
     # food=mongo.db.nutrition100.find()
     # print(food)
-    return render_template("index.html", food=mongo.db.nutrition100.find())
+    # return render_template("index.html", food=mongo.db.nutrition100.find())
+    return render_template("fooditems.html", food=mongo.db.nutrition100.find())
 
 
 @app.route("/add_food_item")

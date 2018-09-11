@@ -64,6 +64,27 @@ a.button-collapse i:hover {
     text-shadow: 0px 2px 5px #0b136f;
 }
 
+
+.row>.col.info {
+    /* border: 1px solid #cedfd9; */
+    padding: 10px;
+    /* margin: 1px; */
+    box-sizing: border-box;
+}
+
+@media screen and (min-width: 770px) {
+    .row>.col.info {
+        padding: 30px;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .row>.col.info {
+        padding: 30px 50px;
+    }
+}
+
+
 .panel-body {
     padding: 15px;
     width: 100%;

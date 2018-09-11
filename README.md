@@ -268,3 +268,12 @@ Also If I come to delete a class, it the confirmation page will tell me how many
 
     Fixed
     
+
+
+Screen shots 
+
+Edited with GIMP
+
+Gif - first captured as .mov file using quickTime. Then turned into a gif using "Drop to Gif" App. 
+This was further processed to reduce its size online at ezgif.com
+

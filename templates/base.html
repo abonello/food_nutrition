@@ -31,11 +31,12 @@
         <header class="row header">
             <nav>
                 <div class="nav-wrapper">
-                    <a href="{{ url_for('get_food_items') }}" class="brand-logo">NUTRITION</a>
+                    <a href="{{ url_for('index') }}" class="brand-logo">NUTRITION</a>
                     <!--<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>-->
                     <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
                     <ul id="wide-menu" class="right hide-on-med-and-down">
-                        <li><a href="{{ url_for('get_food_items') }}">Home</a></li>
+                        <li><a href="{{ url_for('index') }}">Home</a></li>
+                        <li><a href="{{ url_for('get_food_items') }}">Food Items</a></li>
                         <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
                         <li><a href="{{ url_for('add_food_item') }}">New Item</a></li>
                         <li><a href="{{ url_for('get_classification') }}">Food Classes</a></li>
@@ -44,7 +45,8 @@
                         <!-- <li><a href="{#{ url_for('add_category') }#}">Add Category</a></li> -->
                     </ul>
                     <ul class="side-nav" id="mobile-menu">
-                        <li><a href="{{ url_for('get_food_items') }}">Home</a></li>
+                        <li><a href="{{ url_for('index') }}">Home</a></li>
+                        <li><a href="{{ url_for('get_food_items') }}">Food Items</a></li>
                         <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
                         <li><a href="{{ url_for('add_food_item') }}">New Item</a></li>
                         <li><a href="{{ url_for('get_classification') }}">Food Classes</a></li>
@@ -54,9 +56,6 @@
                     </ul>
                 </div>
             </nav>
-            <hr>
-            
-            <p><Strong>Nutrition Value App</Strong> - value per 100g (100ml) for various food items.</p>
             <hr>
         </header>
         
