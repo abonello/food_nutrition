@@ -6,17 +6,16 @@ from bson.objectid import ObjectId
 from bson.json_util import dumps
 from flask_mail import Mail, Message
 
-from connection import getDbName, getURI  # Needed to run locally - Comment out for heroku
+# from connection import getDbName, getURI  # Needed to run locally - Comment out for heroku
 
 
 app = Flask(__name__)
 # Use the following to run LOCALLY will need the import
-app.config["MONGO_DBNAME"] = getDbName()
-app.config["MONGO_URI"] = getURI()
+# app.config["MONGO_DBNAME"] = getDbName()
+# app.config["MONGO_URI"] = getURI()
 
-# app.config['MAIL_SERVER'] = 'host58.servers.prgn.misp.co.uk'
-# app.config['MAIL_PORT'] = 465
-# app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USE_SSL'] = True
 app.config.from_pyfile('config.cfg')
 
 # Use the following to run from HEROKU - remove the import
