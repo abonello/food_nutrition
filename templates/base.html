@@ -62,7 +62,29 @@
 
         {% block content %}
         {% endblock %}
+
+        <!-- <footer class="page-footer font-small blue pt-4"> -->
+        <footer class="footer">
+            <div class="container">
+                <hr>
+    
+                <div class = "row">
+                    <div class="col-sm-6 text-left">
+                        <p>&copy; 2018 - <span class="year"></span>, Anthony Bonello. <br>This page was coded and created by Anthony Bonello, 2018 - 2018.</p>
+                        <script> var span = document.getElementsByClassName("year");
+                            span[0].innerText = (new Date).getFullYear();</script>
+                    </div>
+                    <div class="col-sm-6 text-center">
+                            <a href="https://github.com/abonello/food_nutrition" target="_blank"><i class="fa fa-github"></i>This project is on GitHub</a>
+                    </div>
+                </div>
+            </div>
+    
+        </footer>
+
+        
     </div>
+    
 
     <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
