@@ -14,8 +14,8 @@ app = Flask(__name__)
 # app.config["MONGO_DBNAME"] = getDbName()
 # app.config["MONGO_URI"] = getURI()
 
-# app.config['MAIL_PORT'] = 465
-# app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USE_SSL'] = True
 app.config.from_pyfile('config.cfg')
 
 # Use the following to run from HEROKU - remove the import
