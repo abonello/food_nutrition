@@ -19,8 +19,8 @@ app.config['MAIL_USE_SSL'] = True
 app.config.from_pyfile('config.cfg')
 
 # Use the following to run from HEROKU - remove the import
-# app.config["MONGO_DBNAME"] = os.getenv('MONGO_DBNAME')
-# app.config["MONGO_URI"] = os.getenv('MONGO_URI')
+app.config["MONGO_DBNAME"] = os.getenv('MONGO_DBNAME')
+app.config["MONGO_URI"] = os.getenv('MONGO_URI')
 
 
 mongo = PyMongo(app)
