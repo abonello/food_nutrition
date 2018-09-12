@@ -267,6 +267,18 @@ Also If I come to delete a class, it the confirmation page will tell me how many
     ## Bug - When I edit a class the count disappears
 
     Fixed
+
+    ## Bug when editing class name to a name that already exist
+    Fixed
+
+    <h3>bug</h3>
+    <p>When editing a class I need to make sure that the name is not already in use. I checked and at the moment I mess up the data with some classes being assigned to negative number of items and thus unable to deleted them, except from the database itself.</p>
+        
+    <h3>To do</h3>
+    <p style="color: red">When I edit the name, check if the name already exist. If yes, ask if the user wants to merge or create a new name. If it is a new name, enter the new name (check) and proceed as usual.</p>
+    <p>If the user selects to merge, I need to find the items used by the class being edited and assing them to the new class, adding quantity of the new class and reducing from the edited class. Once the edited class reaches 0, I can delete that class</p>
+
+    Want to add confirmation before merging.
     
 
 
