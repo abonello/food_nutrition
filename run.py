@@ -172,11 +172,11 @@ def update_class(class_id):
     # print("OLD CLASS NAME: {}".format(oldClassName))
     # print("NEW CLASS NAME: {}".format(data["class"]))
     if oldClassName != data["class"]:
-        print("Class has changed and some food items using it")
+        print("Class has changed")
 
 # get food table
-        nutrition100 = mongo.db.nutrition100
-        foodItemsUsingThisClass = list(nutrition100.find({"classification": oldClassName}))
+        # nutrition100 = mongo.db.nutrition100
+        # foodItemsUsingThisClass = list(nutrition100.find({"classification": oldClassName}))
         # print("***************************")
         # print(foodItemsUsingThisClass)
         # print("***************************")
@@ -192,22 +192,27 @@ def update_class(class_id):
         # 2. removing them from old class 
         # 3. followed by delete old class.
             if int(count) > 0:
-                for item in foodItemsUsingThisClass:
-                    # print(item)
-                    itemId = item["_id"]
-                    # print(itemId)
-                    item["classification"] = data["class"]
-                    # print(item)
-                    # print("===================================")
-                    nutrition100.update({"_id": ObjectId(itemId)}, item)
+                print(". . . and some food items using it.")
 
-                # update count of new class
-                newCount = str(int(classExist["count"]) + int(count))
-                print(newCount)
-                classExist["count"] = newCount
-                classExistId = classExist["_id"]
+                #  Ask for confirmation
+                return render_template("confirmeditclasstoalreadyexistingname.html", class_id=class_id, data=data)
 
-                classification.update({"_id": ObjectId(classExistId)}, classExist)
+                # for item in foodItemsUsingThisClass:
+                #                 # print(item)
+                #     itemId = item["_id"]
+                #                 # print(itemId)
+                #     item["classification"] = data["class"]
+                #                 # print(item)
+                #                 # print("===================================")
+                #     nutrition100.update({"_id": ObjectId(itemId)}, item)
+
+                #                 # update count of new class
+                # newCount = str(int(classExist["count"]) + int(count))
+                # print(newCount)
+                # classExist["count"] = newCount
+                # classExistId = classExist["_id"]
+
+                # classification.update({"_id": ObjectId(classExistId)}, classExist)
 
 
 
@@ -224,7 +229,11 @@ def update_class(class_id):
 
         else:
 
+            nutrition100 = mongo.db.nutrition100
+            foodItemsUsingThisClass = list(nutrition100.find({"classification": oldClassName}))
+
             if int(count) > 0:
+                print(". . . and some food items using it.")
                 for item in foodItemsUsingThisClass:
                     # print(item)
                     itemId = item["_id"]
@@ -240,6 +249,50 @@ def update_class(class_id):
 
 
     classification.update({"_id": ObjectId(class_id)}, data)
+    return redirect(url_for('get_classification'))
+
+@app.route("/proceed_editing_class/<class_id>/<data>")
+def proceed_editing_class(class_id, data):
+    # pass
+    # print("class_id \n{}".format(class_id))
+    # print("data \n{}".format(data))
+    # print("Data type: {}".format(type(data)))
+    # data1 = json.loads(data.replace("'", '"'))
+    # print("data1 \n{}".format(data1))
+    # print("Data1 type: {}".format(type(data1)))
+    data = json.loads(data.replace("'", '"'))
+    
+
+
+
+    classification = mongo.db.classification
+    nutrition100 = mongo.db.nutrition100
+    oldClassName = classification.find_one({"_id": ObjectId(class_id)})["class"]
+    foodItemsUsingThisClass = list(nutrition100.find({"classification": oldClassName}))
+    count = classification.find_one({"_id": ObjectId(class_id)})["count"]
+    newName = data["class"]
+    # print(newName)
+    classExist = classification.find_one({"class":newName})
+    print(classExist)
+
+    for item in foodItemsUsingThisClass:
+                        # print(item)
+        itemId = item["_id"]
+                        # print(itemId)
+        item["classification"] = data["class"]
+                        # print(item)
+                        # print("===================================")
+        nutrition100.update({"_id": ObjectId(itemId)}, item)
+
+                    # update count of new class
+    newCount = str(int(classExist["count"]) + int(count))
+    print(newCount)
+    classExist["count"] = newCount
+    classExistId = classExist["_id"]
+
+    classification.update({"_id": ObjectId(classExistId)}, classExist)
+    classification.remove({"_id": ObjectId(class_id)})
+
     return redirect(url_for('get_classification'))
 
 

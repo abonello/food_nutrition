@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h2 class="warning">Editing Class: <strong>{{ classification.class }}</strong></h2>
+    <h2 class="warning">Editing Class: <strong>{{ data.class }}</strong></h2>
 
     <div class="row">
-        <p class="redwarning">Please note that the name you chose <stong>ALREADY EXIST</stong>. If you proceed the food items of the old class will be merged to the new class.</p>
+        <p class="redwarning">Please note that the name you have chosen <stong>ALREADY EXIST</stong>. If you proceed the food items of the old class will be merged to the new class.</p>
         <p class="wayout">If you want to leave this class unchanged, select <strong>Cancel</strong>.</p>
     </div>
 
     <div class="row">
-        <a href="{{ url_for('proceed_editing_class', class_id=classification._id) }}" >
-        <button class="btnDelete" onclick=""><strong>Delete</strong></button></a>
+        <a href="{{ url_for('proceed_editing_class', class_id=class_id, data=data) }}" >
+        <button class="btnDelete" onclick=""><strong>Proceed with Edit</strong></button></a>
         <a href="{{ url_for('get_classification') }}" >
         <button class="btnCancel" onclick=""><strong>Cancel</strong></button></a>
     </div>
