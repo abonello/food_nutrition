@@ -168,10 +168,12 @@ def update_class(class_id):
     oldClassName = classification.find_one({"_id": ObjectId(class_id)})["class"]
     count = classification.find_one({"_id": ObjectId(class_id)})["count"]
     data["count"] = count
+    print(data["class"])
+    newName = data["class"]
     
     # print("OLD CLASS NAME: {}".format(oldClassName))
     # print("NEW CLASS NAME: {}".format(data["class"]))
-    if oldClassName != data["class"] and int(count) > 0:
+    if oldClassName != data["class"]:
         print("Class has changed and some food items using it")
 
 # get food table
@@ -182,33 +184,59 @@ def update_class(class_id):
         # print("***************************")
 
 
+        classExist = classification.find_one({"class":newName})
+        if classExist:
+            print("Class already exist")
 
         # At this point I need to check that it is not a class that already exist
         # if it exist then 
         # 1. food items need to be added to it while 
         # 2. removing them from old class 
         # 3. followed by delete old class.
+            if int(count) > 0:
+                for item in foodItemsUsingThisClass:
+                    # print(item)
+                    itemId = item["_id"]
+                    # print(itemId)
+                    item["classification"] = data["class"]
+                    # print(item)
+                    # print("===================================")
+                    nutrition100.update({"_id": ObjectId(itemId)}, item)
+
+                # update count of new class
+                newCount = str(int(classExist["count"]) + int(count))
+                print(newCount)
+                classExist["count"] = newCount
+                classExistId = classExist["_id"]
+
+                classification.update({"_id": ObjectId(classExistId)}, classExist)
+
+
+
+            # Delete old class
+            classification.remove({"_id": ObjectId(class_id)})
+
+            
 
 
 
 
         # if it does not exist I change the name of the new class and proceed as below
 
+        else:
 
+            if int(count) > 0:
+                for item in foodItemsUsingThisClass:
+                    # print(item)
+                    itemId = item["_id"]
+                    # print(itemId)
+                    item["classification"] = data["class"]
+                    # print(item)
+                    # print("===================================")
+                    nutrition100.update({"_id": ObjectId(itemId)}, item)
 
-
-        
-        for item in foodItemsUsingThisClass:
-            # print(item)
-            itemId = item["_id"]
-            # print(itemId)
-            item["classification"] = data["class"]
-            # print(item)
-            # print("===================================")
-            nutrition100.update({"_id": ObjectId(itemId)}, item)
-
-    # else:
-        # print("class has not changed or no food items using it.")
+            # else:
+                # print("class has not changed or no food items using it.")
 
 
 
