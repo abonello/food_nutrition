@@ -141,7 +141,7 @@ def insert_class(cameFrom=""):
     del data["action"]
     for food_class in classification.find():
         if data['class'].lower() == food_class['class'].lower():
-            return render_template("addclass.html", classification=mongo.db.classification.find(), entry=data['class'])
+            return render_template("addclass.html", classification=mongo.db.classification.find(), cameFrom=cameFrom,  entry=data['class'])
 
     data['class'] = data['class'].capitalize()
     data['count'] = "0"
