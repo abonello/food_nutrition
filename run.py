@@ -35,6 +35,7 @@ def index():
     # return "This is the landing page"
     return render_template("index.html")
 
+
 @app.route("/get_food_items")
 def get_food_items():
     # food=mongo.db.nutrition100.find()
@@ -164,19 +165,39 @@ def update_class(class_id):
     classification = mongo.db.classification
     data = request.form.to_dict()
     del data["action"]
+    oldClassName = classification.find_one({"_id": ObjectId(class_id)})["class"]
     count = classification.find_one({"_id": ObjectId(class_id)})["count"]
     data["count"] = count
-    oldClassName = classification.find_one({"_id": ObjectId(class_id)})["class"]
+    
     # print("OLD CLASS NAME: {}".format(oldClassName))
     # print("NEW CLASS NAME: {}".format(data["class"]))
     if oldClassName != data["class"] and int(count) > 0:
         print("Class has changed and some food items using it")
-        # get food table
+
+# get food table
         nutrition100 = mongo.db.nutrition100
         foodItemsUsingThisClass = list(nutrition100.find({"classification": oldClassName}))
         # print("***************************")
         # print(foodItemsUsingThisClass)
         # print("***************************")
+
+
+
+        # At this point I need to check that it is not a class that already exist
+        # if it exist then 
+        # 1. food items need to be added to it while 
+        # 2. removing them from old class 
+        # 3. followed by delete old class.
+
+
+
+
+        # if it does not exist I change the name of the new class and proceed as below
+
+
+
+
+        
         for item in foodItemsUsingThisClass:
             # print(item)
             itemId = item["_id"]
