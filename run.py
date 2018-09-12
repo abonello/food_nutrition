@@ -215,6 +215,7 @@ def update_class(class_id):
 
             # Delete old class
             classification.remove({"_id": ObjectId(class_id)})
+            return redirect(url_for('get_classification'))
 
             
 
