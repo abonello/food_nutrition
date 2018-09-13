@@ -30,15 +30,11 @@ mail = Mail(app)
 
 @app.route("/")
 def index():
-    # return "This is the landing page"
     return render_template("index.html")
 
 
 @app.route("/get_food_items")
 def get_food_items():
-    # food=mongo.db.nutrition100.find()
-    # print(food)
-    # return render_template("index.html", food=mongo.db.nutrition100.find())
     return render_template("fooditems.html", food=mongo.db.nutrition100.find())
 
 
@@ -89,11 +85,9 @@ def update_food_item(food_item_id, oldClass):
     nutrition100 = mongo.db.nutrition100
     data = request.form.to_dict()
     del data["action"]
-    # print("Old Class is: {}".format(oldClass))
-    # print("New Class is: {}".format(data['classification']))
 
     if oldClass == data['classification']:
-        pass # do nothing
+        pass # If equal: No change -> do nothing
     else:
         classes = mongo.db.classification
         thisClass = classes.find_one({"class": oldClass})
@@ -105,7 +99,6 @@ def update_food_item(food_item_id, oldClass):
 
     nutrition100.update({"_id": ObjectId(food_item_id)}, data)
     return redirect(url_for('get_food_items'))
-
 
 
 
@@ -166,201 +159,55 @@ def update_class(class_id):
     oldClassName = classification.find_one({"_id": ObjectId(class_id)})["class"]
     count = classification.find_one({"_id": ObjectId(class_id)})["count"]
     data["count"] = count
-    print(data["class"])
     newName = data["class"]
     
-    # print("OLD CLASS NAME: {}".format(oldClassName))
-    # print("NEW CLASS NAME: {}".format(data["class"]))
     if oldClassName != data["class"]:
-        print("Class has changed")
-
-# get food table
-        # nutrition100 = mongo.db.nutrition100
-        # foodItemsUsingThisClass = list(nutrition100.find({"classification": oldClassName}))
-        # print("***************************")
-        # print(foodItemsUsingThisClass)
-        # print("***************************")
-
-
         classExist = classification.find_one({"class":newName})
         if classExist:
-            print("Class already exist")
-
-        # At this point I need to check that it is not a class that already exist
-        # if it exist then 
-        # 1. food items need to be added to it while 
-        # 2. removing them from old class 
-        # 3. followed by delete old class.
             if int(count) > 0:
-                print(". . . and some food items using it.")
-
-                #  Ask for confirmation
                 return render_template("confirmeditclasstoalreadyexistingname.html", class_id=class_id, data=data)
 
-                # for item in foodItemsUsingThisClass:
-                #                 # print(item)
-                #     itemId = item["_id"]
-                #                 # print(itemId)
-                #     item["classification"] = data["class"]
-                #                 # print(item)
-                #                 # print("===================================")
-                #     nutrition100.update({"_id": ObjectId(itemId)}, item)
-
-                #                 # update count of new class
-                # newCount = str(int(classExist["count"]) + int(count))
-                # print(newCount)
-                # classExist["count"] = newCount
-                # classExistId = classExist["_id"]
-
-                # classification.update({"_id": ObjectId(classExistId)}, classExist)
-
-
-
-            # Delete old class
             classification.remove({"_id": ObjectId(class_id)})
             return redirect(url_for('get_classification'))
 
-            
-
-
-
-
-        # if it does not exist I change the name of the new class and proceed as below
-
         else:
-
             nutrition100 = mongo.db.nutrition100
             foodItemsUsingThisClass = list(nutrition100.find({"classification": oldClassName}))
 
             if int(count) > 0:
-                print(". . . and some food items using it.")
                 for item in foodItemsUsingThisClass:
-                    # print(item)
                     itemId = item["_id"]
-                    # print(itemId)
                     item["classification"] = data["class"]
-                    # print(item)
-                    # print("===================================")
                     nutrition100.update({"_id": ObjectId(itemId)}, item)
-
-            # else:
-                # print("class has not changed or no food items using it.")
-
-
 
     classification.update({"_id": ObjectId(class_id)}, data)
     return redirect(url_for('get_classification'))
 
 @app.route("/proceed_editing_class/<class_id>/<data>")
 def proceed_editing_class(class_id, data):
-    # pass
-    # print("class_id \n{}".format(class_id))
-    # print("data \n{}".format(data))
-    # print("Data type: {}".format(type(data)))
-    # data1 = json.loads(data.replace("'", '"'))
-    # print("data1 \n{}".format(data1))
-    # print("Data1 type: {}".format(type(data1)))
     data = json.loads(data.replace("'", '"'))
-    
-
-
-
     classification = mongo.db.classification
     nutrition100 = mongo.db.nutrition100
     oldClassName = classification.find_one({"_id": ObjectId(class_id)})["class"]
     foodItemsUsingThisClass = list(nutrition100.find({"classification": oldClassName}))
     count = classification.find_one({"_id": ObjectId(class_id)})["count"]
     newName = data["class"]
-    # print(newName)
     classExist = classification.find_one({"class":newName})
-    print(classExist)
 
     for item in foodItemsUsingThisClass:
-                        # print(item)
         itemId = item["_id"]
-                        # print(itemId)
         item["classification"] = data["class"]
-                        # print(item)
-                        # print("===================================")
         nutrition100.update({"_id": ObjectId(itemId)}, item)
 
-                    # update count of new class
     newCount = str(int(classExist["count"]) + int(count))
-    print(newCount)
     classExist["count"] = newCount
     classExistId = classExist["_id"]
-
     classification.update({"_id": ObjectId(classExistId)}, classExist)
     classification.remove({"_id": ObjectId(class_id)})
-
     return redirect(url_for('get_classification'))
 
 
 #-------------DASHBOARD-----------------------------
-'''
-@app.route("/dashboard1")
-def dashboard1():
-    foodItems=mongo.db.nutrition100.find()
-    foodList = []
-    for eachItem in foodItems:
-        del eachItem["_id"]
-        del eachItem["shop"]
-        del eachItem["notes"]
-        foodList.append(eachItem)
-
-    str1 = ''.join(str(foodList))
-
-    return render_template("dashboard.html", foodList=json.dumps(foodList))
-
-@app.route("/dashboard2")
-def dashboard2():
-    foodItems=mongo.db.nutrition100.find()
-    # for each in foodItems:
-    #     print(each)
-    foodList = []
-    for eachItem in foodItems:
-        # print(eachItem["_id"])
-        # eachItem["id"] = str(eachItem["_id"])
-        eachItem["_id"] = str(eachItem["_id"])
-        # del eachItem["_id"]
-        # del eachItem["shop"]
-        # del eachItem["notes"]
-        foodList.append(eachItem)
-    # print(foodList)
-    # print(type(foodList))
-    foodList = json.dumps(foodList, indent=2)
-    # print("-------------------------------------------------------------------------")
-    # print(foodList)
-    # print(type(foodList))
-    data = {'food_list': foodList}
-    # print("-------------------------------------------------------------------------")
-    # print(data)
-    # print(type(data))
-
-    # df = pd.read_csv('data').drop('Open', axis=1)
-    # chart_data = df.to_dict(orient='records')
-    # chart_data = json.dumps(chart_data, indent=2)
-    # data = {'chart_data': chart_data}
-    # return render_template("index.html", data=data)
-
-    return render_template("dashboard2.html", data=data)
-
-@app.route("/dashboard3")
-def dashboard3():
-    foodItems=mongo.db.nutrition100.find()
-    foodList = []
-    for eachItem in foodItems:
-        eachItem["_id"] = str(eachItem["_id"])
-        # del eachItem["_id"]
-        # del eachItem["shop"]
-        # del eachItem["notes"]
-        foodList.append(eachItem)
-
-    foodList = json.dumps(foodList, indent=2)
-    data = {'food_list': foodList}
-    return render_template("dashboard3.html", data=data)
-'''
-
 @app.route("/dashboard")
 def dashboard():
     foodItems=mongo.db.nutrition100.find()
@@ -373,6 +220,31 @@ def dashboard():
     data = {'food_list': foodList}
     return render_template("dashboard.html", data=data)
 
+
+#-------------OTHERS-----------------------------
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/contact", methods=['GET', 'POST'])
+def contact():
+    if request.method == "GET":
+        return render_template ("contact.html")
+    try:
+        name = request.form['name']
+        email = request.form['email']
+        subject = request.form['subject']
+        message = request.form['message']
+        msg = Message(subject, sender=email, recipients=[app.config['MAIL_DEFAULT_SENDER']])
+        msg.body = "{} sent the following message through the Nutrition website: \n\n{}".format(name, message)
+        mail.send(msg)
+        return render_template("message_sent.html", name=name, email=email, subject=subject, message=message)
+    except Exception as e:
+        return render_template("message_error.html", email=email)
+
+'''
+ERROR EXAMPLE:
+smtplib.SMTPRecipientsRefused: {'websiteadmin@anthonybonello.co.uk': (550, b'Verification failed for <anthony@hotmail>\nThe mail server could not deliver mail to anthonybonello_music@hotmail.  The account or domain may not exist, they may be blacklisted, or missing the proper dns entries.\nSender verify failed')}'''
 
 
 #-------------DATA BACKUP-----------------------------
@@ -411,36 +283,6 @@ def replace_data_from_backup():
         classes.insert_one(classification[ndx])
     return redirect(url_for('get_food_items'))
 
-@app.route("/about")
-def about():
-    # This is a place holder
-    # return "About Page"
-    return render_template("about.html")
-
-@app.route("/contact", methods=['GET', 'POST'])
-def contact():
-    if request.method == "GET":
-        # return "<form action='/contact', method='POST'><input name='name'><input name='email'><input name='subject'><input name='message'><input type='submit'></form>"
-        return render_template ("contact.html")
-    try:
-        name = request.form['name']
-        email = request.form['email']
-        subject = request.form['subject']
-        message = request.form['message']
-
-        msg = Message(subject, sender=email, recipients=[app.config['MAIL_DEFAULT_SENDER']])
-        msg.body = "{} sent the following message through the Nutrition website: \n\n{}".format(name, message)
-        mail.send(msg)
-    
-        # return "Peroson is {}. The email you entered is {}. Subject: {}. You said: '{}'.".format(name, email, subject, message)
-        return render_template("message_sent.html", name=name, email=email, subject=subject, message=message)
-    except Exception as e:
-        # print(e)
-        # return "It looks like the email address you entered is not in a valid format or is blacklisted. Please go back and try again."
-        return render_template("message_error.html", email=email)
-
-
-# smtplib.SMTPRecipientsRefused: {'websiteadmin@anthonybonello.co.uk': (550, b'Verification failed for <anthonybonello_music@hotmail>\nThe mail server could not deliver mail to anthonybonello_music@hotmail.  The account or domain may not exist, they may be blacklisted, or missing the proper dns entries.\nSender verify failed')}
 
 if __name__ == '__main__':
     # app.run(host=os.getenv('IP'), port=int(os.getenv('PORT', 8080)), debug=True)
