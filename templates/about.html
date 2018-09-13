@@ -9,71 +9,82 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row about">
         <p>This app is part of my portfolio for my Fullstack Web developer course at <a href="https://www.codeinstitute.net/" target="_blank"><strong>Code Institute</strong></a>. It is the project for the <strong>Data Centric Development</strong> module.</p>
 
-        <p>This app allows users to store infromation about the nutritional value of various food products. I chose to store the values per 100g (or 100ml). Users should be aware that this value on its own is not enough as some items which for the sake of this example, might be high in salt might be used in small quantities, while others which are low in salt might be used in larger quantitities. In any case products can be compared and filtered based on various parameters in the dashboard. (See features below.)</p>
+        <p>This app allows users to store information about the nutritional value of various food products. I chose to store the values per 100g (or 100ml). 
+            <!-- Users should be aware that this value on its own is not enough as some items which for the sake of this example, might be high in salt might be used in small quantities, while others which are low in salt might be used in larger quantitities. In any case products  -->
+            Products can be compared and filtered based on various parameters in the dashboard. (See features below.)</p>
 
         <p>This app allows the user to fullfill the following tasks:</p>
         <dl>
             <dt>Categorize the foods according to food classes. </dt>
-            <dd>The App allows the user to create, edit and delete classes. <br>
-                A class can only be <strong>deleted</strong> if it is not being used by any food item.<br>
-                <strong>Editing</strong> a class will change the name in all food items that are classified under that class.<br>
-                There is also the functionality to <strong>see</strong> all the classes. Here there is also an indication of how many food items make use of each class.<br>
-                When <strong>adding</strong> a new class, the app will check that that class does not already exist.
-
-                
+            <dd>The App allows the user to create, view, edit and delete classes. <br>
+                <ul>
+                    <li>A class can only be <strong>deleted</strong> if it is not being used by any food item.</li>
+                    <li><strong>Editing</strong> a class will change the class name in all food items that are classified under that class.</li>
+                    <li>There is also the functionality to <strong>see</strong> all the classes. Here, there is also an indication of how many food items make use of each class.</li>
+                    <li>When <strong>adding</strong> a new class or <strong>editing</strong> an exisiting one, the app will check that that class name does not already exist.</li>
+                </ul>   
+                <p>There are three places that will take the user to the page where one can add a new class. The app keeps track of the calling place and will return there on cancelling the process or creating a new class.
+                </p>
             </dd>
             <dt> Food Items can be viewed, added, edited and deleted.</dt>
             <dd>
+                <p>Each food item will belong to a class. It is possible for the user to create a new food item. The form will have the classes prepopulated. The user will have to select one. There is the option to create a new class with checks on whether it already exists.</p> 
                 <p>There are two ways of viewing the food items. </p>
+                <dl>
+                    <dt>
+                        <!-- <h3>The accordion view</h3> -->
+                        <em>The accordion view</em>
+                    </dt>
+                    <dd>
+                        <p>
+                        Here each item is in an accordion panel. I chose to display the info on a card which can rotate to display extra information at the back of the card. Here, the user will also find buttons to <em>edit</em> or <em>delete</em> that particular food item.
+                        </p>
+                        <p>Apart from the button saying: "<em>More info and Controls at the back</em>", the curved arrow at the top right corner of the card is a visual indication pointing to the back of the card.</p>
+                        <p>
+                        If the user clicks on the delete button, a confirmation window will open. The user can confirm or reject the deletion. If the user proceeds to delete an item, the count will be reduced for the class used by that item.
+                        If a user selects to edit the food item, a window will open which will be prepopulated with the information of that item. The user can do the changes necessary and then click the "<em>Update Food Item</em>" button. 
+                        </p>
+                        <p>
+                        If the user chooses to reclassify a food item, then the necessary changes to the quantities of the classes involved will be applied, (increase the new class, decrease the old class). The user can cancel the editing process and will be taken back to the accordion view.
+                        </p>
+                    </dd>
+                    <dt>
+                        <!-- <h3>Dashboard</h3> -->
+                        <em>Dashboard</em>
+                    </dt>
+                    <dd>
+                        <p>
+                        In the dashboard view, the user is able to filter the food items based on the class they belong to, as well as a number of parameter combinations.
+                        At the bottom of the page there is a table which initially will show all products, currently up to 1000, but the number of food items shown will be reduced depending on the filters applied. 
+                        </p>
+                        <p> The name of the food item in the table is a button. Clicking a food item will open a modal which will display the data related to that food item.
+                        </p>
+                        <p>
+                        I experimented with styling the modal to make it appear as if it is a piece of paper on a desk. As soon as the user hovers over the modal, the paper changes as if pressure or weight has been applied to it. I tried to achieve an organic effect.
+                        </p>
+                        <p>
+                        The user can close the modal in a number of ways.
+                        </p>
+                        <ul>
+                            <li>Clicking on the close button.</li>
+                            <li>Clicking on the <strong>X</strong> at the top right corner of the modal.</li>
+                            <li>Clicking on the desk (the white border) around the modal.</li>
+                            <li>Pressing the <strong><em>esc</em></strong> button on the computer keyboard.</li>
+                        </ul>
+                    </dd>
+                </dl>
+            </dd>
 
-                <h3>The accordion view</h3>
-                <p>
-                Here each item is in an accordion panel. I chose to display the info on a card which can rotate and show extra information at the back of the card. Here the user will also find buttons to edit or delete that particular food item.
-                </p>
-                <p>Apart from the button saying:"More info and Controls at the back", the curved arrow at the top right corner of the card is a visual indication pointing to the back of the card.</p>
-                <p>
-                If the user clicks on the delete button, a confirmation window will open. The user can confirm or reject the deletion. An item will be reduced from the class used by that item.
-                If a user selects to edit the food item, a window will open which will be prepopulated with the information of that item. The user can do the changes necessary and then click the "Update Food Item" button. 
-                </p>
-                <p>
-                If the user chooses to reclassify a food item, then the necessary changes to the quantities of the classes involved will be applied, (increase to the new class, decrease the old class).
-                </p>
-                <p>
-                The user can cancel the editing process and will be taken back to the accordion view.
-                </p>
-        
-                <p>There are three places that will take you to the route which allows for the adding a new class. The app keeps track of the calling place and will return there on cancelling or creating a new class.
-                <strong>Need to check this. Editing a food item and trying to create a new class from here will return to the add food item.</strong></p>
-                <p>
-                It is possible for the user to create a new food item. The form will have the classes prepopulated. The user will have to select one. There is the option to create a new class with checks on whether it already exists.</p>
-        
-                <h3>Dashboard</h3>
-                <p>
-                In the dashboard view, the user is able to filter based on classes, and a number of paramter combinations.
-                At the bottom of the page there is a table which initially will show all products, currently up to 1000, but will be reduced depending on the filters applied. The name of the food item in the table is a button.
-                </p>
-                <p> Clicking a food item will open a modal which will display the data related to that food item.
-                </p>
-                <p>
-                I experimented with styling the modal to make it appear as if it is a piece of paper on a desk. As soon as the user hovers over the modal, the paper changes as if pressure or weight has been applied to it. I tried to achieve an organic effect.
-                </p>
-                <p>
-        
-                The user can close the modal in a number of ways.
-                </p>
-                <ul>
-                    <li>Clicking on the close button.</li>
-                    <li>Clicking on the <strong>X</strong> at the top right corner of the modal.</li>
-                    <li>Clicking on the desk (the white border) around the modal.</li>
-                    <li>Pressing the <strong><em>esc</em></strong> button on the computer keyboard.</li>
-                </ul>
+            <dt>The contact Form</dt>
+            <dd>
+                <p>The form is validated and it also has the appropriate try except blocks to catch errors in the case that the email address is not accepted by the server. In such case, the user is returned to an error page.</p>
+                <p>Examples of email addresses that will trigger such a response are <em>try@example.dd</em> or <em>another@example</em></p>
+                <p>Both these cases pass the validation test but are refused by the email server.</p>
             </dd>
         </dl>
-
-        <p>The form is validated and it also has a try except to catch if the email address is not accepted by the server. In this case the user is returned to an error page.</p>
 
     </div>
 
