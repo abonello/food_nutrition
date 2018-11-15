@@ -265,9 +265,9 @@ def get_data_backup():
 def replace_data_from_backup():
     nutrition100 = []
     classification = []
-    with open("data_backup/nutrition100.json", 'r') as file:
+    with open("data_backup/nutrition100-bkup006.json", 'r') as file:
         nutrition100 = json.loads(file.read())
-    with open("data_backup/classification.json", 'r') as file:
+    with open("data_backup/classification-bkup005.json", 'r') as file:
         classification = json.loads(file.read())
 
     foods = mongo.db.nutrition100
