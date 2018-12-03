@@ -1,6 +1,247 @@
 # Nutrition Value
+.
 
-Milestone project from **Data Centric Development**
+----
+
+# NEED to rename CLASSES TO CATEGORIES.
+I WILL NEED TO REDO THE IMAGES ON THE FRONT PAGE.
+
+----
+
+*Milestone project for **Data Centric Development***  
+*Developer: Anthony Bonello*
+
+-------
+**INDEX**
+
+* [INTRODUCTION](#introduction)
+* [UXD](#uxd)  
+    * [Strategy](#strategy)
+    * [Scope](#scope)
+    * [Structure](#structure)
+    * [Skeleton](#skeleton)
+    * [Surface](#surface)
+* [WIREFRAMES](#wireframes)
+* [FEATURES](#features)
+* [TECHNOLOGIES USED](#technologies-used)
+* [TESTING](#testing)
+* [DEPLOYMENT](#deployment)
+* [CREDITS](#credits)
+---
+  
+## INTRODUCTION
+* [Back to TOP](#nutrition-value)
+
+This app allows users to store information about the nutritional value of various food products. I chose to store the values per 100g (or 100ml). Users should be aware that this value on its own is not enough as some items which for the sake of this example, might be high in salt might be used in small quantities, while others which are low in salt might be used in larger quantitities. In any case products can be compared and filtered based on various parameters in the dashboard. (See features below.)
+
+---
+
+## UXD
+* [Back to TOP](#nutrition-value)
+
+This app allows the storage of information about food in a mongodb database and allows users to access, edit and delete that data in a variety of ways. Filtering is also allowed through d3.js graphs.
+
+### **Strategy** 
+* [Back to TOP](#nutrition-value)
+
+**What do I want as the owner of the site?**
+
+I was curious to find out what I eat. For this reason I planned this app to store the data about the food items I consume and display this data in some meaningful form.  
+The values used are the typical nutrition values per 100g (or 100ml). Users should be aware that this value on its own is not enough as some items which for the sake of this example, might be high in salt might be used in small quantities, while others which are low in salt might be used in larger quantitities. In any case products can be compared and filtered based on various parameters in the dashboard. (See features below.)  
+In any case, I found it interesting and somehow fascinating to see how various food products lay out on a graph when various food nutrions (parameters) are mapped against each other.
+
+#### What does it do?
+This data uses forms to collect the data and stores it in a mongodb database. Food items are categorised. Categories have their own form to create them. These categories keep track of the amount of food items I have in each category.
+
+#### How does it work
+A user can create food categories and enter data about food items. Both food categories and food items can be edited.
+Categories keep track of the number of food items using it and if there are none, then it can be deleted.
+There are two forms of data display, an accordion view and a dashboard built from d3.js graphs. Entries in a d3.js generated table in the dashboard acts as links which will open a modal with information about the food item displayed.
+
+---
+
+### **Scope** 
+* [Back to TOP](#nutrition-value)
+
+#### Features to implement
+
+The app should allow the user to fullfill the following tasks:
+
+* Categorize the foods according to food categories.
+* Create, edit and delete categories. 
+* A category can only be deleted if it is not being used by any food item.
+* Editing a category will change the category name in all food items that are classified under that category.
+* If editing a category name results in a name that is already in use, the food items from the old category will have their category renamed and the total food items using the current (new) category will be updated to reflect the total of the two separate categories. This is needed to keep track of the food items using a category to avoid deleting a category that is being used by food items.
+* Functionality to see all the classes. Here there is also an indication of how many food items make use of each class.
+* Creating a new category will check that the name is not already exist.
+* Food Items can be viewed, added, edited and deleted.
+* Confirmation required for deleting food items or categories.
+* Contact form
+
+
+#### User stories
+A user wants to store data about a food item (Category already exists) 
+1. User Clicks on `New Item`
+2. Selects a Category (category exists)
+3. Fill the rest of the form
+4. Clicks `Add Food Item` button
+
+A user wants to store data about a food item (Category does not exist) 
+1. User Clicks on `New Item`
+2. User Clicks on the `Category` field
+3. Category does not exist. User clicks on the `here` button, part of the instruction just above teh coategory field.
+4. User taken to the Add Category form.
+5. User fills in the form
+6. User enters a new category name. (The user can check the categories that already exist.)
+7. If the category entered by the user already exist, the user will be alerted to this effect. A message is displayed. The user is prompted to use a different name.
+8. If the category does not yet exist, a new category will be created, 0 will be assigned to the value of food items using this category (can be checked by visiting the `Food Categories` page) and the user will be automatically taken back to the `Add Food Item` page.
+9. Fill the rest of the form
+10. Clicks `Add Food Item` button
+
+User wants to edit a food item
+
+User wants to delete a food item
+
+User wants to create a category
+
+User wants to edit a category
+
+User wants to delete a category
+
+User wants to see details of food item (accordion view)
+
+User wants to compare nutrition values
+
+
+
+### **Structure**
+
+Pages Navigation Header Footer
+
+## Pages
+
+1. I will have a home page with some description of the project and instructions for using the application.
+2. I will have a page to add data [**C**]. This will be reached from a menu item.
+3. I will have a page to display [**R**] the items. I will use an accordion structure. I can do one of two things:
+    1. There will be a button to lead to a more details. Here there will be a button to delete the item.
+    2. All the details will show once an accordion fold is open. There will be a button to delete the item on the accordion item header.
+4. In any case the delete [**D**] button will either open a modal or take the user to another page for confirmation.
+5. I will have an edit page [**U**]. It will be structured like the add page but will be prepopulated with the data for the particular item to be edited. There will be a button to save the changes or leave without saving changes.
+6. There will be a **Dashboard** with DC.js graphs with filters and the possibility to select an item and go to the item's detail page. (Or the accordion fold of that particular item.)
+
+-----------
+
+
+### Skeleton
+* [Back to TOP](#nutrition-value)
+
+
+There are two ways of viewing the food items.
+
+1. **The accordion view**  
+    Here, each item is in an accordion panel. Opening a panel will display a card. I chose to display the info on a card which can rotate and show extra information at the back of the card. At the back, the user will also find buttons to edit or delete that particular food item.
+
+    Apart from the button saying: "More info and Controls at the back", the curved arrow at the top right corner of the card is a visual indication pointing to the back of the card.  
+    CAN I ADD A LINK TO THE ARROW TO FUNCTION AS A BUTTON?
+    ---
+
+2. **Dashboard**  
+    In the dashboard view, the user is able to filter items based on categories, and a number of paramter combinations. At the bottom of the page there is a table which initially will show all products, currently up to 1000, but will be reduced depending on the filters applied. The name of the food item in the table is a button.
+    # I would like to add pagination to the food table
+
+    Clicking a food item in the table will open a modal which will display the data related to that food item.
+
+    I experimented with styling the modal to make it appear as if it is a piece of paper on a desk. As soon as the user hovers over the modal, the paper-like background changes as if pressure or weight has been applied to it. I tried to achieve an organic effect.
+
+    The user can close the modal in a number of ways.
+    * Clicking on the close button.
+    * Clicking on the X at the top right corner of the modal.
+    * Clicking on the desk (the white border) around the modal.
+    * Pressing the esc button on the computer keyboard.
+
+
+
+* [wireframe](#wireframes) - follow this link for further reading
+
+?????????
+---
+------
+### Surface
+* [Back to TOP](#nutrition-value)
+
+#### Colors 
+
+#### Typography
+
+## WIREFRAMES
+* [Back to TOP](#nutrition-value)  
+* [Back to Skeleton](#skeleton)
+
+
+## FEATURES
+* [Back to TOP](#nutrition-value)
+
+### Existing Features
+
+### Features Left to Implement
+
+
+
+
+## TECHNOLOGIES USED
+* [Back to TOP](#nutrition-value)
+
+- [HTML5](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5) - used to build the sctructure and the content of this project.
+- [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3) - used for styling this project.
+- [jQuery v3.3.1](https://jquery.com) - simplifies accessing the DOM.
+- [Bootstrap v3.3.7](https://getbootstrap.com/docs/3.3/) - used for some of the styles (modified), as well as layout of the content.
+- [Font Awesome v4.7.0](https://fontawesome.com/v4.7.0/) - used to display the GitHub and Linkedin Icons.
+- [Google Fonts](https://fonts.google.com/) - Lobster and Roboto.
+- [email.js](http://www.emailjs.com/) - used to enable the contact form to send emails to me.
+- [jasmine v2.4.1](https://github.com/jasmine/jasmine) - behavior-driven development framework, used to unit test the functions related to form validation.
+- [Compress JPEG ](compressjpeg.com) - I use GIMP to manipulate images. Once I export them as jpg, I use Compress Jpeg to minify them. Usually, I can gain between 25% and 50% reduction in file size.
+
+## TESTING
+* [Back to TOP](#nutrition-value)
+
+
+
+
+The form is validated and it also has a try except to catch if the email address is not accepted by the server. In this case the user is returned to an error page.
+
+
+
+
+
+~~If the user clicks on the delete button, a confirmation window will open. The user can confirm or reject the deletion. An item will be reduced from the class used by that item.~~
+
+If a user selects to edit the food item, a window will open which will be prepopulated with the information of that item. The user can do the changes necessary and then click the "Update Food Item" button.
+
+If the user chooses to reclassify a food item, then the necessary changes to the quantities of the category involved will be applied, (increase to the new category, decrease the old category).
+
+The user can cancel the editing process and will be taken back to the accordion view.
+
+There are three places that will take you to the route which allows for the adding a new category. The app keeps track of the calling place and will return there on cancelling or creating a new category. 
+# Need to check this. 
+Editing a food item and trying to create a new class from here will return to the add food item.
+
+It is possible for the user to create a new food item. The form will have the category prepopulated. The user will have to select one. There is the option to create a new category which checks on whether it already exists.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Data
 
@@ -24,18 +265,7 @@ B12 and Calcium.
 
 I want to allow for data which in Not Available (**NA**) and values which are marked as less than (**<**).
 
-## Pages
 
-1. I will have a home page with some description of the project and instructions for using the application.
-2. I will have a page to add data [**C**]. This will be reached from a menu item.
-3. I will have a page to display [**R**] the items. I will use an accordion structure. I can do one of two things:
-    1. There will be a button to lead to a more details. Here there will be a button to delete the item.
-    2. All the details will show once an accordion fold is open. There will be a button to delete the item on the accordion item header.
-4. In any case the delete [**D**] button will either open a modal or take the user to another page for confirmation.
-5. I will have an edit page [**U**]. It will be structured like the add page but will be prepopulated with the data for the particular item to be edited. There will be a button to save the changes or leave without saving changes.
-6. There will be a **Dashboard** with DC.js graphs with filters and the possibility to select an item and go to the item's detail page. (Or the accordion fold of that particular item.)
-
------------
 
 ## Deploy to Heroku
 
