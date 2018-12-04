@@ -3,9 +3,9 @@
     <div class="row"> <!-- Heading for Accordion -->
         <div class="col-md-12">
             <div class="section-title text-center">
-                <h2>Add a Food Item</h2>
+                <h2>Edit a Food Item</h2>
                 <span></span>
-                <p>Add the details for the food item you want to add and click the "Add" button.</p>
+                <p>Change the details for the food item you want to edit and click the "Update Food Item" button.</p>
             </div>
         </div>
     </div>
@@ -14,12 +14,12 @@
             <form action="{{ url_for('update_food_item', food_item_id=foodItem._id, oldClass=foodItem.classification) }}" method="POST" class="col s12">
                 <div class="row">
                     
-                    <span id="linkToClassCreate">If class does not exist create one <a href="{{ url_for('add_class', cameFrom='add_food_item') }}">here</a>.</span>
+                    <span id="linkToClassCreate">If category does not exist create one <a href="{{ url_for('add_class', cameFrom='edit_food_item') }}">here</a>.</span>
                     
                     <div class="input-field col s12">
                         <i class="material-icons prefix">poll</i>
                         <select id="classification" name="classification">
-                            <option value="" disabled selected>Choose a classification</option>
+                            <option value="" disabled selected>Choose a category</option>
                             {% for class in classification %}
                                 {% if class.class == foodItem.classification %}
                                     <option value="{{ class.class }}" selected>{{ class.class }}</option>
@@ -28,7 +28,7 @@
                                 {% endif %}
                             {% endfor %}
                         </select>
-                        <label>Classification </label>
+                        <label>Category </label>
                     </div>
                 </div>
                 <div class="row">

@@ -9,8 +9,6 @@
         </div>
     </div>
 
-
-
     <div class="row">
         <form action="" method="" class="col s12 framed">
             <div class="row">
@@ -18,6 +16,7 @@
                 <div class="input-field col s12">
                     <i class="material-icons prefix">poll</i>
                     <select id="classification" name="classification_checking">
+                    <!-- <select id="classification" name="classification"> -->
                         <option value="" disabled selected>Choose a category</option>
                         {% for class in classification %}
                             <option value="{{ class.class }}">{{ class.class }}</option>

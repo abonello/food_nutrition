@@ -1,88 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        body {
-            background-color: #eee; 
-        }
-        
-        .container {
-            position: relative;
-            margin: 50px auto;
-            width: 300px;
-            background: white;
-            height: 150px;
-            border-radius: -5px;
-        }
-        .container::before,
-        .container::after {
-            content: '';
-            position: absolute;
-            bottom: 5px;
-            height: 10px;
-            width: 100px;
-            background: red;
-            /* left: 0px; */
-        }
-        .container::before {
-            left: 5px;
-            transform: skew(-5deg) rotate(-5deg);
-            border-radius: -5px;
-        }
-        .container::after {
-            right: 5px;
-            transform: skew(5deg) rotate(5deg);
-        }
-    </style>
-    <style>
-
-
-/* .modal {
-    box-shadow: 0 0 0 100vh #595959f2;
-} */
-
-/* .modal-content {
-    box-shadow: 0 0 0 100vh #595959f5;
-} */
-
-.modal-content::before,
-.modal-content::after {
-    content: '';
-    position: absolute;
-    /* background-color: red; */
-    top: 90%;
-    bottom: 15px;
-    /* left: 0; */
-    /* width: 100px;
-    height: 100px; */
-    box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    z-index: -1;
-}
-
-.modal-content::before {
-    background-color: lightblue;
-    left: 5px;
-    right: 45px;
-    transform: rotate(-3deg);
-}
-
-.modal-content::after {
-    background-color: red;
-    left: 45px;
-    right: 5px;
-    transform: rotate(3deg);
-}
-    </style>
-</head>
-<body>
-
-    <div class="container lift">
-
+<form action="" method="" class="col s12 framed">
+    <div class="row">
+        <p>These are the classes that already exist. If the class you want already exists, simply cancel to return to the previous page.</p>
+        <div class="input-field col s12">
+            <i class="material-icons prefix">poll</i>
+            <div class="select-wrapper">
+            <span class="caret">▼</span>
+            
+            <input type="text" class="select-dropdown" readonly="true" data-activates="select-options-a4afb29e-f1cf-ec36-ff4d-35070521d569" value="Choose a classification">
+            
+            <ul id="select-options-a4afb29e-f1cf-ec36-ff4d-35070521d569" class="dropdown-content select-dropdown "><li class="disabled "><span>Choose a classification</span></li><li class=""><span>Canned tomatoes</span></li><li class=""><span>Fatty spread - margerine</span></li><li class=""><span>Tomato Puree</span></li><li class=""><span>Dried Tomatoes</span></li><li class=""><span>Milk</span></li><li class=""><span>Cheese</span></li><li class=""><span>Capers</span></li><li class=""><span>Biscuits</span></li><li class=""><span>Crackers</span></li><li class=""><span>Canned beans</span></li><li class=""><span>Pizza</span></li><li class=""><span>Canned peas</span></li><li class=""><span>Canned tuna</span></li><li class=""><span>Syrup</span></li><li class=""><span>Cereal</span></li><li class=""><span>Meat</span></li><li class=""><span>Bread</span></li><li class=""><span>Test</span></li><li class=""><span>New test class</span></li><li class=""><span>Another</span></li><li class=""><span>Olives</span></li><li class=""><span>Onions</span></li><li class=""><span>Testing class 2</span></li><li class=""><span>Sea food</span></li></ul>
+            
+            
+            
+            <select id="classification" name="classification_checking" data-select-id="a4afb29e-f1cf-ec36-ff4d-35070521d569" class="initialized">
+                <option value="" disabled="" selected="">Choose a classification</option>
+                
+                    <option value="Canned tomatoes">Canned tomatoes</option>
+                
+                    <option value="Fatty spread - margerine">Fatty spread - margerine</option>
+                
+                    <option value="Tomato Puree">Tomato Puree</option>
+                
+                    <option value="Dried Tomatoes">Dried Tomatoes</option>
+                
+                    <option value="Milk">Milk</option>
+                
+                    <option value="Cheese">Cheese</option>
+                
+                    <option value="Capers">Capers</option>
+                
+                    <option value="Biscuits">Biscuits</option>
+                
+                    <option value="Crackers">Crackers</option>
+                
+                    <option value="Canned beans">Canned beans</option>
+                
+                    <option value="Pizza">Pizza</option>
+                
+                    <option value="Canned peas">Canned peas</option>
+                
+                    <option value="Canned tuna">Canned tuna</option>
+                
+                    <option value="Syrup">Syrup</option>
+                
+                    <option value="Cereal">Cereal</option>
+                
+                    <option value="Meat">Meat</option>
+                
+                    <option value="Bread">Bread</option>
+                
+                    <option value="Test">Test</option>
+                
+                    <option value="New test class">New test class</option>
+                
+                    <option value="Another">Another</option>
+                
+                    <option value="Olives">Olives</option>
+                
+                    <option value="Onions">Onions</option>
+                
+                    <option value="Testing class 2">Testing class 2</option>
+                
+                    <option value="Sea food">Sea food</option>
+                
+            </select></div>
+            <label>Classification </label>
+        </div>
     </div>
-    
-</body>
-</html>
+</form>
