@@ -14,17 +14,17 @@
             <form action="{{ url_for('insert_food_item') }}" method="POST" class="col s12">
                 <div class="row">
                     
-                    <span id="linkToClassCreate">If class does not exist create one <a href="{{ url_for('add_class', cameFrom='add_food_item') }}">here</a>.</span>
+                    <span id="linkToClassCreate">If category does not exist create one <a href="{{ url_for('add_class', cameFrom='add_food_item') }}">here</a>.</span>
                     
                     <div class="input-field col s12">
                         <i class="material-icons prefix">poll</i>
                         <select id="classification" name="classification">
-                            <option value="" disabled selected>Choose a classification</option>
+                            <option value="" disabled selected>Choose a category</option>
                             {% for class in classification %}
                                 <option value="{{ class.class }}">{{ class.class }}</option>
                             {% endfor %}
                         </select>
-                        <label>Classification </label>
+                        <label>Category </label>
                     </div>
                 </div>
                 <div class="row">

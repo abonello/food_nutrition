@@ -8,3 +8,4 @@ connection.py
 __pycache__
 index.old01.html
 config.cfg
+/backups
