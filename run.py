@@ -165,6 +165,10 @@ def update_class(class_id):
     count = classification.find_one({"_id": ObjectId(class_id)})["count"]
     data["count"] = count
     newName = data["class"]
+
+    # There must be a category name otherwise display error message.
+    if data['class'] == "":
+        return render_template("editclass.html", foodClass=mongo.db.classification.find_one({'_id': ObjectId(class_id)}),  empty=True)
     
     if oldClassName != data["class"]:
         classExist = classification.find_one({"class":newName})

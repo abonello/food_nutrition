@@ -28,6 +28,9 @@
                 {% if entry %}
                     <p class="warning">Category {{ entry }} already exists. Did you mean to add a different category?</p>
                 {% endif %}
+                {% if empty %}
+                <p class="warning">Category cannot be empty. Please type a category name.</p>
+                {% endif %}
             </div>
         </div>
 
