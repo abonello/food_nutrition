@@ -66,7 +66,7 @@ The app should allow the user to fullfill the following tasks:
 * A category can only be deleted if it is not being used by any food item.
 * Editing a category will change the category name in all food items that are classified under that category.
 * If editing a category name results in a name that is already in use, the food items from the old category will have their category renamed and the total food items using the current (new) category will be updated to reflect the total of the two separate categories. This is needed to keep track of the food items using a category to avoid deleting a category that is being used by food items.
-* Functionality to see all the classes. Here there is also an indication of how many food items make use of each class.
+* Functionality to see all the categories. Here there is also an indication of how many food items make use of each class.
 * Creating a new category will check that the name is not already exist.
 * Food Items can be viewed, added, edited and deleted.
 * Confirmation required for deleting food items or categories.
@@ -189,12 +189,9 @@ There are two ways of viewing the food items.
     Here, each item is in an accordion panel. Opening a panel will display a card. I chose to display the info on a card which can rotate and show extra information at the back of the card. At the back, the user will also find buttons to edit or delete that particular food item.
 
     Apart from the button saying: "More info and Controls at the back", the curved arrow at the top right corner of the card is a visual indication pointing to the back of the card.  
-    CAN I ADD A LINK TO THE ARROW TO FUNCTION AS A BUTTON?
-    ---
 
 2. **Dashboard**  
     In the dashboard view, the user is able to filter items based on categories, and a number of paramter combinations. At the bottom of the page there is a table which initially will show all products, currently up to 1000, but will be reduced depending on the filters applied. The name of the food item in the table is a button.
-    # I would like to add pagination to the food table
 
     Clicking a food item in the table will open a modal which will display the data related to that food item.
 
@@ -209,8 +206,6 @@ There are two ways of viewing the food items.
 
 
 * [wireframe](#wireframes) - follow this link for further reading
-
-?????????
 ---
 ------
 ### Surface
@@ -224,14 +219,33 @@ There are two ways of viewing the food items.
 * [Back to TOP](#nutrition-value)  
 * [Back to Skeleton](#skeleton)
 
+Add Link for wireframe 
+---
+
+
+
 
 ## FEATURES
 * [Back to TOP](#nutrition-value)
 
 ### Existing Features
 
-### Features Left to Implement
+* Categorize the foods according to food categories.
+* Create, edit and delete categories. 
+* A category can only be deleted if it is not being used by any food item.
+* Editing a category will change the category name in all food items that are classified under that category.
+* If editing a category name results in a name that is already in use, the food items from the old category will have their category renamed and the total food items using the current (new) category will be updated to reflect the total of the two separate categories. This is needed to keep track of the food items using a category to avoid deleting a category that is being used by food items.
+* Functionality to see all the categories. Here there is also an indication of how many food items make use of each class.
+* Creating a new category will check that the name is not already exist.
+* Food Items can be viewed, added, edited and deleted.
+* Confirmation required for deleting food items or categories.
+* Contact form
 
+
+
+### Features Left to Implement
+In food Items page - add pagination
+In dashboard - I would like to add pagination to the food table.
 
 
 
@@ -247,6 +261,9 @@ There are two ways of viewing the food items.
 - [email.js](http://www.emailjs.com/) - used to enable the contact form to send emails to me.
 - [jasmine v2.4.1](https://github.com/jasmine/jasmine) - behavior-driven development framework, used to unit test the functions related to form validation.
 - [Compress JPEG ](compressjpeg.com) - I use GIMP to manipulate images. Once I export them as jpg, I use Compress Jpeg to minify them. Usually, I can gain between 25% and 50% reduction in file size.
+
+FLASK
+---
 
 ## TESTING
 * [Back to TOP](#nutrition-value)
