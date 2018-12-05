@@ -157,7 +157,10 @@ Filtering in this way reduces the amount of food items displayed in the table at
 
 ### **Structure**
 
-Pages Navigation Header Footer
+#### Navigation
+There is a navbar at the top of the page which contains the main menu. This menu allows the user to navigate to the main parts of the app.
+
+The Brand Name is linked to the home page.
 
 #### Pages
 
@@ -169,6 +172,9 @@ Pages Navigation Header Footer
 4. In any case the delete [**D**] button will either open a modal or take the user to another page for confirmation.
 5. I will have an edit page [**U**]. It will be structured like the add page but will be prepopulated with the data for the particular item to be edited. There will be a button to save the changes or leave without saving changes.
 6. There will be a **Dashboard** with DC.js graphs with filters and the possibility to select an item and go to the item's detail page. (Or the accordion fold of that particular item.)
+
+#### Header and Footer
+Each page has a **header** below the menu with a title for the current page. The **footer** contains copyright information and links to github and linked-in.
 
 -----------
 
