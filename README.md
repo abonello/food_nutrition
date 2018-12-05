@@ -1,10 +1,4 @@
 # Nutrition Value
-.
-
-----
-
-# NEED to rename CLASSES TO CATEGORIES.
-I WILL NEED TO REDO THE IMAGES ON THE FRONT PAGE.
 
 ----
 
@@ -80,13 +74,13 @@ The app should allow the user to fullfill the following tasks:
 
 
 #### User stories
-A user wants to store data about a food item (Category already exists) 
+**A user wants to store data about a food item (Category already exists**) 
 1. User Clicks on `New Item`
 2. Selects a Category (category exists)
 3. Fill the rest of the form
 4. Clicks `Add Food Item` button
 
-A user wants to store data about a food item (Category does not exist) 
+**A user wants to store data about a food item (Category does not exist)** 
 1. User Clicks on `New Item`
 2. User Clicks on the `Category` field
 3. Category does not exist. User clicks on the `here` button, part of the instruction just above teh coategory field.
@@ -98,27 +92,74 @@ A user wants to store data about a food item (Category does not exist)
 9. Fill the rest of the form
 10. Clicks `Add Food Item` button
 
-User wants to edit a food item
+**User wants to edit a food item**
 
-User wants to delete a food item
+1. User goes to Food Item list by selecting `Food Items` from the menu.
+2. User selects the accordion panel for the food to be edited.
+3. User clicks on the `More info and Controls at the Back` button. As a result the card rotates showing the Edit button.
+4. User clicks the `Edit` button. The user is taken to the `Edit a Food Item` page.
+5. The user makes the changes needed.
+6. The user clicks the `Update Food Item` button to accept changes or `Cancel` button to leave the page without changes.
 
-User wants to create a category
+**User wants to delete a food item**
+1. User goes to Food Item list by selecting `Food Items` from the menu.
+2. User selects the accordion panel for the food to be deleted.
+3. User clicks on the `More info and Controls at the Back` button. As a result the card rotates showing the Delete button.
+4. User clicks the `Delete` button. The user is taken to the a page to confirm or reject the deletion.
+5. The user clicks the `Delete` button to delete or `Cancel` button to leave the page **without** deleting.
 
-User wants to edit a category
+**User wants to create a category**
+1. User goes to Food Categories list by selecting `Food Category` from the menu.
+2. User clicks on the `Add` button at the bottom of the list. This opens a new page.
+3. The user types in the name of the category to be added. It is possible for the user to check the existing categories without leaving this page. 
+4. The user clicks on the `Add Category` button to add a category
 
-User wants to delete a category
+ALERT ---- RENAME BUTTON
+---
+or the `Cancel` button to abort the process and return to the Food Categories list.
 
-User wants to see details of food item (accordion view)
+5. If the `Add Category` button is selected, the new category name will be checked to see if it is already in use. If it exists an alert is displayed to the user thus prompting the user to change it (or abort).
 
-User wants to compare nutrition values
+ALERT ---- Do not accept empty category name.
+----
 
+This same page can be reached from the New Item page.
+
+**User wants to edit a category**
+ALERT ---- Do not accept empty category name.
+----
+1. User goes to Food Categories list by selecting `Food Category` from the menu.
+2. User clicks on the `Edit` link in the same row as the category to be edited.
+3. A new page opens which allows the user to make the changes required.
+4. User clicks on the `Edit Category` button to accept the changes or the `Cancel` button to abort the process.
+5. If the name entered already exist a message is displayed alerting the user to this effect. The user can continue by clicking the `Proceed with Edit` button. In this case the two classes will be merged and the necessary changes to the quantity of food items using the remaining category will be made. Alternatively the user can abort the process by clicking on the `Cancel` button.
+
+**User wants to delete a category**
+1. User goes to Food Categories list by selecting `Food Category` from the menu.
+2. If a category is not being used it will have (0). This number indicates the number of food items using it, in this case, none. The user clicks on the `Delete` link in the same row as the category to be deleted which is enabled(disabled if the category is in use).
+3. The user is taken to another page where the user can proceed to delete the category by clicking on the `Delete` button or abort the process by clicking the `Cancel` button.
+
+
+**User wants to see details of food item (accordion view)**
+1. User goes to Food Item list by selecting `Food Items` from the menu.
+2. User selects the accordion panel for the food to be edited. Information about this food item will be displayed on a card.
+3. If the user wants to see further information, the user can click on the `More info and Controls at the Back` button. As a result the card rotates displaying more information as well as the `Edit` and `Delete` button. Another button, `Back to Front` allows the user to rotate the card back to the front side.
+
+**User wants to compare nutrition values**
+1. The user goes to the Dashboard by clicking on the `Dashboard` in the menu.  
+    Here the user will see a number of charts powered by d3.js. 
+    1. The scatter plots allow the user to click and select  (click & drag) to filter data.
+    2. The row chart can be filtered by clicking on items to select. Multiple items can be selected by clicking on more than one item.
+
+Filtering in this way reduces the amount of food items displayed in the table at the bottom of the page. Filters can also be reset.
+2. Data displayed in the table includes buttons that on clicking, allows the user to see a detailed view of the information about that food item in a modal.
 
 
 ### **Structure**
 
 Pages Navigation Header Footer
 
-## Pages
+#### Pages
 
 1. I will have a home page with some description of the project and instructions for using the application.
 2. I will have a page to add data [**C**]. This will be reached from a menu item.
