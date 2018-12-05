@@ -131,6 +131,11 @@ def insert_class(cameFrom=""):
     classification = mongo.db.classification
     data = request.form.to_dict()
     del data["action"]
+
+    # There must be a category name otherwise display error message.
+    if data['class'] == "":
+        return render_template("addclass.html", classification=mongo.db.classification.find(), cameFrom=cameFrom,  empty=True)
+
     for food_class in classification.find():
         if data['class'].lower() == food_class['class'].lower():
             return render_template("addclass.html", classification=mongo.db.classification.find(), cameFrom=cameFrom,  entry=data['class'])

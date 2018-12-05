@@ -16,7 +16,6 @@
                 <div class="input-field col s12">
                     <i class="material-icons prefix">poll</i>
                     <select id="classification" name="classification_checking">
-                    <!-- <select id="classification" name="classification"> -->
                         <option value="" disabled selected>Choose a category</option>
                         {% for class in classification %}
                             <option value="{{ class.class }}">{{ class.class }}</option>
@@ -29,9 +28,11 @@
 
         <div class="row">
             <div class="col col-sm-12">
-
                 {% if entry %}
-                    <p class="warning">Class {{ entry }} already exist. Did you mean to add a different class?</p>
+                    <p class="warning">Category {{ entry }} already exist. Did you mean to add a different category?</p>
+                {% endif %}
+                {% if empty %}
+                <p class="warning">Category cannot be empty. Please type a category name.</p>
                 {% endif %}
             </div>
         </div>
