@@ -28,6 +28,14 @@
 
 This app allows users to store information about the nutritional value of various food products. I chose to store the values per 100g (or 100ml). Users should be aware that this value on its own is not enough as some items which for the sake of this example, might be high in salt might be used in small quantities, while others which are low in salt might be used in larger quantitities. In any case products can be compared and filtered based on various parameters in the dashboard. (See features below.)
 
+Replacing data with a new set.
+
+If you are testing this app and find that there is not data or just a few items, it will probably be due to the fact that someone else was testing the app and deleted the data.  
+
+### Use **[this link](https://food-nutrition.herokuapp.com/replace_data_from_backup)** to refresh the data.
+
+
+
 ---
 
 ## UXD
@@ -113,26 +121,20 @@ The app should allow the user to fullfill the following tasks:
 2. User clicks on the `Add` button at the bottom of the list. This opens a new page.
 3. The user types in the name of the category to be added. It is possible for the user to check the existing categories without leaving this page. 
 4. The user clicks on the `Add Category` button to add a category
-
-ALERT ---- RENAME BUTTON
----
 or the `Cancel` button to abort the process and return to the Food Categories list.
 
 5. If the `Add Category` button is selected, the new category name will be checked to see if it is already in use. If it exists an alert is displayed to the user thus prompting the user to change it (or abort).
 
-ALERT ---- Do not accept empty category name.
-----
-
-This same page can be reached from the New Item page.
+This same page can be reached from the New Item page. If the user tries to create a category and leaves the name empty, an error message will be displayed.
 
 **User wants to edit a category**
-ALERT ---- Do not accept empty category name.
-----
 1. User goes to Food Categories list by selecting `Food Category` from the menu.
 2. User clicks on the `Edit` link in the same row as the category to be edited.
 3. A new page opens which allows the user to make the changes required.
 4. User clicks on the `Edit Category` button to accept the changes or the `Cancel` button to abort the process.
 5. If the name entered already exist a message is displayed alerting the user to this effect. The user can continue by clicking the `Proceed with Edit` button. In this case the two classes will be merged and the necessary changes to the quantity of food items using the remaining category will be made. Alternatively the user can abort the process by clicking on the `Cancel` button.
+
+If the user tries to edit a category and leaves the name empty, an error message will be displayed.
 
 **User wants to delete a category**
 1. User goes to Food Categories list by selecting `Food Category` from the menu.
@@ -151,7 +153,8 @@ ALERT ---- Do not accept empty category name.
     1. The scatter plots allow the user to click and select  (click & drag) to filter data.
     2. The row chart can be filtered by clicking on items to select. Multiple items can be selected by clicking on more than one item.
 
-Filtering in this way reduces the amount of food items displayed in the table at the bottom of the page. Filters can also be reset.
+    Filtering in this way reduces the amount of food items displayed in the table at the bottom of the page. Filters can also be reset.  
+
 2. Data displayed in the table includes buttons that on clicking, allows the user to see a detailed view of the information about that food item in a modal.
 
 
@@ -211,9 +214,9 @@ There are two ways of viewing the food items.
 ### Surface
 * [Back to TOP](#nutrition-value)
 
-#### Colors 
-
 #### Typography
+
+The font Montserrat is used as the main font for this app. The font Merienda is used for the Logo.
 
 ## WIREFRAMES
 * [Back to TOP](#nutrition-value)  
@@ -221,8 +224,9 @@ There are two ways of viewing the food items.
 
 Add Link for wireframe 
 ---
+Click [here](https://abonello.github.io/project-4_wireframe/) to see the wireframe.
 
-
+The files for the wireframe are stored in this [repository](https://github.com/abonello/project-4_wireframe).
 
 
 ## FEATURES
@@ -244,8 +248,8 @@ Add Link for wireframe
 
 
 ### Features Left to Implement
-In food Items page - add pagination
-In dashboard - I would like to add pagination to the food table.
+In food Items page - add pagination.  
+In dashboard, I would like to add pagination to the food table.
 
 
 
@@ -257,27 +261,25 @@ In dashboard - I would like to add pagination to the food table.
 - [jQuery v3.3.1](https://jquery.com) - simplifies accessing the DOM.
 - [Bootstrap v3.3.7](https://getbootstrap.com/docs/3.3/) - used for some of the styles (modified), as well as layout of the content.
 - [Font Awesome v4.7.0](https://fontawesome.com/v4.7.0/) - used to display the GitHub and Linkedin Icons.
-- [Google Fonts](https://fonts.google.com/) - Lobster and Roboto.
+- [Google Fonts](https://fonts.google.com/) - Montserrat and Merienda.
 - [email.js](http://www.emailjs.com/) - used to enable the contact form to send emails to me.
-- [jasmine v2.4.1](https://github.com/jasmine/jasmine) - behavior-driven development framework, used to unit test the functions related to form validation.
-- [Compress JPEG ](compressjpeg.com) - I use GIMP to manipulate images. Once I export them as jpg, I use Compress Jpeg to minify them. Usually, I can gain between 25% and 50% reduction in file size.
 
-FLASK
----
+- [FLASK](http://flask.pocoo.org/) - used to build the backend of this app.
+- [MONGODB](https://www.mongodb.com) - This app uses a noSQL database hosted at [mlab](https://mlab.com/)
+
+- [Gimp](https://www.gimp.org/) - Screen shots in landing page were edited with GIMP.
+
+    Gif - first captured as .mov file using quickTime. Then turned into a gif using "Drop to Gif" App.  
+    This was further processed to reduce its size online at ezgif.com
 
 ## TESTING
 * [Back to TOP](#nutrition-value)
 
-
-
+Unittesting is used.
 
 The form is validated and it also has a try except to catch if the email address is not accepted by the server. In this case the user is returned to an error page.
 
-
-
-
-
-~~If the user clicks on the delete button, a confirmation window will open. The user can confirm or reject the deletion. An item will be reduced from the class used by that item.~~
+If the user clicks on the delete button, a confirmation window will open. The user can confirm or reject the deletion. An item will be reduced from the class used by that item.
 
 If a user selects to edit the food item, a window will open which will be prepopulated with the information of that item. The user can do the changes necessary and then click the "Update Food Item" button.
 
@@ -285,51 +287,9 @@ If the user chooses to reclassify a food item, then the necessary changes to the
 
 The user can cancel the editing process and will be taken back to the accordion view.
 
-There are three places that will take you to the route which allows for the adding a new category. The app keeps track of the calling place and will return there on cancelling or creating a new category. 
-# Need to check this. 
-Editing a food item and trying to create a new class from here will return to the add food item.
+There are three places that will take you to the route which allows for the adding a new category. The app keeps track of the calling place and will return there on cancelling or creating a new category.
 
 It is possible for the user to create a new food item. The form will have the category prepopulated. The user will have to select one. There is the option to create a new category which checks on whether it already exists.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Data
-
-The data is the nutrional value per 100g (or 100ml for liquids).
-
-* Energy (kJ)
-* Energy (kcal)
-* Fat
-* Saturated Fat
-* Carbohydrates
-* Sugars
-* Fibre
-* Protein
-* Salt
-* Classification
-* Shop
-* Notes
-
-Others might include:
-B12 and Calcium.
-
-I want to allow for data which in Not Available (**NA**) and values which are marked as less than (**<**).
-
-
 
 ## Deploy to Heroku
 
@@ -392,9 +352,6 @@ heroku run bash
 ~~~~
 3. Use normal bash commands.
 
-.
-
-------------
 
 ## Database
 
@@ -438,15 +395,15 @@ does not work in Heroku.
 
 Instead, in Heroku set environment variables for **MONGO_DBNAME** and **MONGO_URI** with the correct information.
 
-## Classification
+## Classification (Categories)
 
-I created another collection in the database that will hold the different classifications of food. This will help to give unity to the data.  
+I created another collection in the database that will hold the different categories of food. This will help to give unity to the data.  
 
-I implemented the code to populate the classification input field with classes to select from in the add food item page.
+I implemented the code to populate the category input field with categories to select from in the add food item page.
 
-I implemented adding new classes. I also added the functionality of returning to the calling page if the process is cancelled.
+I implemented adding new categories. I also added the functionality of returning to the calling page if the process is cancelled.
 
-Implemented editing a class.
+Implemented editing a categories.
 
 
 ## Backups
@@ -562,24 +519,20 @@ Also If I come to delete a class, it the confirmation page will tell me how many
 
     Fixed
 
-    ## Bug when editing class name to a name that already exist
+    ## Bug 
+    when editing class name to a name that already exist
     Fixed but want to add confirmation step.
 
-    <h3>bug</h3>
-    <p>When editing a class I need to make sure that the name is not already in use. I checked and at the moment I mess up the data with some classes being assigned to negative number of items and thus unable to deleted them, except from the database itself.</p>
+    ## bug
+    When editing a class I need to make sure that the name is not already in use. I checked and at the moment I mess up the data with some classes being assigned to negative number of items and thus unable to deleted them, except from the database itself.
         
-    <h3>To do</h3>
-    <p style="color: orange">When I edit the name, check if the name already exist. If yes, ask if the user wants to merge or create a new name. If it is a new name, enter the new name (check) and proceed as usual.</p>
-    <p>If the user selects to merge, I need to find the items used by the class being edited and assing them to the new class, adding quantity of the new class and reducing from the edited class. Once the edited class reaches 0, I can delete that class</p>
+    ## To do
+    When I edit the name, check if the name already exist. If yes, ask if the user wants to merge or create a new name. If it is a new name, enter the new name (check) and proceed as usual.  
+    If the user selects to merge, I need to find the items used by the class being edited and assing them to the new class, adding quantity of the new class and reducing from the edited class. Once the edited class reaches 0, I can delete that class.
 
     Want to add confirmation before merging.
     
 
 
-Screen shots 
 
-Edited with GIMP
-
-Gif - first captured as .mov file using quickTime. Then turned into a gif using "Drop to Gif" App. 
-This was further processed to reduce its size online at ezgif.com
 
