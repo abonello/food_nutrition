@@ -11,17 +11,17 @@ from flask_mail import Mail, Message
 
 app = Flask(__name__)
     # Use the following to run LOCALLY will need the import
-app.config.from_pyfile('config.cfg')
+# app.config.from_pyfile('config.cfg')
 
     # Use the following to run from HEROKU - remove the import
-# app.config["MONGO_DBNAME"] = os.getenv('MONGO_DBNAME')
-# app.config["MONGO_URI"] = os.getenv('MONGO_URI')
-# app.config["MAIL_SERVER"] = os.getenv('MAIL_SERVER')
-# app.config["MAIL_USERNAME"] = os.getenv('MAIL_USERNAME')
-# app.config["MAIL_PASSWORD"] = os.getenv('MAIL_PASSWORD')
-# app.config["MAIL_PORT"] = os.getenv('MAIL_PORT')
-# app.config["MAIL_USE_SSL"] = os.getenv('MAIL_USE_SSL')
-# app.config["MAIL_DEFAULT_SENDER"] = os.getenv('MAIL_DEFAULT_SENDER')
+app.config["MONGO_DBNAME"] = os.getenv('MONGO_DBNAME')
+app.config["MONGO_URI"] = os.getenv('MONGO_URI')
+app.config["MAIL_SERVER"] = os.getenv('MAIL_SERVER')
+app.config["MAIL_USERNAME"] = os.getenv('MAIL_USERNAME')
+app.config["MAIL_PASSWORD"] = os.getenv('MAIL_PASSWORD')
+app.config["MAIL_PORT"] = os.getenv('MAIL_PORT')
+app.config["MAIL_USE_SSL"] = os.getenv('MAIL_USE_SSL')
+app.config["MAIL_DEFAULT_SENDER"] = os.getenv('MAIL_DEFAULT_SENDER')
 
 
 mongo = PyMongo(app)
@@ -295,4 +295,5 @@ def replace_data_from_backup():
 
 if __name__ == '__main__':
     # app.run(host=os.getenv('IP'), port=int(os.getenv('PORT', 8080)), debug=True)
-    app.run(host=os.getenv('IP'), port=os.getenv('PORT'), debug=True) # Is it because of the different server?
+    # app.run(host=os.getenv('IP'), port=os.getenv('PORT'), debug=True) # Is it because of the different server?
+    app.run(host=os.getenv('IP'), port=os.getenv('PORT'), debug=False)
