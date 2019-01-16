@@ -277,7 +277,7 @@ In dashboard, I would like to add pagination to the food table.
 ## TESTING
 * [Back to TOP](#nutrition-value)
 
-Unittesting is used.
+Unittesting is used. Run `test_run.py`.
 
 The form is validated and it also has a try except to catch if the email address is not accepted by the server. In this case the user is returned to an error page.
 
@@ -292,6 +292,38 @@ The user can cancel the editing process and will be taken back to the accordion 
 There are three places that will take you to the route which allows for the adding a new category. The app keeps track of the calling place and will return there on cancelling or creating a new category.
 
 It is possible for the user to create a new food item. The form will have the category prepopulated. The user will have to select one. There is the option to create a new category which checks on whether it already exists.
+
+---
+
+I already dealt with NA values in accordion not to show units. Now the same issue appears in the modal. I also realised that if a value had to be missing completely, the units will show on their own both in the accordion and the modal.
+
+For the purpose of testing that these two issues are dealt with, I created two test food items, one having NA in all values that will take a unit and the other has all values empty. At the moment NA will not get a unit in the accordion but will do so in the modal (needs fixing). The food item with empty values will get units in both accordion and modal (both need fixing).
+
+The code for the accordion is in the index.html (will be renamed later on) and that for the modal is in the dashboard3.html (This is the dashboard that I will use but will be renamed.)
+
+I added two new test items, one for when I have a value for Energy 1 but not for energy 2, and the other one for vice versa. I want to hide the **/** in such cases ( as well as when both are missing).
+Combinations tested: NA "", value "", NA value, NA NA, "" NA, "" value, "" "", value value, value "", value NA
+
+Accordion Done.
+    
+#### Bug
+When I edit a class the count disappears.  
+**Fixed**
+
+#### Bug 
+when editing class name to a name that already exist
+**Fixed but want to add confirmation step.**
+
+#### bug
+When editing a class I need to make sure that the name is not already in use. I checked and at the moment I mess up the data with some classes being assigned to negative number of items and thus unable to deleted them, except from the database itself.
+    
+#### To do
+When I edit the name, check if the name already exist. If yes, ask if the user wants to merge or create a new name. If it is a new name, enter the new name (check) and proceed as usual.  
+If the user selects to merge, I need to find the items used by the class being edited and assing them to the new class, adding quantity of the new class and reducing from the edited class. Once the edited class reaches 0, I can delete that class.
+
+Want to add confirmation before merging.
+    
+
 
 ## Deploy to Heroku
 
@@ -515,35 +547,3 @@ Also If I come to delete a class, it the confirmation page will tell me how many
         8. return redirect(url_for('get_classification'))
     
     
-    
-    ## Bug - When I edit a class the count disappears
-
-    ### Fixed
-
-    #### Bug 
-    when editing class name to a name that already exist
-    Fixed but want to add confirmation step.
-
-    #### bug
-    When editing a class I need to make sure that the name is not already in use. I checked and at the moment I mess up the data with some classes being assigned to negative number of items and thus unable to deleted them, except from the database itself.
-        
-    #### To do
-    When I edit the name, check if the name already exist. If yes, ask if the user wants to merge or create a new name. If it is a new name, enter the new name (check) and proceed as usual.  
-    If the user selects to merge, I need to find the items used by the class being edited and assing them to the new class, adding quantity of the new class and reducing from the edited class. Once the edited class reaches 0, I can delete that class.
-
-    Want to add confirmation before merging.
-    
-## Testing
-I already dealt with NA values in accordion not to show units. Now the same issue appears in the modal. I also realised that if a value had to be missing completely, the units will show on their own both in the accordion and the modal.
-
-For the purpose of testing that these two issues are dealt with, I created two test food items, one having NA in all values that will take a unit and the other has all values empty. At the moment NA will not get a unit in the accordion but will do so in the modal (needs fixing). The food item with empty values will get units in both accordion and modal (both need fixing).
-
-The code for the accordion is in the index.html (will be renamed later on) and that for the modal is in the dashboard3.html (This is the dashboard that I will use but will be renamed.)
-
-I added two new test items, one for when I have a value for Energy 1 but not for energy 2, and the other one for vice versa. I want to hide the **/** in such cases ( as well as when both are missing).
-Combinations tested: NA "", value "", NA value, NA NA, "" NA, "" value, "" "", value value, value "", value NA
-
-Accordion Done.
-
-
-
