@@ -20,7 +20,9 @@
 * [TECHNOLOGIES USED](#technologies-used)
 * [TESTING](#testing)
 * [DEPLOYMENT](#deploy-to-heroku)
-* [ADDITIONS](#additions)
+* [FURTHER NOTES](#further-notes)
+* [DATABASE](#database)
+* [DEVELOPMENT NOTES](#development-notes)
 ---
   
 ## INTRODUCTION
@@ -343,8 +345,13 @@ git push heroku master
 
 DONE. -- Open the app at [https://food-nutrition.herokuapp.com/]()
 
+&nbsp;   
+&nbsp;   
 
-### Additions
+---
+
+## Further Notes
+* [Back to TOP](#nutrition-value)
 
 To access the files on Heroku, 
 1. go to **More > Run console**.
@@ -356,6 +363,7 @@ heroku run bash
 
 
 ## Database
+* [Back to TOP](#nutrition-value)
 
 Create a MongoDB database on mLab.  
 Database name: **food**  
@@ -377,6 +385,9 @@ The port argument complained about the int() method, so now it is:
 app.run(host=os.getenv('IP'), port=os.getenv('PORT'), debug=True)
 ~~~~
 
+## Development Notes
+* [Back to TOP](#nutrition-value)
+
 ### Add Food Item
 
 Implemented **add food item**.
@@ -397,7 +408,7 @@ does not work in Heroku.
 
 Instead, in Heroku set environment variables for **MONGO_DBNAME** and **MONGO_URI** with the correct information.
 
-## Classification (Categories)
+### Classification (Categories)
 
 I created another collection in the database that will hold the different categories of food. This will help to give unity to the data.  
 
@@ -408,13 +419,13 @@ I implemented adding new categories. I also added the functionality of returning
 Implemented editing a categories.
 
 
-## Backups
+### Backups
 
 I implemented two routes that are used either to get a backup of the database, or replace the database from a backup file. This will help me in two cases. 
 1. I mess up the data during testing where it is quicker to replace the lot rather than edit indivual entries
-2. The data has been messed up by someone (possibly intentionally) - I am not currently implementing a log in system.
+2. The data has been messed up by someone - I am not currently implementing a log in system.
 
-## Dashboard
+### Dashboard
 
 Drafted a dsahboard with 2 scatter plots - fats vs sat, carbs vs sugar.
 
@@ -434,7 +445,7 @@ I would like to be able to transfer the filters to the get_food_items view, if i
 There is something that need to be changed in the database. Currently, the values are stored in the database with the units attached. This is not what crossfilter etc wants. Numbers should be numbers. I can do the processing in javascript(jQuery) to remove the units before passing the data to crossfilter or I can store the numbers without the units. This is the way I am choosing to do. As a result, the display of data in the accordion view will show without units unless I change the code to add them for display. This is the next step. I also have to remove the code which was adding the units when adding a new food item.
 
 
-## Resetting filters for Row Chart
+### Resetting filters for Row Chart
 
 I had a problem with resetting the classification row chart stopping working. I tried to see how I can force an svg group name to use with redrawAll(). This led to nowhere. After a long time of trying various things such as trying to use renderlet and on renderlet (both fail), I commented out some of the code that I had and suddenly the reset link worked.  
 At this point I started uncommenting one line at a time and managed to narrow the error to 
@@ -452,27 +463,15 @@ from working. Otherwise it works fine.
 
 Now I turned the reset link to a button to match that for the scatter plots.
 
-## Testing
-I already dealt with NA values in accordion not to show units. Now the same issue appears in the modal. I also realised that if a value had to be missing completely, the units will show on their own both in the accordion and the modal.
 
-For the purpose of testing that these two issues are dealt with, I created two test food items, one having NA in all values that will take a unit and the other has all values empty. At the moment NA will not get a unit in the accordion but will do so in the modal (needs fixing). The food item with empty values will get units in both accordion and modal (both need fixing).
-
-The code for the accordion is in the index.html (will be renamed later on) and that for the modal is in the dashboard3.html (This is the dashboard that I will use but will be renamed.)
-
-I added two new test items, one for when I have a value for Energy 1 but not for energy 2, and the other one for vice versa. I want to hide the **/** in such cases ( as well as when both are missing).
-Combinations tested: NA "", value "", NA value, NA NA, "" NA, "" value, "" "", value value, value "", value NA
-
-Accordion Done.
-
-
-## Confirm Delete
+### Confirm Delete
 
 Implemented route to delete food item. Tested by creating a test items and deleting them.  
 Implemented route to delete food class. Tested by creating a test items and deleting them.
 
 Functionality includes the ability to cancel the delete process.
 
-## Improving classification collection.
+### Improving classification collection.
 
 I want the classification collection to keep track of the number of food items that use a particular classification.
 
@@ -519,22 +518,32 @@ Also If I come to delete a class, it the confirmation page will tell me how many
     
     ## Bug - When I edit a class the count disappears
 
-    Fixed
+    ### Fixed
 
-    ## Bug 
+    #### Bug 
     when editing class name to a name that already exist
     Fixed but want to add confirmation step.
 
-    ## bug
+    #### bug
     When editing a class I need to make sure that the name is not already in use. I checked and at the moment I mess up the data with some classes being assigned to negative number of items and thus unable to deleted them, except from the database itself.
         
-    ## To do
+    #### To do
     When I edit the name, check if the name already exist. If yes, ask if the user wants to merge or create a new name. If it is a new name, enter the new name (check) and proceed as usual.  
     If the user selects to merge, I need to find the items used by the class being edited and assing them to the new class, adding quantity of the new class and reducing from the edited class. Once the edited class reaches 0, I can delete that class.
 
     Want to add confirmation before merging.
     
+## Testing
+I already dealt with NA values in accordion not to show units. Now the same issue appears in the modal. I also realised that if a value had to be missing completely, the units will show on their own both in the accordion and the modal.
 
+For the purpose of testing that these two issues are dealt with, I created two test food items, one having NA in all values that will take a unit and the other has all values empty. At the moment NA will not get a unit in the accordion but will do so in the modal (needs fixing). The food item with empty values will get units in both accordion and modal (both need fixing).
+
+The code for the accordion is in the index.html (will be renamed later on) and that for the modal is in the dashboard3.html (This is the dashboard that I will use but will be renamed.)
+
+I added two new test items, one for when I have a value for Energy 1 but not for energy 2, and the other one for vice versa. I want to hide the **/** in such cases ( as well as when both are missing).
+Combinations tested: NA "", value "", NA value, NA NA, "" NA, "" value, "" "", value value, value "", value NA
+
+Accordion Done.
 
 
 
