@@ -19,8 +19,8 @@
 * [FEATURES](#features)
 * [TECHNOLOGIES USED](#technologies-used)
 * [TESTING](#testing)
-* [DEPLOYMENT](#deployment)
-* [CREDITS](#credits)
+* [DEPLOYMENT](#deploy-to-heroku)
+* [ADDITIONS](#additions)
 ---
   
 ## INTRODUCTION
@@ -222,8 +222,6 @@ The font Montserrat is used as the main font for this app. The font Merienda is 
 * [Back to TOP](#nutrition-value)  
 * [Back to Skeleton](#skeleton)
 
-Add Link for wireframe 
----
 Click [here](https://abonello.github.io/project-4_wireframe/) to see the wireframe.
 
 The files for the wireframe are stored in this [repository](https://github.com/abonello/project-4_wireframe).
@@ -293,6 +291,8 @@ It is possible for the user to create a new food item. The form will have the ca
 
 ## Deploy to Heroku
 
+* [Back to TOP](#nutrition-value)
+
 Name of app: **food-nutrition**  
 URI: [https://food-nutrition.herokuapp.com/](https://food-nutrition.herokuapp.com/)
 
@@ -342,7 +342,7 @@ git push heroku master
 DONE. -- Open the app at [https://food-nutrition.herokuapp.com/]()
 
 
-### Addition
+### Additions
 
 To access the files on Heroku, 
 1. go to **More > Run console**.
