@@ -34,7 +34,7 @@ If you are testing this app and find that there is not data or just a few items,
 
 ### Use **[this link](https://food-nutrition.herokuapp.com/replace_data_from_backup)** to refresh the data.
 
-
+The reason for the above is that I am not implementing an administrative log in for this project. So everyone has access to do what they want with the data (including deleting all). This is done so that examiners and potential employers can assess the project without needing to ask for a log in. 
 
 ---
 
@@ -159,6 +159,8 @@ If the user tries to edit a category and leaves the name empty, an error message
 
 
 ### **Structure**
+
+* [Back to TOP](#nutrition-value)
 
 #### Navigation
 There is a navbar at the top of the page which contains the main menu. This menu allows the user to navigate to the main parts of the app.
