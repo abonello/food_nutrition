@@ -28,15 +28,15 @@
 ## INTRODUCTION
 * [Back to TOP](#nutrition-value)
 
-This app allows users to store information about the nutritional value of various food products. I chose to store the values per 100g (or 100ml). Users should be aware that this value on its own is not enough as some items which for the sake of this example, might be high in salt might be used in small quantities, while others which are low in salt might be used in larger quantitities. In any case products can be compared and filtered based on various parameters in the dashboard. (See features below.)
+This app allows users to store information about the nutritional value of various food products. I chose to store the values per 100g (or 100ml). Users should be aware that this value on its own is not enough as some items which for the sake of this example, might be high in salt might be used in small quantities, while others which are low in salt might be used in larger quantities. In any case, products can be compared and filtered based on various parameters in the dashboard. (See features below.)
 
-Replacing data with a new set.
+### Replacing data with a new set.
 
-If you are testing this app and find that there is not data or just a few items, it will probably be due to the fact that someone else was testing the app and deleted the data.  
+If you are testing this app and find that there is no data or just a few items, it will probably be due to the fact that someone else was testing the app and deleted the data.  
 
 ### Use **[this link](https://food-nutrition.herokuapp.com/replace_data_from_backup)** to refresh the data.
 
-The reason for the above is that I am not implementing an administrative log in for this project. So everyone has access to do what they want with the data (including deleting all). This is done so that examiners and potential employers can assess the project without needing to ask for a log in. 
+The reason for the above is that I am not implementing an administrative log-in for this project. So everyone has access to do what they want with the data (including deleting all). This is done so that examiners and potential employers can assess the project without needing to ask for log-in details. 
 
 ---
 
@@ -51,8 +51,8 @@ This app allows the storage of information about food in a mongodb database and 
 **What do I want as the owner of the site?**
 
 I was curious to find out what I eat. For this reason I planned this app to store the data about the food items I consume and display this data in some meaningful form.  
-The values used are the typical nutrition values per 100g (or 100ml). Users should be aware that this value on its own is not enough as some items which for the sake of this example, might be high in salt might be used in small quantities, while others which are low in salt might be used in larger quantitities. In any case products can be compared and filtered based on various parameters in the dashboard. (See features below.)  
-In any case, I found it interesting and somehow fascinating to see how various food products lay out on a graph when various food nutrions (parameters) are mapped against each other.
+The values used are the typical nutrition values per 100g (or 100ml). Users should be aware that this value on its own is not enough as some items which, for the sake of this example, might be high in salt might be used in small quantities, while others which are low in salt might be used in larger quantities. In any case products can be compared and filtered based on various parameters in the dashboard. (See features below.)  
+In any case, I found it interesting and somehow fascinating to see how various food products lay out on a graph when various food nutritions (parameters) are mapped against each other.
 
 #### What does it do?
 This data uses forms to collect the data and stores it in a mongodb database. Food items are categorised. Categories have their own form to create them. These categories keep track of the amount of food items I have in each category.
@@ -93,14 +93,14 @@ The app should allow the user to fullfill the following tasks:
 **A user wants to store data about a food item (Category does not exist)** 
 1. User Clicks on `New Item`
 2. User Clicks on the `Category` field
-3. Category does not exist. User clicks on the `here` button, part of the instruction just above teh coategory field.
-4. User taken to the Add Category form.
+3. Category does not exist. User clicks on the `here` button, part of the instruction just above the category field.
+4. User is taken to the Add Category form.
 5. User fills in the form
 6. User enters a new category name. (The user can check the categories that already exist.)
 7. If the category entered by the user already exist, the user will be alerted to this effect. A message is displayed. The user is prompted to use a different name.
 8. If the category does not yet exist, a new category will be created, 0 will be assigned to the value of food items using this category (can be checked by visiting the `Food Categories` page) and the user will be automatically taken back to the `Add Food Item` page.
-9. Fill the rest of the form
-10. Clicks `Add Food Item` button
+9. Fill the rest of the form.
+10. Clicks `Add Food Item` button.
 
 **User wants to edit a food item**
 
@@ -323,7 +323,7 @@ If the user selects to merge, I need to find the items used by the class being e
 
 Want to add confirmation before merging.
     
-
+Rotation of cards does not work well in all mobile browsers but works in mobile Firefox.
 
 ## Deploy to Heroku
 
